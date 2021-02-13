@@ -1,0 +1,202 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\setlength{\parindent}{0cm}
+\let\emptyset\varnothing
+
+\title{\textbf{MATH 2135 Linear Algebra} \\ Fields}
+\author{Alyssa Motas}
+
+\begin{document}
+
+    \maketitle
+
+    \pagebreak
+
+    \tableofcontents
+
+    \pagebreak
+
+    \section{What is Abstract Algebra?}
+
+    In algebra, which is a broad division of mathematics, abstract algebra (occasionally called modern algebra) is the study of algebraic structures. Algebraic structures include groups, rings, fields, modules, vector spaces, lattices, and algebras. \footnote{Definition taken from \href{https://en.wikipedia.org/wiki/Abstract_algebra}{Wikipedia}.}
+
+    \vspace{1em}
+
+    Arithmetic involves \(2 + 3 = 5\), and basic algebra involves using laws in \(2 + x = 5\). For abstract algebra, we use laws (\(x + y = y + x\)) \emph{without} any arithmetic.
+
+    \vspace{1em}
+
+    \emph{Example.} Let \(\mathbb{Z}_2 = \{0,1\}\), the integers modulo 2. We can define the following addition and multiplication rules:
+    \begin{align*}
+        0 + 0 = 0 &\qquad 0 \cdot 0 = 0 \\
+        0 + 1 = 1 &\qquad 0 \cdot 1 = 0 \\
+        1 + 0 = 1 &\qquad 1 \cdot 0 = 0 \\
+        1 + 1 = 0 &\qquad 1 \cdot 1 = 1. \\
+    \end{align*}
+    \emph{Examples of laws.} For all $x,y$, $x+y = y+x$
+
+    \begin{center}
+        \begin{tabular}{| c | c | c | c |} \hline
+            $x$ & $y$ & $x + y$ & $y + x$ \\ \hline
+            0   & 0   & 0       & 0       \\ \hline
+            0   & 1   & 1       & 1       \\ \hline
+            1   & 0   & 1       & 1       \\ \hline
+            1   & 1   & 0       & 1       \\ \hline
+        \end{tabular}
+    \end{center}
+
+    \[xy = yx \qquad (x+y)+z = x+(y+z)\] \dots plus many additional laws.
+
+    \pagebreak
+
+    \section{Fields}
+
+    \emph{Definition.} A \emph{field} is a set $F$, with distinct elements \(0,1 \in F\), and together with two binary operations \[+ : F \times F \rightarrow F \qquad \cdot : F \times F \rightarrow F,\] called \emph{addition} and \emph{multiplication}, respectively, and satisfying the following nine axioms:
+    \begin{enumerate}
+        \item[(A1)] \emph{Commutativity of addition.} For all \(a,b \in F\), we have \[a + b = b + a.\]
+        \item[(A2)] \emph{Associativity of addition.} For all \(a,b,c \in F\), we have \[(a + b) + c = a + (b + c).\]
+        \item[(A3)] \emph{Additive identity.} For all \(a \in F\), we have \[0 + a = a.\]
+        \item[(A4)] \emph{Additive inverse.} For all \(a \in F\), there exists \(b \in F\) such that \[a + b = 0.\]
+        \item[(FM1)] \emph{Commutativity of multiplication.} For all \(a,b \in F\), \[ab = ba.\]
+        \item[(FM2)] \emph{Associativity of multiplication.} For all \(a,b,c \in F\), \[(ab)c = a(bc).\]
+        \item[(FM3)] \emph{Multiplicative identity.} For all \(a \in F,\) \[1a = a.\]
+        \item[(FM4)] \emph{Multiplicative inverse.} For all \(a \in F\), if \(a \neq 0\), then there exists \(b \in F\) such that \[ab = 1.\] In \(\mathbb{R}\), it would look like \[b = \frac{1}{a}.\]  
+        \item[(D)] \emph{Distributivity.} For all \(a,b,c \in F\), we have \[a (b + c) = ab + ac.\]    
+    \end{enumerate}
+    \emph{Note.} There are many additional laws of fields besides the above 9. But they are all consequences of the 9 axioms stated above.
+
+    \vspace{1em}
+
+    \emph{Examples of fields.}
+    \begin{enumerate}
+        \item The set \(\mathbb{R}\) of real numbers, with the ``usual'' addition and multiplication, is a field.
+        \item The set \(\mathbb{C}\) of complex numbers is a field.
+        \item The set \(\mathbb{Q}\) of rational numbers is a field.
+        \item The set \(\mathbb{Z}\) of integers is \emph{not} a field. It only satisfies 8 of the 9 axioms and the one that fails is (FM4).
+        \item The set \(\mathbb{N}\) of natural numbers is \emph{not} a field. It only satisfies 7 of the 9 axioms and the ones that fail are (A4) and (FM4).
+        \item The set \(\mathbb{Z}_2\) of integers modulo 2 is a field (with the above addition and multiplication).
+        \item Let \(n \geq 2\), and let \(\mathbb{Z}_n\) be the integers modulo $n$, with addition and multiplication taken modulo $n$. Then, there are two cases:
+        \begin{enumerate}
+            \item If $n$ is prime, then \(\mathbb{Z}_n\) is a field.
+            \item If $n$ is not prime, then \(\mathbb{Z}_n\) is not a field. The only failed axiom is (FM4).
+        \end{enumerate} 
+    \end{enumerate}
+
+    \pagebreak
+
+    \section{Elementary Properties of Fields}
+
+    \subsection{Cancellation of addition}
+
+    For all \(x,y,a \in F\), if \(x + a = y + a\), then \(x = y\).
+    \begin{proof}
+        Take arbitrary\footnote{When we need to prove a ``for all'' statement, we do it by taking arbitrary elements and prove it.} elements \(x,y,a \in F.\) Assume\footnote{When we need to prove an ``if-then'' statement, we do it by assuming the if-part then proving the else-part.} \(x + a = y + a\) and we need to show that \(x = y\). By (A4), $a$ has an additive inverse. So, let $b$ be its additive inverse, \(a + b = 0.\)
+        \begin{align*}
+            x &= 0 + x          && \text{by (A3)} \\
+              &= x + 0          && \text{by (A1)} \\
+              &= x + (a + b)    && \text{because $b$ is the additive inverse of $a$} \\
+              &= (x + a) + b    && \text{by (A2)} \\
+              &= (y + a) + b    && \text{by assumption} \\
+              &= y + (a + b)    && \text{by (A2)} \\
+              &= y + 0          && \text{because $b$ is the additive inverse of $a$} \\
+              &= 0 + y          && \text{by (A1)} \\
+              &= y              && \text{by (A3).}
+        \end{align*}
+        Therefore, \(x = y\), which is what we had to show.
+    \end{proof}
+
+    \subsection{Cancellation of multiplication}
+
+    \subsection{$0a = 0$}
+
+    For all elements $a$ of a field $F$, we have \[0a = 0.\]
+    \begin{proof}
+        Consider an arbitrary element \(a \in F.\) We must show that \(0a = 0.\)
+        \begin{align*}
+            0 + 0a &= 0a        && \text{by (A3)} \\
+                   &= (0+0)a    && \text{by (A3)} \\
+                   &= a(0 + 0)  && \text{by (FM1)} \\
+                   &= a0 + a0   && \text{by (D)} \\
+                   &= 0a + 0a   && \text{by (FM1)}
+        \end{align*}
+        Therefore, by cancellation of addition (Proposition 3.1), it follows that \[0 = 0a.\]
+    \end{proof}
+
+    \subsection{$ab=0$}
+
+    In any field $F$, for all \(a,b \in F\), if \(ab = 0\), then \(a = 0\) or \(b = 0\).\footnote{We use this all the time when solving equations such as \(x^2 + 3x + 2 = 0 \Rightarrow x = -1, -2.\)}
+
+    \begin{proof}
+        Take arbitrary \(a,b \in F\) and assume that \(ab = 0\). We need to show that \(a = 0\) or \(b = 0\).
+
+        \vspace{1em}
+
+        \emph{Case 1.} When $a = 0$, then the conclusion holds.
+
+        \emph{Case 2.} When \(a \neq 0\), by (FM4), $a$ has a multiplicative inverse. Let $c$ be such an inverse, i.e. $ac = 1$. Then
+        \begin{align*}
+            b &= 1b     && \text{by (FM3)} \\
+              &= (ac)b  && \text{by definition of $c$} \\
+              &= (ca)b  && \text{by (FM1)} \\
+              &= c(ab)  && \text{by (FM2)} \\
+              &= c0     && \text{by assumption} \\
+              &= 0c     && \text{by (FM1)} \\
+              &= 0      && \text{by Proposition 3.3} 
+        \end{align*}
+        So \(b = 0\) as desired.
+    \end{proof}
+
+    \subsection{$z + a = a$}
+
+    In any field $F$, if $z \in F$ is an element that acts like a zero, i.e. such that for all \(a \in F\), \(z + a = a\), then \(z = 0.\)
+    \begin{proof}
+        Let \(z \in F\) be such an element. Assume that \(z + a = a.\) Then we have 
+        \begin{align*}
+            z &= 0 + z      && \text{by (A3)} \\
+              &= z + 0      && \text{by (A1)} \\
+              &= 0          && \text{by assumption.}
+        \end{align*}
+    \end{proof}
+
+    \subsection{Unique additive inverse}
+
+    Let $F$ be a field. For every $a \in F$, the element \(b \in F\) in axiom (A4) is \emph{uniquely} determined. In other words, if \(b,c \in F\) are two additive inverses of $a$, then $b = c$.
+    \begin{proof}
+        Because $b$ is an additive inverse of $a$, we have 
+        \begin{equation}
+            a + b = 0.
+        \end{equation}
+        Similar to $c$, we also have 
+        \begin{equation}
+            a + c = 0.
+        \end{equation}
+        From (1) and (2), we get \[a + b = a + c.\] From (A1), we get \[b + a = c + a.\] By Proposition 3.1 (cancellation of addition), we get \[b = c.\]
+    \end{proof}
+    \emph{Definition.} Since the additive inverse of $a$ is unique, we can introduce a notation for it. We write \(b = (-a)\) when $b$ is the additive inverse of $a$.
+
+    \vspace{1em}
+
+    From now on, we can write \[a + (-a) = 0.\] We define \emph{subtraction} as \(a - b\) which is an abbreviation for \(a + (-b)\).
+
+    \vspace{1em}
+
+    All of the ``usual'' laws of negative and subtraction follow from the field axioms.
+
+    \subsection{Laws of negative and subtraction}
+    \subsubsection{Laws of negative}
+    \begin{enumerate}
+        \item \(-(-a) = a\) 
+        \item \(-(ab) = (-a)b = a(-b)\) \\ \((-a)(-b)=ab\)
+        \item \(-a = (-1)a\)
+    \end{enumerate}
+
+    \subsubsection{Laws of subtraction}
+    \begin{enumerate}
+        \item \((a-b)(c-d) = ac - ad - bc + bd\)
+    \end{enumerate}
+\end{document}
