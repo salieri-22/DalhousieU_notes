@@ -8,5 +8,6 @@ This course is a continutation of MATH 1030 with an emphasis on foundations and 
 
 # Contents
 
-Prelude
+## Prelude
 - Sets and logic notations
+- Fields
