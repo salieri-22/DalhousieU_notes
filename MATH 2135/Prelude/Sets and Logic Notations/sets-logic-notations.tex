@@ -1,0 +1,188 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\setlength{\parindent}{0cm}
+\let\emptyset\varnothing
+
+\title{\textbf{MATH 2135 Linear Algebra} \\ Sets and Logic Notations}
+\author{Alyssa Motas}
+
+\begin{document}
+
+    \maketitle
+
+    \pagebreak
+
+    \tableofcontents
+
+    \pagebreak
+
+    \section{Sets}
+
+    \subsection{Finite sets}
+
+    A set is an unordered collection of things. A finite set would look something like \(\{1,2,3\}\). ``Unordered" means that the order does not matter, i.e. \(\{1,2,3\}\) and \(\{2,3,1\}\) are the same set. 
+
+    \subsection{Infinite sets}
+
+    An example of an infinite set is the set of natural numbers. \[\mathbb{N} = \{0,1,2,3,\dots\}\] and its respective \emph{set comprehension notation} would look like \[\mathbb{N} = \{ x \mid \text{ x is a natural number }\}.\] Another example of an inifnite set would be \[\{x \in \mathbb{N} \mid \text{ x is prime }\} = \{2,3,5,7,11,13,17, \dots\}.\]
+
+    \subsection{Membership}
+
+    The notation \(\in\) implies membership such as ``$x$ is an element of $A$'' and conversely, the notation \(\notin\) implies ``$x$ is not an element of $A$.''
+
+    \subsection{Equality}
+
+    Two sets $A$ and $B$ are \emph{equal} if they have the same elements. \[A = B \Leftrightarrow (\forall x, x \in A \Leftrightarrow x \in B).\] 
+
+    We say that $A$ is a \emph{subset} of $B$, in symbols \(A \subseteq B\), if all elements of $A$ are elements of $B$. \[A \subseteq B \Leftrightarrow (\forall x, x\in A \Rightarrow x \in B).\]
+
+    \subsection{Empty set}
+
+    The empty set (\(\emptyset\)) is the set with no elements.
+
+    \subsection{Cartesian product}
+
+    If $A$ and $B$ are sets, we define the \emph{cartesian product} of $A$ and $B$, in symbols \(A \times B\), as \[A \times B = \{(x,y) \mid x \in A \text{ and } y \in B\}.\] Note that \((x,y)\) is a \emph{pair} or \emph{2-tuple} which is an \emph{ordered pair}, i.e. \((1,2) \neq (2,1)\). 
+
+    \pagebreak
+
+    \section{Logic Notations}
+
+    \subsection{Propositional logic (Boolean logic)}
+
+    A \emph{proposition} is a statement that can be true or false.
+
+    \vspace{1em}
+
+    Let $P$ and $Q$ be propositions.
+
+    \vspace{1em}
+
+    \begin{tabular}{| c | c | c |} \hline
+        $P$ & $Q$ & $P$ and $Q$ \\ \hline
+        T   &  T  &      T      \\ \hline 
+        T   &  F  &      F      \\ \hline 
+        F   &  T  &      F      \\ \hline 
+        F   &  F  &      F      \\ \hline 
+    \end{tabular} \hspace{0.5em}
+    \begin{tabular}{| c | c | c |} \hline
+        $P$ & $Q$ & $P$ or $Q$  \\ \hline
+        T   &  T  &      T      \\ \hline 
+        T   &  F  &      T      \\ \hline 
+        F   &  T  &      T      \\ \hline 
+        F   &  F  &      F      \\ \hline 
+    \end{tabular} \hspace{0.5em}
+    \begin{tabular}{| c | c | c |} \hline
+        $P$ & $Q$ & $P \Rightarrow Q$ \\ \hline
+        T   &  T  &      T            \\ \hline 
+        T   &  F  &      F            \\ \hline 
+        F   &  T  &      T            \\ \hline 
+        F   &  F  &      T            \\ \hline 
+    \end{tabular} \hspace{0.5em}
+    \begin{tabular}{| c | c | c |} \hline
+        $P$ & $Q$ & $P \Leftrightarrow Q$ \\ \hline
+        T   &  T  &      T                \\ \hline 
+        T   &  F  &      F                \\ \hline 
+        F   &  T  &      F                \\ \hline 
+        F   &  F  &      T                \\ \hline 
+    \end{tabular}
+
+    \vspace{0.5em}
+
+    \begin{center}
+        \begin{tabular}{| c | c |} \hline
+            $P$ & $\neg P$  \\ \hline
+            T   &  F       \\ \hline 
+            F   &  T       \\ \hline 
+        \end{tabular}
+    \end{center}
+
+    \subsection{Predicate logic}
+
+    A \emph{predicate} is a proposition that depends on some ``thing'' $x$.
+
+    \begin{align*}
+        P(x) &= \text{``$x$ is a prime number''} \\
+        P(5) &= \text{``5 is a prime number'' \emph{TRUE}} \\
+        P(6) &= \text{``6 is a prime number'' \emph{FALSE}} \\
+        \vdots \\
+        Q(x,y)  &\rightarrow \text{``x is greater or equal to y''} \\
+        Q(3,7)  &\rightarrow \text{\emph{FALSE}} \\
+        Q(7,7)  &\rightarrow \text{\emph{TRUE}} \\
+        Q(19,7) &\rightarrow \text{\emph{TRUE}} \\
+        \vdots
+    \end{align*}
+
+    \subsection{Quantifiers}
+
+    \subsubsection{Universal Quantifier}
+
+    If $P(x)$ is a predicate, then ``for all $x$, $P(x)$'' is a proposition that is either true or false. 
+
+    \pagebreak
+
+    \emph{Example.} Let \(A = \{3,5,7,8,11\}\), \(P(x) = \)``$x$ is prime,'' \(Q(x) = \)``x is even.''
+    \begin{itemize}
+        \item For all \(x \in A, P(x)\) \(\rightarrow\) \emph{FALSE.} This is because \(P(3),P(5),P(7),P(11)\) are all true but \(P(8)\) is false.
+        \item For all \(x \in A\), \((x \leq 7 \Rightarrow P(x))\) \(\rightarrow\) \emph{TRUE.}
+        \begin{center}
+            \begin{tabular}{|c | c | c | c |} \hline
+                $x$ & $x \leq 7$ & $P(x)$ & $x \leq 7 \Rightarrow P(x)$ \\ \hline
+                3   & T          & T      & T                           \\ \hline
+                5   & T          & T      & T                           \\ \hline
+                7   & T          & T      & T                           \\ \hline
+                8   & F          & F      & T                           \\ \hline
+                11  & F          & T      & T                           \\ \hline
+            \end{tabular}
+        \end{center}
+    \end{itemize}
+
+    The notation for ``for all'' is \(\forall\).
+
+    \subsubsection{Existential Quantifer}
+
+    The notation for ``there exists'' is \(\exists\).
+
+    \vspace{1em}
+
+    \emph{Example.} Let \(A = \{3,5,7,8,11\}\).
+    \begin{itemize}
+        \item There exists an \(x \in A\) such that \(P(x)\). \emph{TRUE}
+        \item There exists \(x \in A\) such that \(x \leq 7\) and \(P(x)\). \emph{TRUE}
+    \end{itemize}
+
+    \subsubsection{Nested Quantifiers}
+
+    Suppose that \(\mathbb{N} = \{0,1,2,3,4,\dots\}\).
+    \begin{itemize}
+        \item \(\forall x \in \mathbb{N}, \exists y \in \mathbb{N}, x < y\) \(\rightarrow\) \emph{TRUE}
+        \item \(\exists y \in \mathbb{N}, \forall x \in \mathbb{N}, x < y\) \(\rightarrow\) \emph{FALSE}
+        \item \(\forall x \in \mathbb{N}, (x \geq 3 \text{ and } (\forall y \in \mathbb{N}, \forall z \in \mathbb{N}, (x = yz \Rightarrow y = 1 \text{ or } z = 1)) \Rightarrow \text{$x$ is odd})\)
+    \end{itemize}
+
+    \pagebreak
+
+    \subsection{``Vacuously true''}
+
+    \emph{Question:} Is the empty set a subset of every set? Yes. For \(A \subseteq B\) it means \(\forall x \in A, x \in B\). If $A$ is empty, this is \emph{vacuously} true.
+
+    \vspace{1em}
+
+    What does ``vacuously true'' mean? Suppose we have the following sets and statements:
+
+    \begin{itemize}
+        \item \(A = \{3,5,7,8,11\}\), \(\forall x \in A, P(x)\) \(\rightarrow\) \emph{FALSE}
+        \item \(A = \{3,5,7\}\), \(\forall x \in A, P(x)\) \(\rightarrow\) \emph{TRUE}
+        \item \(A = \{3\}\), \(\forall x \in A, P(x)\) \(\rightarrow\) \emph{TRUE}
+        \item \(A = \emptyset\), \(\forall x \in A, P(x)\) \(\rightarrow\) \emph{``vacuously true''}
+    \end{itemize}
+
+    If $A$ is the empty set, the statement \(\forall x \in A, P(x)\) is \emph{always} true, no matter what \(P(x)\) is.
+
+    \vspace{1em}
+
+    Another example would be: ``All unicorns are green.'' This is true because there are 0 unicorns to check.
+\end{document}
