@@ -1,0 +1,143 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\setlength{\parindent}{0cm}
+\let\emptyset\varnothing
+
+\title{\textbf{MATH 2135 Linear Algebra} \\ 1.A Complex Numbers}
+\author{Alyssa Motas}
+
+\begin{document}
+
+    \maketitle
+
+    \pagebreak
+
+    \tableofcontents
+
+    \pagebreak
+
+    \section{Complex Numbers}
+
+    \subsection{Definition}
+    A complex number is a pair \((a,b)\) where \(a,b \in \mathbb{R}\). We write \(\mathbb{C}\) for the set of complex numbers. The set of all complex numbers is denoted by \(\mathbb{C}\): \[\mathbb{C} = \{a + bi \mid a,b \in \mathbb{R}\}.\]With the following operations:
+    \begin{align*}
+        (a,b) + (c,d)     &= (a+c, b+d)    \\
+        (a,b) \cdot (c,d) &= (ac-bd,ad+bc) 
+    \end{align*}
+
+    We also define: \[0 = (0,0) \qquad 1 = (1,0).\]
+    \emph{Claim.} The set \(\mathbb{C}\), together with \(0,1 \in \mathbb{C}\) and the operations \(+\) and \(\cdot\) defined above, is a field.
+
+    \subsection{Notation}
+    \begin{itemize}
+        \item We write \(i = (0,1) \in \mathbb{C}.\)
+        \item If $a$ is a real number, we will also write \(a = (a,0) \in \mathbb{C}\).
+    \end{itemize}
+    Note, if \(a,b\) are real numbers, then
+    \begin{align*}
+        a + bi &= (a,0) + (b,0) \cdot (0,1) \\
+               &= (a,0) + (0,b)             \\
+               &= (a,b).
+    \end{align*}
+    The notation \(a + bi\) is what everybody uses for complex numbers. With this notation, the rules of addition and multiplication become easier to understand and remember.
+    \begin{align*}
+        (a+bi)+(c+di) &= (a+c) + (b+d)i         \\
+        (a+bi)(c+di)  &= ac + adi + bci + bdi^2 \\
+                      &= ac + adi + bci - bd    \\
+                      &= (ac - bd) + (ad + bc)i.
+    \end{align*}
+    Note: \(i^2 = i \cdot i = (0,1) \cdot (0,1) = (-1,0) = -1.\)
+
+    \subsection{Terminology}
+    Given a complex number \[z = a + bi = (a,b)\] the real number $a$ is called the \emph{real part} of $z$, and the real number $b$ is called the \emph{imaginary part} of $z$.
+
+    \vspace{1em}
+
+    The complex number \(\bar{z} = a - bi\) is called the \emph{complex conjugate} of $z$.
+    \begin{align*}
+        z \bar{z} &= (a+bi)(a - bi)                              \\
+                  &= a^2 - abi + abi - b^2 i^2                   \\
+                  &= a^2 + b^2 \qquad \text{which is \emph{real}}
+    \end{align*}
+
+    \subsection{Arithmetic on Complex Numbers}
+
+    \subsubsection{Division Operation, Part I}
+    It is easy to divide a complex number by a real number. \[\frac{a+bi}{c} = \frac{a}{c} + \frac{b}{c} i.\]
+
+    \subsubsection{Division Operation, Part II}
+    How do we divide a complex number by a complex number? For instance, \[\frac{a+bi}{z} \qquad \text{where } z = c + di.\] We can simply take the conjugate of $z$ and then we have \[\frac{a + bi}{z} = \frac{(a+bi)\bar{z}}{z \bar{z}} = \frac{(a+bi)(c-di)}{c^2 + d^2} \qquad \text{where } c^2 + d^2 \text{ is a real.}\]
+
+    \subsubsection{Multiplicative Inverse}
+
+    The multiplicative of a complex number \(z = a + bi\) is \[z^{-1} = \frac{1}{z} = \frac{\bar{z}}{z \bar{z}} = \frac{a - bi}{a^2 + b^2} = \frac{a}{a^2 + b^2} - \frac{b}{a^2 + b^2}i.\]
+
+    \subsubsection{Argument of a complex number}\footnote{Taken from the \href{https://en.wikipedia.org/wiki/Argument_(complex_analysis)}{Wikipedia}.}
+    The argument of $z$ is the angle between the positive real axis and the line joining the point to the origin. For each point on the plane, \(\arg\) is the function which returns the angle \(\phi\). The numeric value is given by the angle in radians, and is positive if measured counterclockwise.
+
+    Algebraically, as any real quantity \(\phi\), such that \[z = r(cos \phi + i sin \phi) = r e^{i \phi}\] for some positive real $r$. The quantity $r$ is the modulus (or absolute value) of $z$, denoted $|z|$. \[r = \sqrt{x^2 + y^2}\]
+
+    Some identities are \[\arg(zw) = \arg(z) + \arg(w) \mod{(-\pi, \pi]}\] \[\arg \left(\frac{z}{w}\right) = \arg(z) - \arg(w) \mod{(-\pi, \pi]}\] If \(z \neq 0\) and $n$ is any integer, then \[\arg(z^n) \equiv n \arg(z) \mod{(-\pi,\pi]}\]
+    
+    \emph{Example.} \[\arg \left(\frac{-1 -i}{i}\right) = \arg (-1 - i) - \arg (i) = - \frac{3 \pi}{4} - \frac{\pi}{2} = - \frac{5 \pi}{4}.\] \emph{Complex logarithm.} From \(z = |z| e^{i \arg(z)}\) or \(z = |z| e^{i \theta}\), it easily follows that \[\arg(z) = -i \ln \frac{z}{|z|}.\]
+
+    \pagebreak
+
+    \section{Fundamental Theorem of Algebra}
+
+    Over the complex numbers, every non-constant polynomial has a root.
+    \begin{itemize}
+        \item There are two solutions (namely \(x = -2, 2\)) over \(\mathbb{R}\): \[x^2 - 4 = 0 \Leftrightarrow (x-2)(x+2) = 0 \]
+        \item Has no roots over \(\mathbb{R}\): \[x^2 + 4 = 0.\]
+        \item Has two solutions over \(\mathbb{C}\): \[z^2 + 4 = 0 \Leftrightarrow z^2 = -4 \Leftrightarrow z = \pm \sqrt{-4} = \pm 2i\] \[z^2 + 4 = (z - 2i)(z + 2i)\]
+        \item Only one root over \(\mathbb{R}\): \[x^3 = 1\]
+        \item Three distinct solutions over \(\mathbb{C}\): \[z^3 = 1\]
+    \end{itemize}
+
+    \pagebreak
+
+    \section{Lists}
+
+    \subsection{Definition}
+
+    Suppose $n$ is a nonnegative integer. A \emph{list} of \emph{length} $n$ is an ordered collection of $n$ elements (which might be numbers, other lists, or more abstract entities) separated by commas and surrounded by parentheses. A list of length $n$ looks like this: \[(x_1, \dots, x_n).\] Two lists are equal if and only if they have the same length and the same elements in the same order.
+
+    \subsection{Examples}
+    \begin{itemize}
+        \item The set \(\mathbb{R}^2\) is the set of all ordered pairs of real numbers: \[\mathbb{R}^2 = \{(x,y) \mid x,y \in \mathbb{R}\}.\]
+        \item The set \(\mathbb{R}^3\) is the set of all ordered triples of real numbers: \[\mathbb{R}^3 = \{(x,y,z) \mid x,y,z \in \mathbb{R}\}.\]
+        \item A list of length 0 looks like this: ().
+        \item Lists differ from sets in two ways: in lists, order matters and repetitions have meaning; in sets, order and repetitions are irrelevant.
+    \end{itemize}
+
+    \pagebreak
+
+    \section{\textbf{F}\(^n\)}
+
+    \subsection{Definition}
+
+    \(\textbf{F}^n\) is the set of all lists of length $n$ of elements of \textbf{F}: \[\textbf{F}^n = \{(x_1, \dots, x_n \mid x_j \in \textbf{F} \text{ for } j = 1, \dots, n)\}.\] For \((x_1, \dots, x_n) \in \textbf{F}^n\) and \(j \in \{1, \dots, n\}\), we say that \(x_j\) is the $j$th \emph{coordinate} of \((x_1, \dots, x_n).\)
+
+    \subsection{Arithmetic}
+
+    \subsubsection{Addition}
+    Addition is defined by adding corresponding coordinates: \[(x_1, \dots, x_n) + (y_1, \dots, y_n) = (x_1 + y_1, \dots, x_n + y_n).\] It is also commutative.
+
+    \subsubsection{0}
+    Let 0 denote the list of length $n$ whose coordinates are all 0: \[0 = (0, \dots, 0).\]
+
+    \subsubsection{Additive Inverse}
+    For \(x \in \textbf{F}^n\), the \emph{additive inverse} of $x$, denoted $-x$, is the vector \(-x \in \textbf{F}^n\) such that \[x + (-x) = 0.\] In other words, if \(x = (x_1, \dots, x_n)\) then \(-x = (-x_1, \dots, -x_n).\)
+
+    \subsubsection{Scalar Multiplication}
+    The \emph{product} of a number \(\lambda\) and a vector in \(\textbf{F}^n\) is computed by multiplying each coordinate of the vector by \(\lambda\): \[\lambda (x_1, \dots, x_n) = (\lambda x_1, \dots, \lambda x_n);\] here \(\lambda \in \textbf{F}\) and \((x_1, \dots, x_n) \in \textbf{F}^n.\)
+
+    \section{Digression on Fields}
+    A \emph{field} is a set containing at least two distinct elements called 0 and 1, along with operations of addition and multiplication. Thus, \(\mathbb{R}\) and \(\mathbb{C}\) are fields, as is the set of rational numbers along with the usual operations. Another example of a field is the set \(\{0,1\}\) with the usual operations of addition and multiplication except that \(1+1\) is defined to equal 0.
+
+\end{document}

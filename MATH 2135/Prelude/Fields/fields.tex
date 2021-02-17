@@ -112,6 +112,25 @@
 
     \subsection{Cancellation of multiplication}
 
+    For all elements \(x,y,a\) of a field, if \(xa = ya\) and \(x \neq 0\), then \(x = y\).
+
+    \begin{proof}
+        Assume both \(xa = ya\) and \(a \neq 0\) are true, and we need to show that \(x = y\). Let $b$ be the multiplicative inverse of $a$, where \(ab = 1\). By (FM3), we can rewrite $x$ as
+        \begin{align*}
+            x &= 1 \cdot x                                                           \\
+              &= (ab)x                                                               \\
+              &= \left(a \cdot \frac{1}{a}\right) x && \text{since } b = \frac{1}{a} \\
+              &= \frac{1}{a} (a \cdot x) && \text{by (FM1)}                          \\
+              &= \frac{1}{a} (xa)                                                    \\
+              &= \frac{1}{a} (ya) && \text{since } xa = ya                           \\
+              &= \frac{1}{a} (a \cdot y)                                             \\
+              &= \left(\frac{1}{a} \cdot a\right) y                                  \\
+              &= (ab)y                                                               \\
+              &= 1 \cdot y = y.
+        \end{align*}
+        Therefore, \(xa = ya \Leftrightarrow x = y\) if and only if \(a \neq 0\), as shown above. 
+    \end{proof}
+
     \subsection{$0a = 0$}
 
     For all elements $a$ of a field $F$, we have \[0a = 0.\]
@@ -187,13 +206,57 @@
 
     All of the ``usual'' laws of negative and subtraction follow from the field axioms.
 
-    \subsection{Laws of negative and subtraction}
-    \subsubsection{Laws of negative}
+    \subsection{Unique multiplicative identity}
+    In a field, the element 1 is uniquely determined by axiom (FM3).
+    \begin{proof}
+        Suppose we represent $b,c$ as multiplicative identities of $a$, where \(a,b,c \in F\). By (FM3), we have \[a \cdot b = a \quad \text{and} \quad a \cdot c = a.\] Then we have
+        \begin{align*}
+            a \cdot b &= a \cdot c \\
+                      &\Rightarrow b = c \qquad \text{by Proposition 3.2}
+        \end{align*}
+        This implies that the multiplicative identity of $a$ is unique and there can be no more than one of it.
+    \end{proof}
+
+    \subsection{Unique multiplicative inverse}
+    For any element \(a \neq 0\) of a field, the element $b$ in axiom (FM4) is uniquely determined.
+    \begin{proof}
+        Suppose $b,c$ are multiplicative inverses of $a$, where \(a \neq 0\) and \(a,b,c \in F\). By the definition of (FM4), we have \[a \cdot b = 1 \quad \text{and} \quad a \cdot c = 1.\] It follows that, since both equations are equal to 1, we can use the axiom (FM3) to prove that \(b = c.\)
+        \begin{align*}
+            b &= 1 \cdot b     \\
+              &= (c \cdot a) b \\
+              &= c(a \cdot b)  \\
+              &= c \cdot 1     \\
+              &= c.
+        \end{align*}
+        Hence, we get \(b = c\), which implies that the multiplicative inverse of any element is unique.
+    \end{proof}
+
+    \subsection{Right Distributivity}
+
+    Distributivity also holds on the right: \((b+c)a = ba + ca.\)
+    \begin{proof}
+        This is a direct consequence of (D) and (FM1).
+    \end{proof}
+
+    \subsection{Laws of Negative}
     \begin{enumerate}
-        \item \(-(-a) = a\) 
-        \item \(-(ab) = (-a)b = a(-b)\) \\ \((-a)(-b)=ab\)
-        \item \(-a = (-1)a\)
+        \item[(a)] \(-(-a) = a\) 
+        \item[(b)] \(-(ab) = (-a)b = a(-b)\) \\ \((-a)(-b)=ab\)
+        \item[(c)] \(-a = (-1)a\)
     \end{enumerate}
+    \begin{proof}
+        (a) By definition of \((-a)\), we have \(a + (-a) = 0.\) Also, by definition of \(-(-a)\) (and commutativity), we have \((-(-a)) + (-a) = 0\). By cancellation, it follows that \(a = -(-a).\)
+
+        (b) To show that \(-(ab) = (-a)b\), we need to show that \((-a)b\) is the negative of \(ab\), in other words, that \(ab + (-a)b = 0\). This follows from the axioms:
+        \begin{align*}
+            ab + (-a)b &= (a + (-a))b && \text{by distributivity}  \\
+                       &= 0b          && \text{by (A4)}            \\
+                       &= 0           && \text{by Proposition 3.3}
+        \end{align*}
+        The proof of \(-(ab) = a(-b)\) is similar.
+
+        (c) By (FM3) and (b), we have \(-a = -(1a) = (-1)a.\)
+    \end{proof}
 
     \subsubsection{Laws of subtraction}
     \begin{enumerate}
