@@ -1,0 +1,84 @@
+\documentclass[11pt]{article}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\setlength{\parindent}{0cm}
+\let\emptyset\varnothing
+
+\title{\textbf{CSCI/MATH 2113 Discrete Structures} \\ 5.1 Cartesian Products and Relations}
+\author{Alyssa Motas}
+
+\begin{document}
+
+    \maketitle
+
+    \pagebreak
+
+    \tableofcontents
+
+    \pagebreak
+
+    \section{Cartesian Product}
+
+    \subsection{Definition}
+    For sets $A, B$ the \emph{Cartesian product}, or \emph{cross product}, of $A$ and $B$ is denoted by \(A \times B\) and equals \(\{(a,b) \mid a \in A, b \in B\}.\)
+
+    \subsection{Example}
+    Suppose that \(A = \{2,3,4\}\) and \(B = \{4,5\}\) then we have \[A \times B = \{(2,4),(2,5),(3,4),(3,5),(4,4),(4,5)\}.\] Note that \[A \times B \neq B \times A.\] Another example of a Cartesian product is the real plane \(\mathbb{R} \times \mathbb{R}\).
+
+    \subsection{Notation}
+    \[A^n = \underbrace{A \times A \times A \times \dots \times A}_\text{$n$ times}.\]
+
+    \pagebreak
+
+    \section{Relations}
+
+    \subsection{Definition}
+    For sets $A, B$, any subset of \(A \times B\) is called a (\emph{binary}) \emph{relation} from $A$ to $B$. Any subset of \(A \times A\) is called a (\emph{binary}) \emph{relation} on $A$.
+
+    \subsection{Notation}
+    If $R$ is a relation on $A$ and \((a,a') \in R\), then we write \(a R a'\). 
+
+    \subsection{Examples}
+    Suppose that \(A = \{2,3,4\}\) and \(B = \{4,5\}\). Then,
+    \begin{itemize}
+        \item \(\{(2,5),(2,4)\}\)
+        \item \(A \times B\)
+        \item \(\emptyset\)
+    \end{itemize}
+    are relations from $A$ to $B$.
+
+    \subsection{Counting}
+    For finite sets $A,B$ with \(|A| = m\) and \(|B| = n\), there are \(2^{mn}\) relations from $A$ to $B$, including the empty relation as well as the relation \(A \times B\) itself.
+
+    \vspace{1em}
+
+    There are also \(2^{nm} (= 2^{mn})\) relations from $B$ to $A$, one of which is also \(\emptyset\) and another of which is \(B \times A\). The reason we get the same number of relations from $B$ to $A$ as we have from $A$ to $B$ is that any relation \(R_1\) from $B$ to $A$ can be obtained from a unique relation $R_2$ from $A$ to $B$ by simply reversing the components of each ordered pair in $R_2$ (and vice versa).
+
+    \subsection{Standard Relations}
+    Standard relations can be expressed in this way: \[R = \{(a,b) \in \mathbb{Z} \times \mathbb{Z} \mid b = a + n \text{ for } n \in \mathbb{N}\}.\] This is the relation ``is less than or equal to.'' Indeed \[(a,b) \in R \text{ if and only if } a \leq b.\] Suppose that \(A = \{1\}\) and let \(R \subseteq \mathcal{P}(A)^2\) defined by \[R = \{(\emptyset, \emptyset), (\emptyset, \{1\}), (\{1\}, \{1\})\}.\] This is the relation ``is a subset of.'' Indeed, \[(S,S') \in R \text{ if and only if } S \subseteq S'.\]
+
+    \subsection{Theorem}
+    For sets $A$, $B$, and $C$:
+    \begin{itemize}
+        \item \(A \times \emptyset = \emptyset = \emptyset \times A\)
+        \item \(A \times (B \cap C) = (A \times B) \cap (A \times C)\)
+        \item \(A \times (B \cup C) = (A \times B) \cup (A \times C)\)
+        \item \((B \cap C) \times A = (B \times A) \cap (C \times A)\)
+        \item \((B \cup C) \times A = (B \times A) \cup (C \times A)\)
+    \end{itemize}
+    \begin{proof}
+        Let \(x \in A \times (B \cap C)\). Then \(x = (a,d)\) when \(a \in A, d \in B \cap C\). So, \(x = (a,d)\) with \(a \in A\) and \(d \in B\) which implies that \(x \in A \times B.\) But \(x = (a,d)\) with \(a \in A\) and \(d \in C\), which implies \(x \in A \times C\). Hence, we have \(x \in (A \times B) \cap (A \times C)\) which implies \(A \times (B \cap C) \subseteq (A \times B) \cap (A \times C).\) The converse inclusion is shown similarly. Hence we have the desired equality. The other statements are proved similarly as well.
+    \end{proof}
+
+    \subsection{Recursive Relation}
+    An example of a recursively defined relation is on \(\mathbb{N} \times \mathbb{N}\):
+    \begin{enumerate}
+        \item \((0,0) \in R\)
+        \item If \((s,t) \in R\) then \((s+1, t+7) \in R\).
+    \end{enumerate}
+    In fact, we have \[R = \{(m,n) \mid n = 7m\}.\]
+\end{document}
