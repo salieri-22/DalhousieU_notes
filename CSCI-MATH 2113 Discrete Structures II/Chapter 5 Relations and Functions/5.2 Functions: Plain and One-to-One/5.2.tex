@@ -1,0 +1,134 @@
+\documentclass[11pt]{article}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\setlength{\parindent}{0cm}
+\let\emptyset\varnothing
+
+\title{\textbf{CSCI/MATH 2113 Discrete Structures} \\ 5.2 Functions: Plain and One-to-One}
+\author{Alyssa Motas}
+
+\begin{document}
+
+    \maketitle
+
+    \pagebreak
+
+    \tableofcontents
+
+    \pagebreak
+
+    \section{Defintion of a function}
+
+    For nonempty sets $A$, $B$, a \emph{function}, or \emph{mapping}, $f$ from $A$ to $B$, denoted \(f: A \rightarrow B\), is a relation from $A$ to $B$ in which every lement of $A$ appears exactly once as the first component of an ordered pair in the relation. 
+
+    \vspace{1em}
+
+    We have \(f \subseteq A \times B\) and 
+    \begin{enumerate}
+        \item[(1)] Existence: \[\forall a \in A, \exists b \in B, (a,b) \in f.\]
+        \item[(2)] Uniqueness: If \((a,b) \in f\) and \((a,b') \in f\) then \[b = b'.\]   
+    \end{enumerate}
+
+    \subsection{Image and Preimage}
+
+    If \((a,b) \in f\), we write \(f(a)=b\). We then say that $b$ is the \emph{image} of $a$ under $f$, and that $a$ is the \emph{preimage} of $b$ under $f$.
+
+    \vspace{1em}
+
+    \emph{Example.} The absolute value is the function \(|x|: \mathbb{R} \rightarrow \mathbb{R}\). Here, 2 and -2 are two preimages of 2 since \[|2| = 2 = |-2|.\] So a given element can have more than one preimage.
+
+    \subsection{Domain and codomain}
+
+    For the function \(f: A \rightarrow B\), $A$ is called the \emph{domain} of $f$ and $B$ the \emph{codomain} of $f$. The subset of $B$ consisting of those elements that appear as second components in the ordered pairs of $f$ is called the \emph{range} of $f$ and is also denoted by $f(A)$ because it is the set of images (of the elements of $A$) under $f$.
+
+    \vspace{1em}
+
+    \emph{Note:} Range does not imply that it is equal to codomain.
+
+    \subsection{Examples}
+
+    \begin{enumerate}
+        \item The \emph{greatest integer function}, or \emph{floor function}. This function \(f: \mathbb{R \rightarrow \mathbb{R}}\), is given by \[f(x) = \lfloor x \rfloor = \text{ the greatest integer less than or equal to $x$}\] \emph{Example.} \(\lfloor 7.7 + 8.4 \rfloor = \lfloor 16.1 \rfloor = 16.\)
+        \item The \emph{ceiling function}. This function \(g: \mathbb{R} \rightarrow \mathbb{Z}\) is defined by \[g(x) = \lceil x \rceil = \text{ the least integer greater than or equal to $x$.}\] \emph{Example.} \(\lceil 3.3 + 4.2 \rceil = \lceil 7.5 \rceil = 8.\)
+        \item The function trunc (for truncation). It deletes the fractional part of a real number. Note that trunc(3.78) = \(\lfloor 3.78 \rfloor = 3\) while trunc(-3.78) = \(\lceil -3.78 \rceil = -3.\)
+        \item The \emph{access} function. In storing a matrix in a one-dimensional array, many computer languages use the \emph{row major} implementation. If \(A = (a_{ij})_{m \times n}\) is an \(m \times n\) matrix, to determine the location of an entry \(a_{ij}\) from $A$, where \(1 \leq i \leq m, 1 \leq j \leq n\), we can use the formula for the access function: \[f(a_{ij}) = (i - 1)n + j.\]
+    \end{enumerate}
+
+    \subsection{Counting functions}
+
+    Let \(A,B\) be nonempty sets with \(|A| = m, |B| = n.\) How many functions are there in \(f:A \rightarrow B\)?
+
+    \vspace{1em}
+
+    Suppose that \(A = \{a_1, a_2, a_3, \dots, a_m\}\) and \(B = \{b_1, b_2, b_3, \dots, b_n\}\), then a typical function can be described by \(\{(a_1, x_1), (a_2,x_2), \dots, (a_m, x_m)\}.\) We can select any $n$ elements of $B$ for \(x_1\) then do the same for \(x_2\). We continue this selection until one of the $n$ elements of $B$ is finally selected for \(x_m\). Using the product rule, there are \[n^m = |B|^{|A|}\] functions from $A$ to $B$.
+
+    \vspace{1em}
+
+    \emph{Example.} Suppose that \(A = \{1,2,3\}\) and \(B = \{w,x,y,z\}\). There are \(4^3 = 64\) functions from $A$ to $B$.
+
+    \vspace{1em}
+
+    In general, we do not expect \(|A|^{|B|} = |B|^{|A|}\).
+
+    \pagebreak
+
+    \section{One-to-one Correspondence}
+
+    \subsection{Definition}
+
+    A function \(f:A \rightarrow B\) is called \emph{one-to-one}, or \emph{injective}, if each element of $B$ appears at most once as the image of an element of $A$. 
+    
+    \vspace{1em}
+
+    If \(f: A \rightarrow B\) is one-to-one, with $A$, $B$ finite, we must have \(|A| \leq |B|\). For arbitrary sets \(A,B\), \(f: A \rightarrow B\) is one-to-one if and only if for all \(a_1, a_2 \in A, f(a_1) = f(a_2) \Rightarrow a_1 = a_2.\) Consequently, we also have \(a_1 \neq a_2 \Rightarrow f(a_1) \neq f(a_2).\)
+
+    \subsection{Examples}
+
+    \begin{enumerate}
+        \item Suppose that \(f: \mathbb{R} \rightarrow \mathbb{R}\) where \(f(x) = 3x + 7\) for all \(x \in \mathbb{R}\). Then for all \(x_1,x_2 \in \mathbb{R}\), we find that \[f(x_1) = f(x_2) \Rightarrow 3x_1 + 7 = 3x_2 + 7 \Rightarrow 3x_1 = 3x_2 \Rightarrow x_1 = x_2,\] so the given function $f$ is one-to-one.
+        \item Suppose that \(g: \mathbb{R} \rightarrow \mathbb{R}\) is the function defined by \(g(x) = x^4 - x\) for each real number $x$. Then \[g(0) = (0)^4 - 0 = 0 \text{ and } g(1) = (1)^4 - (1) = 1 - 1 = 0.\] Consequently, $g$ is not one-to-one since \(g(0) = g(1)\) but \(0 \neq 1.\)
+    \end{enumerate}
+
+    \subsection{Counting injective functions}
+
+    Let \(A,B\) be nonempty sets with \(|A| = m, |B| = n.\) How many injective functions are there in \(f:A \rightarrow B\)?
+
+    \vspace{1em}
+
+    Suppose that \(A = \{a_1, \dots, a_m\}\), \(B = \{b_1, \dots, b_n\}\), and that \(m \leq n\). The one-to-one function has the form \(\{(a_1,x_1), \dots, (a_m, x_m)\}\), where there are $n$ choices for \(x_1\), \(n-1\) choices for \(x_2\), \(n-2\) choices for \(x_3\), and so on, finishing with \(n - (m - 1) = n - m + 1\) choices for \(x_m\). By the rule of product, we have \[n(n-1)(n-2) \dots (n - m + 1) = \frac{n!}{(n - m)!} = P(n,m) = P(|B|,|A|).\]
+
+    \subsection{Direct Image}
+
+    If \(f: A \rightarrow B\) and \(A_1 \subseteq A\), then \[f(A_1) = f[A_1] = \{b \in B \mid b = f(a), \text{ for some } a \in A_1\},\] and \(f(A_1)\) is called the \emph{direct image} of \(A_1\) under $f$.
+
+    \vspace{1em}
+
+    \emph{Example.} Let \(g: \mathbb{R} \rightarrow \mathbb{R}\) be given by \(x^2\). Then \(g(\mathbb{R}) = \text{ the range of $g$ } = [0, + \infty).\) The \emph{image} of \(\mathbb{Z}\) under $g$ is \[g(\mathbb{Z}) = \{0,1,4,9,16, \dots\}\] and for \(A_1 = [-2,1]\) we get \[g(A_1) = [0,4].\]
+
+    \subsection{Set Operations}
+
+    Let \(f: A \rightarrow B\), with \(A_1, a_2 \subseteq A\). Then
+    \begin{enumerate}
+        \item[(a)] \(f(A_1 \cup A_2) = f(A_1) \cup f(A_2);\)
+        \item[(b)] \(f(A_1 \cap A_2) \subseteq f(A_1) \cap f(A_2)\);
+        \item[(c)] \(f(A_1 \cap A_2) = f(A_1) \cap f(A_2)\) when $f$ is one-to-one.   
+    \end{enumerate}
+    \begin{proof}
+        Part (b): For each \(b \in B, b \in f(A_1 \cap A_2) \Rightarrow b = f(a),\) for some \(a \in A_1 \cap A_2 \implies [b = f(a) \text{ for some } a \in A_1]\) and \([b = f(a) \text{ for some } a \in A_2] \Rightarrow b \in f(A_1)\) and \(b \in f(A_2) \Rightarrow b \in f(A_1) \cap f(A_2)\), so \(f(A_1 \cap A_2) \subseteq f(A_1) \cap f(A_2)\).
+    \end{proof}
+
+    \subsection{Restriction and Extension}
+
+    \subsubsection{Restriction}
+
+    If \(f: A \rightarrow B\) and \(A_1 \subseteq A\), then \(f |_{A_1} : A_1 \rightarrow B\) is called the \emph{restriction of f to $A_1$} if \(f|_{A_1}(a) = f(a)\) for all \(a \in A_1\).
+    
+    \subsubsection{Extension}
+
+    Let \(A_1 \subseteq A\) and \(f:A_1 \rightarrow B.\) If \(g:A \rightarrow B\) and \(g(a) = f(a)\) for all \(a \in A_1\), then we call $g$ an \emph{extension of f to A}.
+
+\end{document}
