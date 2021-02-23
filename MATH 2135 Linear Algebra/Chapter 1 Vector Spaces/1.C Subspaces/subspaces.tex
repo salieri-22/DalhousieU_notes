@@ -1,0 +1,239 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{microtype}
+
+\setlength{\parindent}{0cm}
+\let\emptyset\varnothing
+
+\title{\textbf{MATH 2135 Linear Algebra} \\ 1.C Subspaces}
+\author{Alyssa Motas}
+
+\begin{document}
+
+    \maketitle
+
+    \pagebreak
+
+    \tableofcontents
+
+    \pagebreak
+
+    \section{Definition}
+
+    Let $V$ be a vector space over a field $F$. A subset $U$ of $B$ is called a \emph{subspace} of $V$ if $U$ is also a vector space in its own right, using the same zero, addition, and scalar multiplication as $V$.
+
+    \subsection{Characterization of Subspaces}
+
+    A subset $U \subseteq V$ is a subspace if and only if $U$ satisfies the following three conditions:
+
+    \begin{enumerate}
+        \item[(1)] Additive identity. \[0 \in U\]
+        \item[(2)] Closed under addition. \[\forall v,w, v,w \in U \Rightarrow v + w \in U\] 
+        \item[(3)] Closed under scalar multiplication. \[\forall a,v, a \in F, v \ in U \Rightarrow av \in U\] 
+    \end{enumerate}
+    \begin{proof}
+        ``\(\Rightarrow\)'' Given \(U \subseteq V\), assume $U$ is a subspace of $V$. We want to show that $U$ satisfies all three conditions above.
+        \begin{enumerate}
+            \item[(1)] By definition of subspaces, the zero vector of $V$ is the zero vector of $U$. So \(0 \in U\).
+            \item[(2)] Since $U$ is a vector space, the sume of two vectors in $U$ is a vector in $U$. Also, $U$ uses the same addition operation as $V$. So whenever \(v,w \in U\), then \(v + w \in U.\)
+            \item[(3)] Similar to (2).  
+        \end{enumerate}
+    \end{proof}
+
+    \begin{proof}
+        ``\(\Leftarrow\)'' Another proof is this: To show that $U$ is a vector space, we first need an element \(0 \in U\) and operations \[+ : U \times U \rightarrow U \qquad \text{and} \qquad \cdot : F \times U \rightarrow U.\] Second, we must show axioms (A1) - (M4).
+        \begin{enumerate}
+            \item[(1)] By assumption, \(0 \in U\), where 0 is the additive identity of $V$. So we can use 0 as the additive identity of $U$.
+            \item[(2)] By assumption, $U$ is closed under addition, so the addition function \(+ : V \times V \rightarrow V\) restricts to a function \(+ : U \times U \rightarrow U.\) We can use the same function as the addition function on $U$. 
+            \item[(3)] We do the same with scalar multiplication. 
+        \end{enumerate}
+        Second: We must show (A1) - (M4) hold. We only do (A1) since the rest are similar. To prove (A1), take arbitrary \(u,v \in U\). We need to show that \[u + v = v + u\] in $U$. But since $V$ is a vector space, we know that \[u + v = v + u\] in $V$. This automatically holds.
+
+        \vspace{1em}
+
+        The other parts of the definition of a vecotr space, such as associativity and commutativity, are automatically satisfied for $U$ because they hold on the larger space $V$. Thus, $U$ is a vector space and hence is a subspace of $V$.
+    \end{proof}
+
+    \section{Examples of Subspaces}
+
+    \begin{enumerate}
+        \item[(a)] Let \(V = \mathbb{R}^4\) and let \[W = \{ (x,y,z,w) \mid x = 3y + 2z \}.\] Then $W$ is a subspace of $V$.
+        \begin{proof}
+            We need to show that $W$ is a subspace of $V$.
+            \begin{enumerate}
+                \item[(1)] \((0,0,0,0) \in W\).
+                \item[(2)] Assume \(v = (x,y,z,w) \in W\) and \(v' = (x',y',z',w') \in W.\) We need to show that \[x + x' = 3(y + y') + 2(z + z').\] We know that \(v \in W\) implies \[x = 3y + 2z.\] And we know that \(v' \in W\) implies \[x' = 3y' + 2z'.\] Add these two equations together and we get \[x + x' = 3(y + y') + 2(z + z').\]
+                \item[(3)] Similar proof for scalar multiplication. 
+            \end{enumerate}
+        \end{proof} 
+
+        \item[(b)] Recall that \(V = \mathbb{R}^{[0,1]}\) is the vector space of functions from the unit interval \[[0,1] = \{x \in \mathbb{R} \mid 0 \leq x \leq 1\}\] to \(\mathbb{R}.\) Let \(W = \{f : [0,1] \rightarrow \mathbb{R} \mid \text{ $f$ is continuous }\}.\) Then $W$ is a subspace of $V$.
+        \begin{proof}
+            We need to show that $W$ is a subspace of $V$.
+            \begin{enumerate}
+                \item[(1)] The zero function \(f(x) = 0\) is continuous. From Calculus, any constant function is continuous.
+                \item[(2)] The sum of two continuous functions is continuous. This is from Calculus.
+                \item[(3)] If $f$ is continuous, then so is $kf$, for any $k \in \mathbb{R}.$ This is also from Calculus.   
+            \end{enumerate}
+        \end{proof} 
+
+        \item[(c)] Again, let \(V = \mathbb{R}^{[0,1]}\), and \(U = \{f: [0,1] \rightarrow \mathbb{R} \mid \text{ $f$ is differentiable }\}.\) Then $U$ is a subspace of $V$.
+        \begin{proof}
+            From Calculus, we know these hold true:
+            \begin{enumerate}
+                \item[(1)] The zero function \(f(x) = 0\) is differentiable with the derivative of \[f'(x) = 0.\]
+                \item[(2)] If $f,g$ are differentiable then so is $f+g$ and \[(f+g)' = f' + g'.\]
+                \item[(3)] If $f$ is differentiable and $k$ is a scalar, then $kf$ is differentiable. \[(kf)' = kf'.\]  
+            \end{enumerate}
+            For example, the derivative of \((0 + 2 \sin(x) - 3 \cos(x))' = 0 + 2 \cos(x) - 3(-\sin(x))\).
+
+            We also know from Calculus that every differentiable function is continuous.
+            \[U \subseteq W \subseteq V\] where $U$ is the set of all differentiable functions, $W$ is the set of all continuous functions, and $V$ is the set of all functions.
+        \end{proof} 
+
+        \item[(d)] Let \(V = \mathbb{R}^{[0,1]}\) and define \[X = \left\{ f:[0,1] \rightarrow \mathbb{R} \mid \text{ $f$ is differentiable and $f' \left( \frac{1}{2} \right) = 0$}\right\}.\] We claim that $X$ is a subspace of $V$.
+        
+        \emph{Note.} We already know that $U$, the set of differentiable functions, is a subspace of $V$.
+        
+        \begin{proof}
+            Effectively, it is sufficient to show that $X$ is a subspace of $U$.
+            \begin{enumerate}
+                \item[(1)] The zero function \(f(x) = 0\) is differentiable since \[f'(x) = 0 \text{ and } f'\left(\frac{1}{2}\right) = 0.\] So \(f \in X\).
+                \item[(2)] Given \(f,g \in X\), we must check that \(f + g \in X\). Clearly \(f + g\) is differentiable. We must check that \((f + g)' \left( \frac{1}{2} \right) = 0.\) From Calculus, we have
+                \begin{align*}
+                    (f+g)'\left(\frac{1}{2}\right) &= f'\left(\frac{1}{2}\right) + g' \left(\frac{1}{2}\right) \\
+                    &= 0 + 0 \\
+                    &= 0.
+                \end{align*}
+                So we have \(f + g \in X\).
+                \item[(3)] Similar proof as follows for scalar multiplication: \[ (kg)' \left(\frac{1}{2}\right) = k \cdot f' \left(\frac{1}{2}\right) = 0. \] 
+            \end{enumerate}
+        \end{proof}
+
+        \item[(e)] Let \(V = \mathbb{R}^{\infty}\), the set of infinite sequences of real numbers. \[\mathbb{R}^{\infty} = \{(a_0,a_1,a_2,a_3, \dots) \mid a_0,a_1, \dots \in \mathbb{R}\}.\] Recall that $V$ is a vector space. Let $W \subseteq V$ be the set of \emph{convergent} sequences. From Calculus, we know that some sequences converge and some do not.
+        
+        Some examples are:
+        \begin{itemize}
+            \item \(a_i = i \Rightarrow (0,1,2,3,4,5,6,7, \dots)\) \[\lim_{i \to \infty} a_i =\text{ does not exist, so it does not converge}\]
+            \item \(b_i = \frac{1}{i} \Rightarrow (\frac{1}{1}, \frac{1}{2}, \frac{1}{3}, \dots)\) \[ \lim_{i \to \infty} b_i = \text{ converges to 0} \]
+            \item \(c_i = (-1)^i \Rightarrow (1, -1, 1, -1, 1, -1, \dots)\) does not converge.
+            \item \(d_i = 2 + \left( - \frac{1}{2} \right)^i \Rightarrow (3, 1.5, 2.25, 1.875, \dots)\) \[\lim_{i \to \infty} d_i = \text{ converges to 2}\]
+        \end{itemize}
+        Then $W$ is a subspace of $V$.
+
+        \begin{proof}
+            We must show that this is true.
+            \begin{enumerate}
+                \item[(1)] The zero sequence \(a_i = 0 \Rightarrow (0,0,0,\dots)\) converges to 0.
+                \item[(2)] From Calculus, the sum of two convergent sequences converges. In fact, \[\lim_{i \to \infty} (a_i + b_i) = \lim_{i \to \infty} a_i + \lim_{i \to \infty} b_i\]
+                \item[(3)] Similar proof to scalar muiltiplication. \[\lim_{i \to \infty} (ka_i) = k \lim_{i \to \infty} a_i\]   
+            \end{enumerate}
+        \end{proof}
+        Let $U$ be the set of sequences that converge to 0. Then $U$ is a subspace of $V$ (and of $W$).
+
+        \item[(f)] A reccurence relation. Consider the Fibonacci sequence \[1,1,2,3,5,8,13,21,34,55,89,144,\dots\] Let \(F_n\) be the \(n\)th element of this sequence. Then, we have the following recurrence:
+        \begin{align*}
+            \text{base case }  F_0 &= 1 \\
+            \text{base case }  F_1 &= 1 \\
+            \text{reccurence }  F_{n + 2} &= F_n + F_{n + 1} \qquad \text{for all } n \geq 0.
+        \end{align*} 
+        If we forget the base cases, we can consider the set of \emph{all} sequences satisfying the reccurence \[U = \{(a_0, a_1, a_2, \dots) \mid \text{ for all } n \geq 0, a_{n + 2} = a_n + a_{n+1}\}\] A sequence of numbers is called a \emph{generalized Fibonacci sequence} if it satisfies this reccurence, i.e. if it is a member of the set $U$.
+
+        \emph{Examples.}
+        \begin{align*}
+            & 1,2,3,5,8,13, \dots \\
+            & 7, -3,4,1,5,6,11,17,28,45, \dots \\
+            & 0,0,0,0,0,0,0,0, \dots
+        \end{align*} 
+
+        \emph{Claim.} $U$ is a subspace of \(\mathbb{R}^{\infty}\).
+        \begin{enumerate}
+            \item[(1)] The sequence \(0,0,0, \dots\) is a generealized Fibonacci sequence.
+            \item[(2)] $U$ is closed under addition.
+            \begin{align*}
+                & 1,2,3,5,8,13 \dots \\
+                & 7, -3,4,1,5,6, \dots \\
+                \cline{1-2}
+                & 8,-1,7,6,13,19, \dots
+            \end{align*}
+            \begin{proof}
+                Suppose \(a = (a_0, a_1, a_2, \dots) \in U\) and \(b = (b_0, b_1, b_2, \dots) \in U.\) Then \(a + b = c = (c_0, c_1, c_2, \dots)\) where \(c_i = a_i + b_i.\) 
+
+                We must show \(c \in U\), i.e. we must show that $c$ is a generalized Fibonacci sequence.
+
+                So take an arbitrary \(n \geq 0\). We must show \(C_{n+2} = C_n + C_{n+1}\). Indeed, we have:
+                \begin{align*}
+                    C_{n+2} &= a_{n+2} + b_{n+2} \\
+                            &= (a_n + a_{n+1}) + (b_n + b_{n+1}) \\
+                            &= (a_n + b_n) + (a_{n+1} + b_{n+1}) \\
+                            &= c_n + c_{n+1}
+                \end{align*}
+            \end{proof}
+            \item[(3)] Closed under scalar multiplication: similar.
+        \end{enumerate}
+    \end{enumerate}
+
+    \section{Intersection of Subspaces}
+
+    \subsection{Theorem}
+
+    Let $V$ be a vector space over a field $F$. Assume $U$ and $W$ are subspaces of $V$. Then \(U \cap W\) is a subspace of $V$.
+
+    \begin{proof}
+        To show that \(U \cap W\) is a subspace, we need to show the three properties.
+        \begin{enumerate}
+            \item[(1)] We must show that \(0 \in U \cap W\). But by assumption, $U$ is a subspace, so \(0 \in U\). Also, $W$ is a subspace, so \(0 \in W\). By definiton of intersection, we have \(0 \in U \cap W\).
+            \item[(2)] We must show that \(U \cap W\) is closed under addition. Consider arbitrary \(v,w \in U \cap W\) and we need to show that \(v + w \in U \cap W\).
+            
+            Indeed, we have:
+            \begin{itemize}
+                \item Since \(v \in U \cap W\), we know \(v \in U\).
+                \item Since \(w \in U \cap W\), we know \(w \in U\).
+                \item Since $U$ is a subspace, it is closed under addition, so \(v + w \in U\).
+            \end{itemize}
+
+            Similarly:
+            \begin{itemize}
+                \item Since \(v \in U \cap W\), we know \(v \in W\).
+                \item Since \(w \in U \cap W\), we know \(w \in W\).
+                \item Since $W$ is a subspace, it is closed under addition, so \(v + w \in W\).
+            \end{itemize}
+
+            From \(v + w \in U\) and \(v + w \in W\), by definition of intersection, we know \[v + w \in U \cap W.\]
+
+            \item[(3)] We must show that \(U \cap W\) is closed under scalar multiplication. So consider arbitrary \(k \in F\) and \(v \in U \cap W\). We must show that \(kv \in U \cap W.\)
+            
+            Since \(v \in U \cap W\), we have \(v \in U\). Since $U$ is a subspace of $V$, we know that $U$ is closed under scalar multiplication, so $kv \in U$.
+
+            Similarly, since \(v \in U \cap W\), we know \(v \in W.\) Since $W$ is a subspace of $V$, we know that $W$ is closed under scalar multiplication, so $kv \in W$.
+
+            From \(kv \in U\) and \(kv \in W\), it follows that \(kv \in U \cap W\) (by definition of intersection), as desired.
+        \end{enumerate}
+    \end{proof}
+
+    \subsection{Notations}
+
+    \begin{itemize}
+        \item \((x_1, \dots, x_n)\) is called an $n$-tuple.
+        \item \((x_i)_{i \in \{1, \dots, n\}}\) is another notation for the same thing. This is called ``family'' notation. But, this notation also works for infinite index sets. \[ (x_i)_{i \in \mathbb{N}} = (x_0, x_1, x_2, \dots) \] \[ \left( \frac{1}{i + 1} \right)_{i \in \mathbb{N}} = \left( 1, \frac{1}{2}, \frac{1}{3}, \frac{1}{4}, \dots \right) \]
+        \item More generally, we can use the ``family notation'' for other families of things, not necessarily numbers. 
+        \begin{align*}
+            U_1, U_2, U_3 && \text{3 subspaces of $V$} \\
+            (U_i)_{i \in \{ 1,2,3 \}} && \text{Notation for the same thing.} \\
+            (U_i)_{i \in I} && \text{Some family of subspaces.}
+        \end{align*}
+        \item Other notations that go along with these:
+        
+    \end{itemize}
+
+    
+    \section{Sums of Subspaces}
+
+    \section{Direct Sums}
+
+
+    \end{document}
