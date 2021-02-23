@@ -122,7 +122,58 @@
         \end{align*}
         Consider \(x_1\) as an element of $A$ and $x_2$ as an identity. Then \(f(x_1,x_2) = x_1\). Now reverse the roles of \(x_1\) and \(x_2\), that is, consider \(x_2\) as an element of $A$ and $x_1$ as an identity. We find that \(f(x_1,x_2) = x_2\). Consequently, \(x_1 = x_2\), and $f$ has at most one identity.
     \end{proof}
+
+    \section{Projections}
+
+    For sets $A$ and $B$, if \(D \subseteq A \times B\), then \(\pi_A : D \rightarrow A\), defined by \(\pi_A (a,b) = a\), is called the \emph{projection} on the first coordinate. The function \(\pi_B : D \rightarrow B\), defined by \(\pi_B (a,b) = b\), is called the \emph{projection} on the second coordinate.
+
+    \pagebreak
+
+    \section{Counting Binary Operations}
+
+    \begin{itemize}
+        \item For the set \(A = \{a,b,c,d\}\), how many closed binary operations are there on $A$? 
+
+        \vspace{1em}
     
+        A binary operation is a function \(A \times A \rightarrow A\). Hence this number is \[|A|^{|A| \times |A|} = 4^{16}.\] In other words, we need to fill the table below.
+        \begin{center}
+            \begin{tabular}{| c | c | c | c | c |} \hline
+                     & $a$ & $b$ & $c$ & $d$ \\ \hline
+                 $a$ &     &     &     &     \\ \hline
+                 $b$ &     &     &     &     \\ \hline
+                 $c$ &     &     &     &     \\ \hline
+                 $d$ &     &     &     &     \\ \hline
+            \end{tabular}
+        \end{center}
+        There are 4 choices for each cell.
 
+        \item How many of these operations are commutative?
+        
+        \vspace{1em}
 
+        Commutative operations correspond to symmetric tables.
+        \begin{center}
+            \begin{tabular}{| c | c | c | c | c |} \hline
+                     & $a$ & $b$ & $c$ & $d$ \\ \hline
+                 $a$ &     &     &     &     \\ \hline
+                 $b$ &  x  &     &     &     \\ \hline
+                 $c$ &  x  &  x  &     &     \\ \hline
+                 $d$ &  x  &  x  &  x  &     \\ \hline
+            \end{tabular}
+        \end{center}
+        Since only 10 cells need to be filled, there are \[4^{10}\] binary operations.
+
+        \item How many of these operations have $a$ as an identity?
+        \begin{center}
+            \begin{tabular}{| c | c | c | c | c |} \hline
+                     & $a$ & $b$ & $c$ & $d$ \\ \hline
+                 $a$ & $a$ & $b$ & $c$ & $d$ \\ \hline
+                 $b$ & $b$ &     &     &     \\ \hline
+                 $c$ & $c$ &  x  &     &     \\ \hline
+                 $d$ & $d$ &  x  &  x  &     \\ \hline
+            \end{tabular}
+        \end{center}
+        Since $a$ is the identity, we have \(f(d,a) = d\) for every \(d \in A\). In total, there are \(4^6\) such operations since there are 6 cells to fill.
+    \end{itemize}
 \end{document}
