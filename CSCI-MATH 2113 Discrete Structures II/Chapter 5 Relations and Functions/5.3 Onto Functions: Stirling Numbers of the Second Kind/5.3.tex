@@ -1,0 +1,67 @@
+\documentclass[11pt]{article}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{microtype}
+
+\setlength{\parindent}{0cm}
+\let\emptyset\varnothing
+
+\title{\textbf{CSCI/MATH 2113 Discrete Structures} \\ 5.3 Onto Functions: Stirling Numbers of the Second Kind}
+\author{Alyssa Motas}
+
+\begin{document}
+
+    \maketitle
+
+    \pagebreak
+
+    \tableofcontents
+
+    \pagebreak
+
+    \section{Surjective Functions}
+    \subsection{Definition}
+
+    \(f: A \rightarrow B\) is \emph{onto} or \emph{surjective} if \(\forall b \in B, \exists a \in A\) such that \(f(a)=b.\)
+
+    \vspace{1em}
+
+    \emph{Remark.} A function is onto if its range is equal to the codomain. 
+
+    \vspace{1em}
+
+    If \(A,B\) are finite sets, then for an onto function \(f: A \rightarrow B\) to possibly exist we must have \(|A| \leq |B|\). 
+
+    \subsection{Examples}
+    \begin{itemize}
+        \item For the function \(f: \mathbb{R} \rightarrow \mathbb{R}\) defined by \(f(x)=x^3\) we have: if \(x \in \mathbb{R}\), then \(f(\sqrt[3]x) = (\sqrt[3]x)^3 = x.\) This means that $f$ is onto.
+        \item For the function \(g: \mathbb{R} \rightarrow \mathbb{R}\) defined by \(g(x)=x^2\) we have: no such \(y \in \mathbb{R}\) that satisfies \(y^2 = -1.\) For instance, \[g(x) = x^2 = -9 \Rightarrow r = 3i, -3i \in \mathbb{C}.\] Therefore, $g$ is not onto.
+    \end{itemize}
+
+    \subsection{Counting}
+
+    Suppose that \(A = \{x,y,z\}\) and \(B = \{1,2\}\). How many \(f: A \rightarrow B\) are onto? 
+    \begin{proof}
+        The function \(f: A \rightarrow B\) is not onto if and only if \(f(a) = 1\) for all \(a \in A\) or \(f(a)=2\) for all \(a \in A\). Hence, the number we seek is \[|B|^{|A|} - 2 = 2^3 - 2 = 6.\]
+    \end{proof}
+    In general, if $A$ and $B$ are sets with \(|A| = m\) and \(|B| = n\), then this quantity is \[ \sum_{k = 0}^{n} (-1)^k \binom{n}{n - k} (n-k)^m \] onto functions from $A$ to $B$.
+
+    \section{Stirling Numbers}
+
+    \subsection{A combinatorial interpretation}
+
+    In how many ways can you distribute 4 objects into 3 labelled cotainers with no container empty?
+    We just need to count the number of surjections from $A$ to $B$. By the previuos formula, this is \[\sum_{k = 0}^{3} (-1)^k \binom{3}{3-k} (3-k)^4 = 36.\] What if we had the same situation but with containers that aren't labelled? The number of such distributions is \[S(m,n) = \frac{1}{n!} \sum_{k=0}^n (-1)^k \binom{n}{n-k} (n-k)^m\] where the factor of \(\frac{1}{n!}\) corrects for the fact that certain distributions are equivalent.
+
+    So \(S(m,n)\) is the number of ways to distribute $m$ objects into $n$ identical containers with no container left empty. 
+
+    \subsection{Definition}
+
+    \(S(m,n)\) is a \emph{Stirling number} of the 2nd kind.
+    
+
+\end{document}
