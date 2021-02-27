@@ -226,14 +226,151 @@
             (U_i)_{i \in \{ 1,2,3 \}} && \text{Notation for the same thing.} \\
             (U_i)_{i \in I} && \text{Some family of subspaces.}
         \end{align*}
-        \item Other notations that go along with these:
+
+        \pagebreak
         
+        \item Other notations that go along with these:
+        \begin{itemize}
+            \item Summation. \[\sum_{i \in \mathbb{N}} x_i\]
+            \item Product. \[\prod_{i \in \mathbb{N}} x_i \]
+            \item Limit. \[\lim_{i \to \infty} x_i\]
+            \item Union. \[ \bigcup_{i \in \{1,2,3\}} U_i \]
+            \item Intersection. \[ \bigcap_{i \in I} U_i\] 
+        \end{itemize}
     \end{itemize}
 
+    \subsection{Theorem}
+
+    Let $V$ be a vector space over a field $F$. Let $I$ be a set. Let \((U_i)_{i \in I}\) be a \emph{family} of subspaces of $V$. Then, \[\bigcap_{i \in I} U_i\] is a subspace of $V$.
+
+    \begin{proof}
+        Let \(W = \bigcap_{i \in I} U_i\). To show that $W$ is a subspace of $V$, we must show the three subspace properties.
+        \begin{enumerate}
+            \item[(1)] We must show that \(0 \in W\). Take an arbitrary \(i \in I\). By assumption, \(U_i\) is a subspace of $V$. Therefore, \(0 \in U_i\).
+            
+            Since $i$ was arbitrary, we have \(0 \in U_i\) for all $i$, and therefore, by definition of intersection, \(0 \in \bigcap_{i \in I} U_i = W\).
+
+            \item[(2)] Must show $W$ is closed under addition. Take an arbitrary \(v,u \in W\). We must show that \(v + u \in W\) or \(v + u \in \bigcap_{i \in I} U_i\).
+            
+            Take an arbitrary \(i \in I\). We must show that \(v + u \in U_i\). By assumption, \(v \in W = \bigcap_{i \in I} U_i\), therefore \(v \in U_i\).
+
+            Simiarly, by assumption, \(u \in W = \bigcap_{i \in I} U_i\), therefore \(u \in U_i\).
+
+            Also by assumption, \(U_i\) is a subspace of $V$, therefore it is closed under addition. So \(v + u \in U_i\).
+
+            Since $i$ was arbitrary, we therefore know for all \(i \in I\) that \(v + u \in U_i\). It follows that \(v + u \in \bigcap_{i \in I} U_i\) as desired.
+
+            \item[(3)] Closed under scalar multiplication: similar proof.
+        \end{enumerate}
+    \end{proof}
+
+    \subsection{Meta-theorem}
+
+    Let $V$ be a vector space over a field $F$. Let $P$ be any property of subspaces of $V$ such that $P$ is closed under arbitrary intersections.
+
+    This means that whenever we have a family of subspaces, \((U_i)_{i \in I}\) of $V$,
+    \begin{itemize}
+        \item If, for all \(i \in I\), \(U_i\) has the property $P$, then \[\bigcap_{i \in I} U_i\] has the property $P$.
+    \end{itemize}
+    Then there exists a \emph{smallest} subspace of $V$ with the property $P$.
+
+    \begin{proof}
+        Let $P$ be such a property, i.e. a property of subspaces of $V$ that is closed under intersections.
+
+        We want to showt hat there exists a \emph{smallest} subspace $W$ of $V$ with property $P$. Specifically, this means:
+        \begin{enumerate}
+            \item[(1)] $W$ is a subspace of $V$ and has the property $P$.
+            \item[(2)] Whenever $W'$ is a subspace of $V$ that has the property $P$, then $W \subseteq W'$.  
+        \end{enumerate}
+
+        To show it, let \((U_i)_{i \in I}\) be the family of \emph{all} subspaces of $V$ satisfying property $P$. Define \[W = \bigcap_{i \in I} U_i. \] We have to show (1) and (2).
+
+        \begin{enumerate}
+            \item[(1)] $W$ is a subspace of $V$ by the previous theorem. Also, $W$ has the property $P$ because all $U_i$ have the property $P$ and $P$ is closed under intersections.
+            \item[(2)] We must show that $W$ is smallest. So consider any subspace $W'$ with property $P$. We must show that \(W \subseteq W'\).
+            
+            But the family \((U_i)_{i \in I}\) contains \emph{all} subspaces with property $P$. So \(W' = U_i\) for all some \(i \in I\). Then \[W = \bigcap_{i \in I} U_i \subseteq U_i = W'.\]
+        \end{enumerate}
+    \end{proof}
+
+    \subsubsection{Example}
+    
+    Consider \(v_1, v_2, v_3 \in V\).
+
+    There exists a \emph{smallest subspace} $W$ of $V$ such that \(v_1, v_2, v_3 \in W\). We normally call $W$ the \emph{span} of \(v_1, v_2, v_3\).
+
+    \begin{proof}
+        By the meta-theorem, the property ``contains \(v_1, v_2\), and \(v_3\)'' is closed under intersections.
+    \end{proof}
     
     \section{Sums of Subspaces}
 
+    \subsection{Definition of Sum of Subsets}
+
+    Suppose \(U_1, \dots, U_m\) are subsets of $V$. The \textbf{sum} of \(U_1, \dots, U_m\), denoted \(U_1 + \dots + U_m\), is the set of all possible sums of elements of \(U_1, \dots, U_m\). More precisely, \[U_1 + \dots + U_m = \{u_1 + \dots + u_m \mid u_1 \in U_1, \dots, u_m \in U_m\}.\]
+
+    \subsubsection{Example}
+
+    For \(U = \{(x,0,0) \in \textbf{F}^3 \mid x \in \textbf{F}\}\) and \(W = \{(0,y,0) \in \textbf{F}^3 \mid y \in \textbf{F}\}\), we have \[U + W = \{(x,y,0) \mid x,y \in \textbf{F}\}.\]
+
+    For \(U = \{(x,x,y,y) \in \textbf{F}^4 \mid x,y \in \textbf{F}\}\) and \(W = \{(x,x,x,y) \in \textbf{F}^4 \mid x,y \in \textbf{F}\}\), then \[U + W = \{(x,x,y,z) \in \textbf{F}^4 \mid x,y,z \in \textbf{F}\}.\]
+
+    \subsection{Sum of subspaces is the smallest containing subspace}
+
+    Suppose \(U_1, \dots, U_m\) are subspaces of $V$. Then \(U_1 + \dots + U_m\) is the smallest subspace of $V$ containing \(U_1, \dots, U_m\).
+
+    \begin{proof}
+        We know that \(0 \in U_1 + \dots + U_m\) and \( U_1 + \dots + U_m \) is closed under addition and scalar multiplication. Thus, \(U_1 + \dots + U_m\) is a subspace of $V$.
+
+        \(U_1, \dots, U_m\) are contained in \(U_1 + \dots + U_m\), and every subspace of $V$ containing \(U_1, \dots, U_m\) contains \(U_1 + \dots + U_m\).
+
+        Thus, \(U_1 + \dots + U_m\) is the smallest subspace of $V$ containing \(U_1, \dots, U_m\).
+    \end{proof}
+
+    \emph{Note.} Sums of subspaces in theory of vector spaces are analogous to unions of subsets in set theory. Given two subspaces of a vector space, the smallest subspace containing them is their sum. Analogously, given two subsets of a set, the smallest subset containing them is their union.
+
     \section{Direct Sums}
+
+    Suppose \(U_1, \dots, U_m\) are subspaces of $V$. Every element of \(U_1 + \dots + U_m\) can be written in the form \[u_1 + \dots + u_m\] where each \(u_j\) is in $U_j$.
+
+    \subsection{Definition of direct sum}
+
+    \begin{itemize}
+        \item The sum \(U_1 + \dots + U_m\) is called a \emph{direct sum} if each element of \(U_1 + \dots + U_m\) can eb written in only one way as a sum \(u_1 + \dots + u_m\), where each \(u_j\) is in \(U_j\).
+        \item If \(U_1 + \dots + U_m\) is a direct sum, then \(U_1 \oplus \dots \oplus U_m\) denotes \(U_1 + \dots + U_m\), with the \(\oplus\) notation serving as an indication that this is a direct sum. 
+    \end{itemize}
+
+    \subsubsection{Examples}
+
+    For \(U = \{(x,y,0) \in \textbf{F}^3 \mid x,y \in \textbf{F}\}\) and \(W = \{(0,0,z) \in \textbf{F}^3 \mid z \in \textbf{F}\}\), then \[\textbf{F}^3 = U \oplus W.\]
+
+    Suppose \(U_j = \{(0,0,0,\dots, j) \in \textbf{F}^n \mid x \in \textbf{F}\}\). Then \[\textbf{F}^n = U_1 \oplus \dots \oplus U_n.\]
+
+    \textbf{Non-example:} Let \(U_1 = \{(x,y,0) \in \textbf{F}^3 \mid x,y \in \textbf{F}\}\), \(U_2 = \{(0,0,z) \in \textbf{F}^3 \mid z \in \textbf{F}\}\), \(U_3 = \{(0,y,y) \in \textbf{F}^3 \mid y \in \textbf{F}\}\). Then, \(U_1 + U_2 + U_3\) is not a direct sum. 
+
+    \begin{proof}
+        Clearly \(\textbf{F}^3 = U_1 + U_2 + U_3\) because every vector \((x,y,z)\in \textbf{F}^3\) can be written as \[(x,y,z) = (x,y,0) + (0,0,z) + (0,0,0).\] This is not equal to the direct sum because the vector \((0,0,0)\) can be written in two different ways. \[(0,0,0) = (0,0,0) + (0,0,0) + (0,0,0)\] and \[(0,0,0) = (0,1,0) + (0,0,1) + (0,-1,-1).\]
+    \end{proof}
+
+    \subsection{Condition for a direct sum}
+    
+    Suppose \(U_1, \dots, U_m\) are subspaces of $V$. Then \(U_1 + \dots + U_m\) is a direct sum if and only if the only way to write 0 as a sum \(u_1 + \dots + u_m\), where each \(u_j\) is in \(U_j\), is by taking each \(u_j\) equal to 0.
+
+    \begin{proof}
+        Suppose \(U_1 + \dots + U_m\) is a direct sum. Then by definition, the only way to write 0 as a sum is by taking each \(u_j\) equal to 0. To show that \(U_1 + \dots + U_m\) is a direct sum, let \(v \in U_1 + \dots + U_m.\) We can write \[v = u_1 + \dots + u_m\] for some \(u_1 \in U_1, \dots, u_m \in U_m.\) To show that this is unique, suppose we also have \[v = v_1 + \dots + v_m\] where \(v_1 \in U_1, \dots, v_m \in U_m\). Subtracting them, we have \[0 = (u_1 - v_1) + \dots + (u_m - v_m).\] This implies that \(u_j = v_j\). 
+    \end{proof}
+
+    \subsection{Direct sum of two subspaces}
+
+    Suppose $U$ and $W$ are subspaces of $V$. Then $U+W$ is a direct sum if and only if \(U \cap W = \{0\}\).
+
+    \begin{proof}
+        Suppose that $U+W$ is a direct sum. If \(v \in U \cap W\), then \(0 = v + (-v)\) where \(v \in U\) and \(-v \in W\). This implies \(v = 0\) since it is unique. 
+
+        To prove the other direction, suppose \(U \cap W = \{0\}\). To prove that \(U + W\) is a direct sum, suppose \(u \in U, w \in W\), and \[0 = u + w.\] By the previous theorem, we know that \(u = w = 0.\) The equation above implies \(u = -w \in W,\) so \(u \in U \cap W\) and \(u = w = 0\) is true.
+    \end{proof}
+
+    \emph{Note.} Sums of subspaces are analogous to unions of subsets. Similarly, direct sums of subspaces are analogous to disjoint unions of subsets. No two subspaces of a vector space can be disjoint, because both contain 0. So disjointness is replaced, at least in the case of two subspaces, with the requirement that the intersection equals \(\{0\}\).
 
 
     \end{document}
