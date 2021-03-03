@@ -75,6 +75,7 @@ MATH 2135 Linear Algebra/Chapter 2 Finite-Dimensional Vector Spaces/2.A Span and
 MATH 2135 Linear Algebra/Chapter 2 Finite-Dimensional Vector Spaces/2.A Span and Linear Independence/span-lin-indep.fls
 MATH 2135 Linear Algebra/Chapter 2 Finite-Dimensional Vector Spaces/2.A Span and Linear Independence/span-lin-indep.fdb_latexmk
 MATH 2135 Linear Algebra/Chapter 2 Finite-Dimensional Vector Spaces/2.A Span and Linear Independence/span-lin-indep.aux
+<<<<<<< HEAD
 CSCI-MATH 2113 Discrete Structures II/Chapter 5 Relations and Functions/5.6 Function Composition and Inverse Functions/5.6.aux
 CSCI-MATH 2113 Discrete Structures II/Chapter 5 Relations and Functions/5.6 Function Composition and Inverse Functions/5.6.fdb_latexmk
 CSCI-MATH 2113 Discrete Structures II/Chapter 5 Relations and Functions/5.6 Function Composition and Inverse Functions/5.6.fls
@@ -89,3 +90,12 @@ CSCI-MATH 2113 Discrete Structures II/Chapter 5 Relations and Functions/ch5.log
 CSCI-MATH 2113 Discrete Structures II/Chapter 5 Relations and Functions/ch5.out
 CSCI-MATH 2113 Discrete Structures II/Chapter 5 Relations and Functions/ch5.synctex.gz
 CSCI-MATH 2113 Discrete Structures II/Chapter 5 Relations and Functions/ch5.toc
+=======
+MATH 2135 Linear Algebra/Chapter 1 Vector Spaces/ch1.aux
+MATH 2135 Linear Algebra/Chapter 1 Vector Spaces/ch1.fdb_latexmk
+MATH 2135 Linear Algebra/Chapter 1 Vector Spaces/ch1.fls
+MATH 2135 Linear Algebra/Chapter 1 Vector Spaces/ch1.log
+MATH 2135 Linear Algebra/Chapter 1 Vector Spaces/ch1.out
+MATH 2135 Linear Algebra/Chapter 1 Vector Spaces/ch1.synctex.gz
+MATH 2135 Linear Algebra/Chapter 1 Vector Spaces/ch1.toc
+>>>>>>> 78587431be0872eca7f8343d1c856a9e6581a94a
