@@ -17,6 +17,9 @@ This class continues the exploration of discrete mathematics started in Discrete
 ## Appendix 3 Countable and Uncountable Sets
 
 ## Chapter 6 Languages: Finite State Machines
+- 6.1 Language: The Set Theory of Strings
+- 6.2 Finite State Machines: A First Encounter
+- 6.3 Finite State Machines: A Second Encounter
 
 ## Chapter 7 Relations: The Second Time Around
 
