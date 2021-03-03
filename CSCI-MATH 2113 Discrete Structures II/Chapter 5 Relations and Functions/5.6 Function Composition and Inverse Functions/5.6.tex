@@ -1,0 +1,154 @@
+\documentclass[11pt]{article}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{graphicx}
+\graphicspath{ {./img/} }
+
+\setlength{\parindent}{0cm}
+\let\emptyset\varnothing
+
+\title{\textbf{CSCI/MATH 2113 Discrete Structures} \\ 5.6 Function Composition and Inverse Functions}
+\author{Alyssa Motas}
+
+\begin{document}
+
+    \maketitle
+
+    \pagebreak
+
+    \tableofcontents
+
+    \pagebreak
+
+    \section{Bijective functions}
+
+    If \(f: A \rightarrow B\), then $f$ is said to be \emph{bijective}, or to be a \emph{one-to-one corespondence}, if $f$ is both one-to-one and onto.
+
+    \section{Identity function}
+
+    The function \(1_A : A \rightarrow A\), defined by \(1_A (a) = a\) for all \(a \in A\), is called the \emph{identity function}.
+
+    \section{Equality of functions}
+
+    If \(f,g : A \rightarrow B\), we say that $f$ and $g$ are \emph{equal} and write \(f = g\), if \(f(a) = g(a)\) for all \(a \in A\).
+
+    A common pitfall in dealing with the equality of functions occurs when $f$ and $g$ are functions with a common domain $A$ and \(f(a) = g(a)\) for all \(a \in A\). It may \emph{not} be the case that \(f = g\). The pitfall results from not paying attention to the codomains of the functions.
+
+    \subsection{Example}
+
+    Let \(f: \mathbb{Z} \rightarrow \mathbb{Z}, g: \mathbb{Z} \rightarrow \mathbb{Q}\) where \(f(x) = x = g(x)\), for all \(x \in \mathbb{Z}\). Then, \(f,g \) share the common domain \(\mathbb{Z}\), have the same range \(\mathbb{Z}\), and act the same on every element of \(\mathbb{Z}\). Yet \(f \neq g\) because $f$ is injective and $g$ is injective but surjective; so the codomains do not make a difference.
+
+    \section{Composite functions}
+
+    If \(f:A \rightarrow B\) and \(g: B \rightarrow C\), we define the \emph{composite function}, which is denoted \(g \circ f: A \rightarrow C\), by \((g \circ f)(a) = g(f(a))\), for each \(a \in A\). $f$ and $g$ are composable. However, if \(C \neq A\) then \(f \circ g\) is not defined.
+
+    \vspace{1em}
+
+    The definition and examples for composite functions required that the codomain of $f$ = domain of $g$. If range of $f$ \(\subseteq\) $g$, this will actually be enough to yield the composite function \(g \circ f: A \rightarrow C\). Also, for any \(f:A \rightarrow B\), we observe that \(f \circ 1_A = f = 1_B \circ f\).
+
+    \subsection{Theorem}
+
+    Let \(f:A \rightarrow B\) and \(g:B \rightarrow C\).
+    \begin{enumerate}
+        \item[(a)] If  $f$ and $g$ are one-to-one, then \(g \circ f\) is one-to-one.
+        \item[(b)] If $f$ and $g$ are onto, then \(g \circ f\) is onto.   
+    \end{enumerate}
+
+    \begin{proof} Let us prove the following theorem above.
+        \begin{enumerate}
+            \item[(a)] Let \(a_1, a_2 \in A\) with \((g \circ f)(a_1) = (g \circ f)(a_2)\). Then \[(g \circ f)(a_1) = (g \circ f)(a_2) \Rightarrow g(f(a_1)) = g(f(a_2)) \Rightarrow f(a_1) = f(a_2)\] since $g$ is one-to-one. Also, \(a_1 = a_2\) because $f$ is one-to-one. Consequently, \(g \circ f\) is one-to-one. 
+            \item[(b)] Let \(z \in C\). Since $g$ is onto, there exists \(y \in B\) with \(g(y) = z.\) With $f$ onto and \(y \in B\), there exists \(x \in A\) with \(f(x) = y\). Hence, \(z = g(y) = g(f(x)) = (g \circ f)(x)\), so the range of \(g \circ f = C = \) the codomain of \(g \circ f\), and \(g \circ f\) is onto. 
+        \end{enumerate}
+    \end{proof}
+
+    Function composition is not commutative, but it is associative.
+
+    \subsection{Collection of functions}
+
+    If $A$ is a set then \[A^A = \{f \mid f:A \rightarrow A\}\] is the collection of functions \(A \rightarrow A\). So the function composition is a binary operation on $A^A$.
+
+    \subsection{Theorem}
+
+    If \(f: A \rightarrow B, g: B \rightarrow C\), and \(h:C \rightarrow D\), then \[ (h \circ g) \circ f = h \circ (g \circ f). \]
+
+    \begin{proof}
+        We have \[(h \circ g) \circ f(x) = h(g(f(x)))\] and \[h \circ (g \circ f)(x) = h(g(f(x))).\] Therefore, we have \((h \circ g) \circ f = h \circ (g \circ f).\)
+    \end{proof}
+
+    \subsection{Powers of functions}
+
+    If \(f:A \rightarrow A\), we define \(f^1 = 1\), and for \(n \in \mathbb{Z}^+, f^{n+1} = f \circ f(^n).\)
+
+    \vspace{1em}
+
+    This definition is another example wherein the result is defined \emph{recursively}. With \(f^{n+1} = f \circ (f^n)\), we see the dependence of \(f^{n+1}\) on a previous power, namely, \(f^n\).
+
+    \section{Invertible functions}
+
+    \subsection{Converse of a relation}
+
+    For sets \(A,B,\) if $R$ is a relation from $A$ to $B$, then the \emph{converse} of $R$, denoted $R^c$, is the relation from $B$ to $A$ defined by \[R^c = \{(b,a) \mid (a,b) \in R\}.\] We simply interchange the components of each ordered pair in $R$.
+
+    \subsection{Invertible function}
+
+    If \(f:A \rightarrow B\), then $f$ is said to be \emph{invertible} if there is a function \(g: B \rightarrow A\) such that \(g \circ f = 1_A\) and \(f \circ g = 1_B.\)
+
+    \subsection{Uniqueness}
+
+    If a function \(f: A \rightarrow B\) is invertible and a function \(g:B \rightarrow A\) satisfies \(g \circ f = 1_A\) and \(f \circ g = 1_B\), then this function $g$ is unique.
+
+    \begin{proof}
+        If $g$ is not unique, then there is another function \(h: B \rightarrow A\) with \(h \circ f = 1_A\) and \(f \circ h = 1_B \). Consequently, \[h = h \circ 1_B = h \circ (f \circ g) = (h \circ f) \circ g = 1_A \circ g = g.\]
+    \end{proof}
+
+    As a result of this theorem, we shall call the function $g$ the inverse of $f$ and shall adopt the notation \(g = f^{-1}\). Note that \(f^{-1} = f^c\) and \((f^{-1})^{-1} = f.\)
+
+    \subsection{Theorem}
+
+    \(f: A \rightarrow B\) is invertible if and only if $f$ is bijective. 
+    \begin{proof}
+        Assuming that $f$ is invertible, we have a unique function \(g:B \rightarrow A\) with \(g \circ f = 1_A, f \circ g = 1_B\). If \(a_1,a_2 \in A\) with \(f(a_1) = f(a_2)\), then \(g(f(a_1)) = g(f(a_2))\). It follows that \(a_1 = a_2\), so $f$ is one-to-one. For the onto property, let \(b \in B\), then \(g(b) \in A\). We have \(b = 1_B (b) = (f \circ g)(b) = f(g(b))\), so $f$ is onto.
+
+        \vspace{1em}
+
+        For the other direction, suppose \(f: A \rightarrow B\) is bijective. Since $f$ is onto, for each \(b \in B\), there is an  \(a \in A\) with \(f(a) = b.\) Consequently, we define the function \(g: B \rightarrow A\) by \(g(b) = a\), where \(f(a) = b\). Our definition of $g$ such that \(g \circ f = 1_A\) and \(f \circ g = 1_B\), so we find that $f$ is invertible, with \(g = f^{-1}\).
+    \end{proof}
+
+    \subsection{Theorem}
+
+    If \(f:A \rightarrow B, g:B \rightarrow C\) are invertible functions, then \(g \circ f: A \rightarrow C\) is invertible and \[(g \circ f)^{-1} = f^{-1} \circ g^{-1}.\]
+
+    \section{Inverse image}
+
+    If \(f: A \rightarrow B\) and \(B_1 \subseteq B\), then \(f^{-1} (B_1) = \{x \in A \mid f(x) \in B_1\}\). The set \(f^{-1}(B_1)\) is called the \emph{preimage or inverse image} of $B_1$ under $f$.
+
+    \vspace{1em}
+
+    \emph{Note.} \(f^{-1}(B_1)\) is defined even if $f$ is not invertible. 
+
+    \subsection{Examples}
+
+    \begin{itemize}
+        \item For \(f: \mathbb{Z} \rightarrow \mathbb{Z}\), we have \[f^{-1}[\{2\}] = \{2\}.\]
+        \item For \(f: \mathbb{Z} \rightarrow \mathbb{Z}\), we have \[f^{-1}[\{0\}] = \{x \in \mathbb{Z} \mid f(x) \in \{0\}\} = \{x \in \mathbb{Z} \mid f(x) = 0\}\] and \[f^{-1}[\{1,2\}] = \emptyset.\]
+        \item For \(f: \mathbb{Z} \rightarrow \mathbb{Z}_2\), we have \[f^{-1}[\{0\}] = 2 \mathbb{Z} \qquad \text{even integers}\] and \[f^{-1}[\{1\}] = 2 \mathbb{Z} + 1 \qquad \text{odd integers}\]
+    \end{itemize}
+
+    \section{Theorem}
+
+    If \(f: A \rightarrow B\) and \(B_1, B_2 \subseteq B\), then 
+    \begin{enumerate}
+        \item[(a)] \(f^{-1}(B_1 \cap B_2) = f^{-1}(B_1) \cap f^{-1}(B_2)\);
+        \item[(b)] \(f^{-1}(B_1 \cup B_2) = f^{-1}(B_1) \cup f^{-1}(B_2);\)
+        \item[(c)] \(f^{-1}(\overline{B_1}) = \overline{f^{-1}(B_1)}\).   
+    \end{enumerate}
+
+    \section{Finite sets}
+
+    Let \(f: A \rightarrow B\) for finite sets $A$ and $B$, where \(|A| = |B|\). Then the following statements are equivalence: (a) $f$ is one-to-one; (b) $f$ is onto; and (c) $f$ is invertible.
+\end{document}

@@ -13,3 +13,15 @@ This class continues the exploration of discrete mathematics started in Discrete
 - 5.4 Special Functions
 - 5.5 The Pigeonhole Principle
 - 5.6 Function Composition and Inverse Functions
+
+## Appendix 3 Countable and Uncountable Sets
+
+## Chapter 6 Languages: Finite State Machines
+
+## Chapter 7 Relations: The Second Time Around
+
+## Chapter 8 The Principle of Inclusion and Exclusion
+
+## Chapter 10 Recurrence Relations
+
+## Chapter 11 An Introduction to Graph Theory
