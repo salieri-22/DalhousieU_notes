@@ -18,8 +18,8 @@ This class continues the exploration of discrete mathematics started in Discrete
 
 ## Chapter 6 Languages: Finite State Machines
 - 6.1 Language: The Set Theory of Strings
-- 6.2 Finite State Machines: A First Encounter
-- 6.3 Finite State Machines: A Second Encounter
+- 6.3 Finite State Machines
+- 6.4 Mealy Machine
 
 ## Chapter 7 Relations: The Second Time Around
 

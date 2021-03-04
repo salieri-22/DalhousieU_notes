@@ -103,4 +103,112 @@
 
     With \( \Sigma = \{0,1\} \), the sets \[A = \{0,01,001\}\] and \[ B = \{0,01,001,0001, \dots\} \] are examples of languages over \(\Sigma\).
 
+    \subsection{Concatenation}
+
+    For an alphabet \(\Sigma\) and languages \(A,B \subseteq \Sigma^*\), the \emph{concatenation} of $A$ and $B$, denoted \(AB\) is \(\{ab \mid a \in A, b \in B\}\).
+
+    \vspace{1em}
+
+    We might compare concaenation with the cross product. We shall see that just as \(A \times B \neq B \times A\) in general, we also have \(AB \neq BA\) in general. For \(A,B \) finite we did have \(|A \times B| = |B \times A|\), but here \(|AB| \neq |BA|\) is possible for finite languages.
+
+    \vspace{1em}
+
+    \emph{Example.} Let \(\Sigma = \{x,y,z\}\), and let \(A,B\) be the finite languages \(A = \{x, xy, z\}\), \(B = \{\lambda, y\}\). Then \(AB = \{x, xy, z, xyy, zy\}\) and \(BA = \{x, xy, z, yx, yxy, yz\}\), so 
+    \begin{enumerate}
+        \item \(|AB| = 5 \neq 6 = |BA|\); and
+        \item \(|AB| = 5 \neq 6 = 3 \cdot 2 = |A||B|\).
+    \end{enumerate}
+
+    This suggests that for finite languages $A$ and $B$, \(|AB| \leq |A||B|\).
+
+    \subsection{Properties}
+
+    For an alphabet \(\Sigma\), let \(A,B,C \subseteq \Sigma^*\). then
+    \begin{enumerate}
+        \item[(a)] \(A \{\lambda\} = \{\lambda\} A = A\)
+        \item[(b)] \((AB)C = A(BC)\)
+        \item[(c)] \(A(B \cup C) = AB \cup AC\)
+        \item[(d)] \((B \cup C)A = BA \cup CA\)
+        \item[(e)] \(A(B \cap C) \subseteq AB \cap AC\)
+        \item[(f)] \((B \cap C)A \subseteq BA \cap CA\)      
+    \end{enumerate}
+
+    \begin{proof}
+        Let us prove (d) and (f).
+        \begin{enumerate}
+            \item[(d)] Starting with \(x \in \Sigma^*\) we find that
+            \begin{align*}
+                x \in (B \cup C)A &\Rightarrow x = yz && \text{for \(y \in B \cup C, z \in A\)} \\
+                x &\Rightarrow yz && \text{for \(y \in B\) or \(y \in C\), \(z \in A\)} \\
+                &\Rightarrow x \in BA \cup x \in CA \\
+                &\Rightarrow (B \cup C)A \subseteq BA \cup CA.
+            \end{align*} 
+            Conversely, it follows that
+            \begin{align*}
+                x \in BA \cup CA &\Rightarrow x \in BA \text{ or } x \in CA \\
+                &\Rightarrow (x = ba_1, b \in B, a_1 \in A) \text{ or } (x = ca_2, c \in C, a_2 \in A).
+            \end{align*}
+            Assume that \(x = ba_1\) for \(b \in B, a_1 \in A\). Since \(B \subseteq B \cup C\), we have \(x = ba_1\), where \(b \in B \cup C, a_1 \in A\). Then \(x \in (B \cup C)A\), so \(BA \cup CA \subseteq (B \cup C)A\). The argument is similar when \(x = ca_2\). With both inclusions established, it follows that \((B \cup C)A = BA \cup CA\).
+            
+            \item[(f)] For \(x \in \Sigma^*\), we see that \(x \in (B \cap C)A \Rightarrow x = yz\) where \(y \in B \cap C\) and \(z \in A \Rightarrow x = yz \text{ for } y \in B, z \in A\) and \(x = yz \text{ for } y \in C\). This implies that \(x \in BA\) and \(x \in CA\), then \(x \in BA \cap CA\). Thus, \((B \cap C)A \subseteq BA \cap CA\).
+        \end{enumerate}
+    \end{proof}
+
+    \subsection{Positive and Kleene Closure}
+    For a given language \(A \subseteq \Sigma^*\) we can construct other languages as follows:
+    \begin{enumerate}
+        \item \(A^0 = \{\lambda\}\), \(A^1 = A\), and for all \(n \in \mathbb{Z}^+\), \(A^{n+1} = \{ab \mid a \in A, b \in A^n\}\).
+        \item \(A^+ = \bigcup_{n \in \mathbb{Z}^+} A^n\), the \emph{positive closure} of $A$.
+        \item \(A^* = A^+ \cup \{\lambda\}\). The language \(A^*\) is called the \emph{Kleene} closure of $A$, in honor of the American logician Stephen Cole Kleene (1909-1994).
+    \end{enumerate}
+
+    \emph{Examples.} For \(\Sigma = \{x,y,z\}\), \(A = \{x\}\) then
+    \begin{align*}
+        A^0 = \{\lambda\} && A^+ = \{x^n \mid n > 0\} \\
+        A^n = \{x^n\}     && A^* = \{x^n \mid n \in \mathbb{N}\}
+    \end{align*}
+    For \(\Sigma = \{x,y\}\) we have
+    \begin{enumerate}
+        \item[(a)] \(A = \{xx, xy, yx, yy\}\)
+        \begin{align*}
+            A^* &\subseteq \Sigma^* \\
+            A^* &= \{w \in \Sigma^* \mid ||w|| \text{ is even}\}
+        \end{align*}  
+
+        \item[(b)] \(B = \{x,y\}\)
+        \begin{align*}
+            B(A^*) &= \{w \in \Sigma^* \mid ||w|| \text{ is odd}\} \\
+            \text{Here } BA^* &= A^*B \text{ and} \\
+            \Sigma^* &= A^* \cup A^*B
+        \end{align*} 
+
+        \item[(c)] \begin{align*}
+            \{x\} \{x,y\}^* &= \{w \in \Sigma^* \mid \text{ w has $x$ as a prefix}\} \\
+            \{x\} \{x,y\}^+ &= \{w \in \Sigma^* \mid \text{ w has $x$ as a proper prefix}\}
+        \end{align*}
+    \end{enumerate}
+    There are languages $A$ and $B$ for which \(AB \neq BA\). Conversely, there are languages $A$ and $B$ for which \(AB = BA\).
+
+    \vspace{1em}
+
+    \emph{Example.} For \(\Sigma = \{x,y\}\) we have
+    \begin{align*}
+        A &= \{\lambda, x, x^3, x^4, \dots\} = \{x^n \mid n \in \mathbb{N}\} \setminus \{x^2\} \\
+        B &= \{x^n \mid n \in \mathbb{N}\} \\
+        &\Rightarrow A^2 = B^2 (=B) \text{ but } A \neq B.
+    \end{align*}
+
+    \subsection{Theorem}
+
+    Let \(\Sigma\) be an alphabet, with languages \(A,B \subseteq \Sigma^*\). 
+    \begin{enumerate}
+        \item[(a)] \(A \subseteq \Rightarrow A^n \subseteq B^n, \forall n \in \mathbb{N}\)
+        \item[(b)] \(A \subseteq AB^*\)
+        \item[(c)] \(A \subseteq B^*A\)
+        \item[(d)] \(A \subseteq B \Rightarrow A^+ \subseteq B^+ \text{ and } A^* \subseteq B^*\)   
+        \item[(e)] \(A^+ = AA^* = A^*A\)
+        \item[(f)] \(A^* A^* = A^* = (A^*)^* = (A^*)^+ = (A^+)^*\)
+        \item[(g)] \((A \cup B)^* = (A^* \cup B^*)^* = (A^* B^*)^*\)    
+    \end{enumerate}
+
 \end{document}
