@@ -22,6 +22,10 @@ This class continues the exploration of discrete mathematics started in Discrete
 - 6.4 Mealy Machine
 
 ## Chapter 7 Relations: The Second Time Around
+- 7.1 Relations Revisited: Properties of Relations
+- 7.2 Computer Recognition: Zero-One Matrices and Directed Graphs
+- 7.3 Partial Orders: Hasse Diagrams
+- 7.4 Equivalence Relations and Partitions
 
 ## Chapter 8 The Principle of Inclusion and Exclusion
 
