@@ -1,0 +1,105 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{graphicx}
+\graphicspath{ {./img/} }
+
+\setlength{\parindent}{0cm}
+\let\emptyset\varnothing
+
+\title{\textbf{MATH 2135 Linear Algebra} \\ 2.C Dimension}
+\author{Alyssa Motas}
+
+\begin{document}
+
+    \maketitle
+
+    \pagebreak
+
+    \tableofcontents
+
+    \pagebreak
+
+    \section{Dimension}
+
+    \subsection{Basis length does not depend on basis}
+
+    Any two bases of a finite-dimensional vector space have the same length.
+
+    \begin{proof}
+        Suppose $V$ is finite-dimensional. Let $B_1$ and $B_2$ be two bases of $V$. Then $B_1$ is linearly independent in $V$ and $B_2$ spans $V$, so the length of $B_1$ is at most length of $B_2$. Interchanging the roles, we also see that the length of $B_2$ is at most the length of $B_1$. Thus the length of $B_1$ equals the length of $B_2$, as desired.
+    \end{proof}
+
+    \subsection{Definition of a dimension}
+
+    \begin{itemize}
+        \item The \emph{dimension} of a finite-dimensional vector space is the length of any basis of the vector space.
+        \item The dimension of $V$ (if $V$ is finite-dimensional) is denoted by \(\dim V\).
+    \end{itemize}
+
+    \subsection{Examples of a dimension}
+
+    \begin{enumerate}
+        \item \(\dim \textbf{F}^n = n\) because the standard basis of \(\textbf{F}^n\) has length $n$.
+        \item \(\dim \mathcal{P}_m(\textbf{F}) = m + 1\) because the basis \(1,z,\dots,z^m\) of \(\mathcal{P}_m(\textbf{F})\) has length $m$ + 1.
+    \end{enumerate}
+
+    \subsection{Dimension of a subspace}
+
+    If $V$ is finite-dimensional and $U$ is a subspace of $V$, then \(\dim U \leq \dim V.\)
+
+    \begin{proof}
+        Suppose $V$ is finite-dimensional and $U$ is a subspace of $V$. Think of a basis of $U$ as a linearly independent list in $V$, and think of a basis of $V$ as a spanning list in $V$. These linearly independent vectors \(u_1, \dots, u_m\) can be extended to a basis of $V$. That extended basis has at least $m$ vectors, so \(\dim V \geq \dim U.\)
+    \end{proof}
+
+    \subsection{Linearly independent list of the right length is a basis}
+
+    Suppose $V$ is finite-dimensional. Then every linearly independent list of vectors in $V$ with length \(\dim V\) is a basis of $V$.
+
+    \begin{proof}
+        Suppose \(\dim V = n\) and \(v_1, \dots, v_n\) is linearly independent in $V$. The list \(v_1, \dots, v_n\) can be extended to a basis of $V$. However, every basis of $V$ has length $n$, so in this case the extension is the trivial one, meaning that no elements are adjoined to \(v_1, \dots, v_n\). In other words, \(v_1, \dots, v_n\) is a basis of $V$, as desired.
+    \end{proof}
+
+    \subsection{Examples}
+
+    \begin{enumerate}
+        \item Show that the list \((5,7), (4,3)\) is a basis of \(\textbf{F}^2\). 
+        \begin{proof}
+            The two vectors are linearly independent (because neither vector is a scalar multiple of the other). Note that \(\textbf{F}^2\) has dimension 2. Thus, Theorem 1.5 implies that the linearly independent list of length 2 is a basis of \(\textbf{F}^2\).
+        \end{proof}
+        \item Show that \(p(x) = x^2 + 1, q(x) = x^2 + x, r(x) = x^2\) are a basis of \(\mathcal{P}_2(\textbf{F})\).
+        \begin{proof}
+            Assume \(a(x^2 + 1) + b(x^2 + x) + c(x^2) = 0\), where \(a,b,c \in \textbf{F}\). Then we have \((a + b + c)x^2 + bx + a = 0 \Rightarrow a + b + c = 0.\) We know that \(a = b = 0\) so it follows that \(c = 0\). Hence, $p,q,r$ are linearly independent. Since we know that \(\dim \mathcal{P}_2(\textbf{F}) = 3\) then by Theorem 1.5, $p,q,r$ are bases of \(\mathcal{P}_2(\textbf{F})\).
+        \end{proof}
+    \end{enumerate}
+
+    \subsection{Spanning list of the right length is a basis}
+
+    Suppose $V$ is finite-dimensional. Then every spanning list of vectors in $V$ with length \(\dim V\) is a basis of $V$.
+
+    \begin{proof}
+        Suppose \(\dim V = n\) and \(v_1, \dots, v_n\) spans $V$. The list \(v_1, \dots, v_n\) can be reduced to a basis of $V$ (by removing 0 or more vectors from the list). However, every basis of $V$ has length $n$, so the reduction is the trivial one, meaning that no elements are deleted from \(v_1, \dots, v_n\). In other words, \(v_1, \dots, v_n\) is a basis of $V$, as desired.
+    \end{proof}
+
+    \subsection{Dimension of a sum}
+
+    If $U_1$ and $U_2$ are subspaces of a finite-dimensional vector space, then \[\dim(U_1 + U_2) = \dim U_1 + \dim U_2 - \dim(U_1 \cap U_2).\]
+
+    \begin{proof}
+        Let \(u_1, \dots, u_m\) be a basis of \(U_1 \cap U_2\); thus \(\dim (U_1 \cap U_2) = m\). These basis are linearly independent in $U_1$ and can be extended to a basis \(u_1, \dots, u_m, v_1, \dots, v_j\). Thus, \(\dim U_1 = m + j\) Also, \(u_1, \dots, u_m, w_1, \dots, w_k\) of $U_2$ and so \(\dim U_2 = m + k\).
+
+        We need to show that \(u_1, \dots, u_m, v_1, \dots, v_j, w_1, \dots, w_k\) is a basis of \(U_1 + U_2\). so
+        \begin{align*}
+            \dim(U_1 + U_2) &= m + j + k \\
+                            &= (m+j) + (m+k) - m \\
+                            &= \dim U_1 + \dim U_2 - \dim (U_1 \cap U_2).
+        \end{align*}
+        Clearly \(span(u_1,\dots,u_m,v_1,\dots,v_j,w_1, \dots, w_k)\) contains \(U_1 + U_2\) which equals \(U_1 + U_2\). To show that this list is a basis of \(U_1 + U_2\), we need to show that it is linearly independent. Suppose that \[a_1 u_1 + \dots + a_m u_m + b_1 v_1 + \dots + b_j v_j + c_1 w_1 + \dots + c_k w_k = 0\] where \(a,b,c \in \textbf{F}\). Then \[c_1 w_1 + \dots + c_k w_k = -a_1 u_1 - \dots - a_m u_m - b_1 v_1 - \dots - b_j v_j.\] This implies that \(c_1 w_1 + \dots + c_k w_k \in U_1\) and consequently, \(c_1 w_1 + \dots + c_k w_k \in U_1 \cap U_2\). Since \(u_1, \dots, u_m\) is a basis of \(U_1 \cap U_2\), we can write \[c_1 w_1 + \dots + c_k w_k = d_1 u_1 + \dots + d_m u_m\] for some scalars \(d \in \textbf{F}\). But \(u_1, \dots, u_m, w_1, \dots, w_k\) are linearly independent, so all $c$'s and $d$'s equal 0. Thus, our original equation becomes \[ a_1 u_1 + \dots + a_m u_m + b_1 v_1 + \dots + b_j v_j = 0. \] Since \(u_1, \dots, u_m, v_1, \dots, v_j\) are linearly independent, then all $a$'s and $b$'s equal 0. 
+    \end{proof}
+
+ 
+    \end{document}

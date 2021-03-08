@@ -1,0 +1,157 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{graphicx}
+\graphicspath{ {./img/} }
+
+\setlength{\parindent}{0cm}
+\let\emptyset\varnothing
+
+\title{\textbf{MATH 2135 Linear Algebra} \\ 2.B Bases}
+\author{Alyssa Motas}
+
+\begin{document}
+
+    \maketitle
+
+    \pagebreak
+
+    \tableofcontents
+
+    \pagebreak
+
+    \section{Bases}
+
+    \subsection{Definition}
+
+    A \emph{basis} of $V$ is a list of vectors in $V$ that is linearly independent and spans $V$.
+
+    \subsection{Examples}
+
+    \begin{enumerate}
+        \item[(a)] \begin{equation*}
+                        \begin{bmatrix}
+                            1 \\ 0 \\ 0
+                        \end{bmatrix}, \begin{bmatrix}
+                                            0 \\ 1 \\ 0
+                                        \end{bmatrix}, \begin{bmatrix}
+                                                            0 \\ 0 \\ 1
+                                                        \end{bmatrix} \text{ is a basis of } \mathbb{R}^3.
+                   \end{equation*} 
+        \item[(b)] \begin{equation*}
+            \begin{bmatrix}
+                1 \\ 3 \\ 5
+            \end{bmatrix}, \begin{bmatrix}
+                                0 \\ 1 \\ 2
+                            \end{bmatrix}, \begin{bmatrix}
+                                                1 \\ 1 \\ 5
+                                            \end{bmatrix} \text{ is a basis of } \mathbb{R}^3
+        \end{equation*}
+        \item[(c)] \[ 1, x, x^2, x^3 \text{ is a basis of } \mathcal{P}_3(\textbf{F}) \]
+    \end{enumerate}
+
+    \subsection{Criterion for basis}
+
+    A list \(v_1, \dots, v_n\) of vectors in $V$ is a basis of $V$ if and only if every \(v \in V\) can be written uniquely in the form \[v = a_1 v_1 + \dots + a_n v_n,\] where \(a_1, \dots, a_n \in \textbf{F}.\)
+
+    \begin{proof}
+        Suppose \(v_1, \dots, v_n\) is a basis of $V$. Let \(v \in V\). Since \(v_1, \dots, v_n\) spans $V$, there exists \(a_1, \dots, a_n \in \textbf{F}\) such that \[v = a_1 v_1 + \dots  a_n v_n.\] To show that it is unique, suppose that \(c_1, \dots, c_n\) are scalars where \(v = c_1 v_1 + \dots + c_n v_n\). Subtracting this equation from the previous, we get \[0 = (a_1 - c_1) v_1 + \dots + (a_n - c_n)v_n.\] This completes the proof for uniqueness.
+
+        In the other direction, suppose every \(v \in V\) can be written uniquely in the form \[v = a_1 v_1 + \dots + a_n v_n.\] This implies that \(v_1, \dots, v_n\) spans $V$. To show that \(v_1, \dots, v_n\) are linearly independent, suppose that \(a_1, \dots, a_n \in \textbf{F}\). Then \[0 = a_1 v_1 + \dots + a_n v_n.\] Thus \(v_1, \dots, v_n\) is linearly independent and hence is a basis of $V$.
+    \end{proof}
+
+    \section{Coordinates}
+
+    If \(B = v_1, \dots, v_n\) is a basis of $V$, and \(v = a_1 v_1 + \dots + a_n v_n\), then we say \(a_1, \dots, a_n\) are the \emph{coordinates} of $v$ with respect to the basis $B$.
+
+    \subsection{Examples of coordinates}
+
+    Suppose that \(B = 1,x,x^2, x^3\) is the basis of \(\mathcal{P}_3 (\mathbb{R})\). Find the coordinates of \(p = (1+2x)(3x + x^2)\) with respect to the basis $B$.
+
+    \vspace{1em}
+
+    \textbf{Solution:}
+    \begin{align*}
+        p &= (1 + 2x)(3x + x^2) \\
+          &= 3x + x^2 + 6x^2 + 2x^3 \\
+          &= 3x + 7x^2 + 2x^3 \\
+          &= 0 \cdot 1 + 3 \cdot x + 7 \cdot x^2 + 2 \cdot x^3
+    \end{align*}
+    The coordinates are: 0, 3, 7, and 2.
+
+    \vspace{1em}
+
+    Another basis for \(\mathcal{P}_3(\mathbb{R})\) is \(B' = 1, (x-1), (x-1)^2, (x-1)^3\). Find the coordinates of \(p = 3x + 6x^2 + 2x^3\) in the basis $B'$.
+
+    \vspace{1em}
+
+    \textbf{Solution:} Suppose that \(y = x - 1\) and \(x = y + 1\). Then 
+    \begin{align*}
+        p &= 3(y+1) + 7(y + 1)^2 + 2(y+1)^3 \\
+          &= 3y + 3 + 7y^2 + 14y + 7 + 2y^3 + 6y^2 + 6y + 2 \\
+          &= 12 + 23y + 13 y^2 + 2y^3 \\
+          &= 12 + 23(x-1) + 13(x-1)^2 + 2(x-1)^3
+    \end{align*}
+    The coordinates of $p$ with respect to $B'$ are: 12, 23, 13, and 2.
+
+    \section{Theorems about Bases}
+
+    \subsection{Spanning list contains a basis}
+
+    Every spanning list in a vector space can be reduced to a basis of the vector space (by removing 0 or more vectors from the list).
+
+    \begin{proof}
+        Suppose \(v_1, \dots, v_n\) spans $V$. We want to remove some of the vectors from \( v_1, \dots, v_n \) so that the remaining vectors form a basis of $V$. We do this through induction.
+
+        Start with $B$ equal to the list \(v_1, \dots, v_n.\)
+
+        \begin{enumerate}
+            \item[\textbf{Step 1}] If \(v_1 = 0\), delete \(v_1\) from $B$. If \(v_1 \neq 0\), leave $B$ unchanged.
+            \item[\textbf{Step $j$}] If \(v_j\) is in \(span(v_1, \dots, v_{j-1})\), delete \(v_j\) from $B$. If \(v_j\) is not in \(span(v_1, \dots, v_{j-1})\), leave $B$ unchanged.  
+        \end{enumerate}
+
+        Stop the process after step $n$, getting a list $B$. This list spans $V$ because our original list spanned $V$ and we have discarded vectors that were already in the span of the previous vectors. This process ensures that no vector in $B$ is in the span of the previous ones. Thus, $B$ is linearly independent, by the Linear Dependence Lemma. Hence $B$ is a basis of $V$.
+    \end{proof}
+
+    \subsection{Basis of finite-dimensional vector space}
+
+    Every finite-dimensional vector space has a basis.
+
+    \begin{proof}
+        By definition, a finite-dimensional vector space has a spanning list. The previous result tells us that each spanning list can be reduced to a basis.
+    \end{proof}
+
+    \subsection{Linearly independent list extends to a basis}
+
+    Every linearly indepdendent list of vectors in a finite-dimensional vector space can be extended to a basis of the vector space.
+
+    \begin{proof}
+        Suppose \(u_1, \dots, u_m\) is linearly independent in a finite-dimensional vector space $V$. Let \(w_1, \dots, w_n\) be a basis of $V$. Thus the list \[u_1, \dots, u_m, w_1, \dots, w_n\] spans $V$. Applying the produce of the proof of 3.1 to reduce this list to a basis of $V$ produces a basis consisting of the vectors \(u_1, \dots, u_m\) (none of the $u$'s get deleted because \(u_1, \dots, u_m\) is linearly independent) and some of the $w$'s.
+    \end{proof}
+
+    \subsection{Every subspace of $V$ is part of a direct sum equal to $V$}
+
+    Suppose $V$ is finite-dimensional and $U$ is a subspace of $V$. Then there is a subspace $W$ of $V$ such that \(V = U \oplus W\).
+
+    \begin{proof}
+        Since $V$ is finite-dimensional, so is $U$. Thus, there is a basis \(u_1, \dots, u_m\) of $U$ and is linearly independent in $V$. Hence, this list can be extended to a basis \(u_1, \dots, u_m, w_1, \dots, w_n\) of $V$. Let \(W = span(w_1, \dots, w_n)\).
+        
+        \vspace{1em}
+
+        To prove that \(V = U \oplus W\), we need to show that \[V = U + W \text{ and } U \cap W = \{0\}.\]
+
+        Proving the first equation, suppose \(v \in V\) Then, since the list \(u_1, \dots, u_m, w_1, \dots, w_n\) spans $V$, there exist \(a_1, \dots, a_m, b_1, \dots, b_n \in \textbf{F}\) such that 
+        \begin{equation*}
+            v = \underbrace{a_1u_1 + \dots + a_m u_m}_{u} + \underbrace{b_1 w_1 + \dots + b_n w_n}_{w} \Rightarrow v = u + w, u \in U, w \in W.
+        \end{equation*}
+        Thus we have \(v \in U + W\).
+
+        Proving the second equation, suppose \(v \in U \cap W\). There exists scalars \(a_1, \dots, a_m, b_1, \dots, b_n \in \textbf{F}\) such that \[ v = a_1 u_1 + \dots + a_m u_m = b_1 w_1 + \dots + b_n w_n. \] Thus \[a_1 u_1 = \dots + a_m u_m - b_1 w_1 - \dots - b_n w_n = 0.\] Since \(u_1, \dots, u_m, w_1, \dots, w_n\) is linearly independent, this implies \(a_1 = \dots = a_m = b_1 = \dots = b_n = 0.\) Thus \(v = 0\) and this completes the proof.
+    \end{proof}
+
+
+    \end{document}
