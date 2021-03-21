@@ -1,0 +1,167 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{graphicx}
+\graphicspath{ {./img/} }
+
+\setlength{\parindent}{0cm}
+\let\emptyset\varnothing
+
+\title{\textbf{MATH 2135 Linear Algebra} \\ 3.B Null Spaces and Ranges}
+\author{Alyssa Motas}
+
+\begin{document}
+
+    \maketitle
+
+    \pagebreak
+
+    \tableofcontents
+
+    \pagebreak
+
+    \section{Null Space and Injectivity}
+
+    \subsection{Definition of null space}
+
+    For \(T \in \mathcal{L}(V,W)\), the \emph{null space} or \emph{kernel} of $T$, denoted null $T$, is the subset of $V$ consisting of those vectors that $T$ maps to 0: \[\text{null } T = \{v \in V \mid Tv = 0\}.\]
+
+    \subsection{Examples of null spaces}
+
+    \begin{itemize}
+        \item If \(T:V \rightarrow W\) is the zero map where \(Tv = 0\) for every \(v \in V\), then null \(T = V\). 
+        \item If \(T:V \rightarrow V\) is the identity function, then null \(T = \{0\}\). 
+        \item Suppose \(\phi \in \mathcal{L}(\mathbb{R}^3, \textbf{F})\) is defined by \(\phi (z_1, z_2, z_3) = z_1 + 2z_2 + 3z_3\). Then null \(\phi = \{(z_1, z_2, z_3) \in \mathbb{C}^3 \mid z_1 + 2 z_2 + 3 z_3 = 0\}.\) A basis of null \(\phi\) is \((-2,1,0), (-3,0,1)\). 
+        \item Suppose \(D \in \mathcal{L}(\mathcal{P}(\mathbb{R}), \mathcal{P}(\mathbb{R}))\) is the differentiation map defined by \(Dp = p'\). The only functions whose derivative equals the zero function are the constant functions. Then, the null space of $D$ equals the set of constant functions. \[\text{null } D = \{ a_0 \mid a_0 \in \mathbb{R} \}.\]
+        \item Suppose \(T \in \mathcal{L}(\mathcal{P}(\mathbb{R}), \mathcal{P}(\mathbb{R}))\) is the multiplication by \(x^2\) map defined by \((Tp)(x) = x^2 p(x)\). The only polynomial $p$ such that \(x^2 p(x) = 0\) for all \(x \in \mathbb{R}\) is the 0 polynomial. Then null \(T = \{0\}\). 
+        \item Suppose \(B \in \mathcal{L}(\textbf{F}^{\infty}, \textbf{F}^{\infty})\) is the backward shift defined by \[ B(x_1, x_2, x_3, \dots) = (x_2, x_3, \dots).\] Then \(B(x_1,x_2,x_3,\dots) = 0\) if and only if \(x_2 = x_3 = \dots = 0\). So we have null \(B = \{ (a,0,0,\dots) \mid a \in \textbf{F} \}\). 
+    \end{itemize}
+
+    \subsection{The null space is a subspace}
+
+    Suppose \(T \in \mathcal{L}(V,W)\). Then null \(T\) is a subspace of $V$.
+
+    \begin{proof}
+        Since $T$ is a linear map, we know that \(T(0) = 0\) then \(0 \in\) null $T$.  Suppose $u,v \in \text{null } T$, then \[ T(u+v) = Tu + Tv = 0 + 0 = 0. \] Since \(u+v \in \) null $T$, then it is closed under addition. Suppose that \(u \in \) null $T$ and \(\lambda \in \textbf{F}\). Then \[ T(\lambda u) = \lambda Tu = \lambda 0 = 0. \] Hence \(\lambda u \in \) null $T$ and it is closed under scalar multiplication. Thus, null $T$ is a subspace of $V$. 
+    \end{proof}
+
+    \subsection{Injective}
+
+    A function \(T:V \rightarrow W\) is called \emph{injective} or \emph{one-to-one} if \(Tu = Tv\) implies \(u = v\). This can be rephrased to say that $T$ is injective if \(u \neq v\) implies that \(Tu \neq Tv\). 
+
+    \subsection{Injectivity is equivalent to null space equals \(\{0\}\)}
+
+    Let \(T \in \mathcal{L}(V,W)\). Then $T$ is injective if and only if null $T = \{0\}$.
+
+    \begin{proof}
+        Suppose $T$ is injective. We want to prove that null $T = \{ 0 \}$. We already know that \(\{0\} \subset \text{null } T\) since \(0 \in \text{null } T\). To prove that null \(T \subset \{0\}\), suppose \(v \in\) null $T$. Then \[ T(v) = 0 = T(0). \] Since $T$ is injective, the equation above implies $v = 0$, then we can conclude that null \(T = \{0\}\), as desired.
+
+        Suppose that null \(T = \{0\}\) and we need to show that $T$ is injective. Suppose \(u,v \in V\) and \(Tu = Tv\). Then \[0 = Tu - Tv = T(u-v).\] Then \(u - v \in \) null $T$, which equals \(\{0\}\). Hence \(u - v = 0 \Rightarrow u = v\) which implies $T$ is injective, as desired. 
+    \end{proof}
+
+    \section{Range and Surjectivity}
+
+    \subsection{Definition of range}
+
+    For $T$ a function from $V$ to $W$, the \emph{range} of $T$ is the subset of $W$ consisting of those vectors that are of the form $Tv$ for some $v \in V$: \[ \text{range } T = \{Tv \mid v \in V\}. \]
+
+    \subsection{Examples of range}
+
+    \begin{itemize}
+        \item If $T$ is the zero map from $V$ to $W$, in other words if $Tv = 0$ for every $v \in V$, then range $T = \{0\}$.
+        \item Suppose \(T \in \mathcal{L}(\mathbb{R}^2, \mathbb{R}^3)\) is defined by \(T(x,y) = (2x, 5y, x + y)\), then range $T = \{(2x, 5y, x+y) \mid x,y \in \mathbb{R}\}$. A basis of range $T$ is \((2,0,1),(0,5,1)\). 
+        \item Suppose \(D \in \mathcal{L}(\mathcal{P}(\mathbb{R}), \mathcal{P}(\mathbb{R}))\) is the differentiation map by \(Dp = p'\). Because for every polynomial \(q \in \mathcal{P}(\mathbb{R})\) there exists a polynomial \(p \in \mathcal{P}(\mathbb{R})\) such that \(p' = q\), the range of $D$ is \(\mathcal{P}(\mathbb{R})\). 
+        \item Suppose \(B \in \mathcal{L}(\textbf{F}^{\infty}, \textbf{F}^{\infty})\) is the backshift operator defined by \(B(x_1, x_2, x_3, \dots) = (x_2, x_3, x_4, \dots)\). Then
+        \begin{align*}
+            \text{range } B &= \{B(x_1, x_2, \dots) \mid (x_1, x_2, dots) \in \textbf{F}^{\infty}\} \\
+            &= \{(x_2, x_3, x_4, \dots) \mid x_1, x_2, \dots \in \textbf{F}\} \\
+            &= \textbf{F}^{\infty}.
+        \end{align*}
+        \item Let \(F \in \mathcal{L}(\textbf{F}^{\infty}, \textbf{F}^{\infty})\) be the forward shift operator defined by \(F(x_1, x_2, x_3, \dots) = (0, x_1, x_2, \dots)\). Then 
+        \begin{align*}
+            \text{range } F &= \{F(x_1, x_2, \dots) \mid (x_1, x_2, \dots) \in \textbf{F}^{\infty}\} \\
+            &= \{(0, x_1, x_2, \dots) \mid x_1, x_2, \dots \in \textbf{F}\}.
+        \end{align*}
+        This is a proper subspace of \(\textbf{F}^{\infty}\). 
+    \end{itemize}
+
+    \subsection{The range is a subspace}
+
+    If \(T \in \mathcal{L}(V,W)\), then range $T$ is a subspace of $W$.
+
+    \begin{proof}
+        Suppose \(T \in \mathcal{L}(V,W)\), then \(T(0) = 0\) which implies that \(0 \in \) range $T$. If \(w_1, w_2 \in \) range $T$, then there exist \(v_1, v_2 \in V\) such that \(Tv_1 = w_1\) and \(Tv_2 = w_2\). So \[T(v_1 + v_2) = Tv_1 + Tv_2 = w_1 + w_2.\] Hence \(w_1 + w_2 \in \) range $T$, so it is closed under addition. If \(w \in \) range $T$ and \(\lambda \in \textbf{F}\), then there exists \(v \in V\) such that \(Tv = w\). Thus \[T(\lambda v) = \lambda Tv = \lambda w.\] Hence \(\lambda w \in \) range $T$, and it is closed under scalar multiplication. Hence, range $T$ is a subspace of $W$. 
+    \end{proof}
+
+    \subsection{Surjective}
+
+    A function \(T:V \rightarrow W\) is called \emph{surjective} or \emph{onto} if its range equals $W$. 
+
+    \subsection{Example}
+
+    The differentiation map \(D \in \mathcal{L}(\mathcal{P}_5 (\mathbb{R}), \mathcal{P}_5 (\mathbb{R}))\) defined by \(Dp = p'\) is not surjective, because the polynomial $x^5$ is not in the range of $D$. However, the differentiation map \(S \in \mathcal{L}(\mathcal{P}_5 (\mathbb{R}), \mathcal{P}_4 (\mathbb{R}))\) defined by \(Sp = p'\) is surjective, because its range equals \(\mathcal{P}_4 (\mathbb{R})\), which is now the vector space into which $S$ maps. 
+
+    \section{Fundamental Theorem of Linear Maps}
+
+    Suppose $V$ is finite-dimensional and \(T \in \mathcal{L}(V,W)\). Then range $T$ is finite-dimensional and \[\dim V = \dim \text{null } T + \dim \text{range } T.\]
+
+    \begin{proof}
+        Let \(u_1, \dots, u_m\) be a basis of null $T$, then dim null $T = m$. The linearly independent list \(u_1, \dots, u_m\) can be extended to a basis \[u_1, \dots, u_m, v_1, \dots, v_n\] of $V$, thus dim $V = m + n$. We need to show that range $T$ is finite-dimensional and dim range $T = n$. We will do this by proving that \(Tv_1, \dots, Tv_n\) is a basis of range $T$.
+
+        \vspace{1em}
+
+        Let \(v \in V\). Since \(u_1, \dots, u_m, v_1, \dots, v_n\) spans $V$, we can write \[v = a_1 u_1 + \dots + a_m u_m + b_1 v_1 + \dots + b_n v_n\] where \(a_1, \dots, a_m, b_1, \dots, b_n \in \textbf{F}\). Applying $T$ to both sides, we get \[Tv = b_1 Tv_1 + \dots + b_n T v_n,\] where all the terms of \(Tu_j\) disappeared since \(u_j \in \) null $T$. The equation above implies that \(Tv_1, \dots, Tv_n\) spans range $T$, then range $T$ is finite-dimensional. 
+
+        \vspace{1em}
+        To show that \(Tv_1, \dots, Tv_n\) is linearly independent, suppose \(c_1, \dots, c_n \in \textbf{F}\) and \(c_1 Tv_1 + \dots + c_n T v_n = 0.\) Then \[T(c_1 v_1 + \dots + c_n v_n) = 0\] and \(c_1 v_1 + \dots + c_n v_n \in \) null $T$. Because \(u_1, \dots, u_m\) spans null $T$, we can write \(c_1 v_1 + \dots + c_n v_n = d_1 u_1 + \dots + d_m u_m\) where \(d_1, \dots, d_m \in \textbf{F}\). The equation implies all $c$'s and $d$'s are 0 (since \(u_1, \dots, u_m, v_1, \dots, v_n\) is linearly independent). Thus \(Tv_1, \dots, Tv_n\) is linearly independent and hence is a basis of range $T$, as desired.
+    \end{proof}
+
+    \subsection{A map to a smaller dimensional space is not injective}
+
+    Suppose $V$ and $W$ are finite-dimensional vector spaces such that \(\dim V > \dim W\). Then no linear map from $V$ to $W$ is injective. 
+
+    \begin{proof}
+        Let \(T \in \mathcal{L}(V,W)\). Then 
+        \begin{align*}
+            \text{dim null } T &= \dim V - \dim \text{ range } T \\
+                               &\geq \dim V - \dim W \\
+                               &> 0.
+        \end{align*}
+        The inequality states that dim null $T > 0$ which means null $T$ contains vectors other than 0. Thus, $T$ is not injective since null $T \neq \{0\}$. 
+    \end{proof}
+
+    \subsection{A map to a larger dimensional space is not surjective}
+
+    Suppose $V$ and $W$ are finite-dimensional vector spaces such that \(\dim V < \dim W\). Then no linear map from $V$ to $W$ is surjective.
+
+    \begin{proof}
+        Let \(T \in \mathcal{L}(V,W)\). Then 
+        \begin{align*}
+            \dim \text{ range } T &= \dim V - \dim \text{ null } T \\
+                                  &\leq \dim V \\
+                                  &< \dim W.
+        \end{align*}
+        The inequality states that \(\dim \text{range } T < \dim W\). This means that range $T$ \(\neq W\), so $T$ is not surjective. 
+    \end{proof}
+
+    \subsection{Homogenous system of linear equations}
+    
+    A homogenous system of linear equations with more variables than equations has nonzero solutions. 
+
+    \begin{proof}
+        Consider \(T: \textbf{F}^n \rightarrow \textbf{F}^m\) defined by \[T(x_1, \dots, x_n) = \left( \sum_{k=1}^{n} A_{1,k} x_k, \dots, \sum_{k=1}^{n} x_k \right)\] where \(T(x_1, \dots, x_n) = 0\) and 0 here is the additive identity in \(\textbf{F}^m\), which is the list of length $m$ of all 0's. We have a homogenous system of $m$ linear equations with $n$ variables. If \(\dim \textbf{F}^n = n > \dim \textbf{F}^m = m\), then $T$ is not injective. We also have null \(T \neq \{0\}\) which implies that there exists some \(v \in\) null $T$ such that \(v \neq 0\). So, the system \(Tv = 0\) has nonzero solutions. 
+    \end{proof}
+
+    \subsection{Inhomogenous system of linear equations}
+
+    An inhomogenous system of linear equations with more equations than variables has no solution for some choice of the constant terms.
+
+    \begin{proof}
+        Define \(T: \textbf{F}^n \rightarrow \textbf{F}^m\) by \[T(x_1, \dots, x_n) = \left( \sum_{k=1}^{n} A_{1,k} x_k, \dots, \sum_{k=1}^{n} A_{m,k} x_k \right)\] where \(T(x_1, \dots, x_n) = (c_1, \dots, c_m)\). We have a system of $m$ equations with $n$ variables \(x_1, \dots, x_n\). We see that $T$ is not surjective if \(n < m\) since range \(T \neq \textbf{F}^m\).
+    \end{proof}
+
+\end{document}

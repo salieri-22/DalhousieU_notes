@@ -22,3 +22,7 @@ This course is a continutation of MATH 1030 with an emphasis on foundations and 
 - 2.A Span and Linear Independence
 - 2.B Bases
 - 2.C Dimension
+
+## Chapter 3 Linear Maps
+- 3.A The Vector Space of Linear Maps
+- 3.B Null Spaces and Ranges

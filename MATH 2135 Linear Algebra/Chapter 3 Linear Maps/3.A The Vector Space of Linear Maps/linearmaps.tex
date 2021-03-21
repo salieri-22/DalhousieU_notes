@@ -1,0 +1,141 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{graphicx}
+\graphicspath{ {./img/} }
+
+\setlength{\parindent}{0cm}
+\let\emptyset\varnothing
+
+\title{\textbf{MATH 2135 Linear Algebra} \\ 3.A The Vector Space of Linear Maps}
+\author{Alyssa Motas}
+
+\begin{document}
+
+    \maketitle
+
+    \pagebreak
+
+    \tableofcontents
+
+    \pagebreak
+
+    \section{Definition and Examples of Linear Maps}
+
+    The words ``map,'' ``mapping,'' ``function'' all mean exactly the same thing. Let $X,Y$ be sets. A \emph{function} \(f:X \rightarrow Y\) is an operation that assigns to each element \(x \in X\) a unique element \(y \in Y\), called \(y = f(x)\). $X$ is called the \emph{domain} of $f$, and $Y$ is called the \emph{codomain} of $f$. We also say that $f$ is a ``map'' from $X$ to $Y$.
+
+    \subsection{Definition of a linear map}
+
+    A \emph{linear map} or \emph{linear transformation} from $V$ to $W$ is a function \(T:V \rightarrow W\) with the following properties:
+    \begin{enumerate}
+        \item Additivity. \[T(u+v) = Tu + Tv \text{ for all } u,v \in V\]
+        \item Homogeneity. \[T(\lambda v) = \lambda (Tv) \text{ for all } \lambda \in \textbf{F} \text{ and all } v \in V.\]
+    \end{enumerate}
+
+    \subsection{Notation \(\mathcal{L}(V,W)\)}
+
+    The set of all linear maps from $V$ to $W$ is denoted by \[\mathcal{L}(V,W) = \{T:V \rightarrow W \mid T \text{ is linear }\}.\] In the case that \(V=W\), a linear function \(T:V \rightarrow V\) is called an \emph{operator} on $V$. In other words, \(\mathcal{L}(V,V)\) is the set of operators on $V$.
+
+    \subsection{Examples of linear maps}
+
+    \begin{enumerate}
+        \item \textbf{zero function} The zero function is denoted by \(0 \in \mathcal{L}(V,W)\) and defined with \[0v = 0 \quad \text{or} \quad f(v) = 0.\] The 0 on the left side is a function from \(V to W\), whereas the right one is the additive identity in $W$. The zero function is linear.
+        \item \textbf{identity function} The identity map, denoted by $I$, is the function that takes each element to itself. It is defined as \(I \in \mathcal{L}(V,V)\) such that \[Iv = v.\] The identity map is linear.
+        \item \textbf{differentiation} Define \(D \in \mathcal{L}(\mathcal{P}(\mathbb{R}), \mathcal{P}(\mathbb{R}))\) by \[Dp = p'.\] $D$ is a linear function because: \((f + g)' = f' + g'\) and \((\lambda f)' = \lambda f'\) whenever $f,g$ are differentiable and $\lambda$ is a constant.
+        \item \textbf{integration (antiderivative)} Define \(T \in \mathcal{L}(\mathcal{P}(\mathbb{R}), \mathcal{P}(\mathbb{R}))\) such that \[T(p) = \int_{0}^{x} p(t) dt.\] $T$ is a linear function since the integral of the sum of two functions equals the sum of the integrals, and the integral of a constant times a function equals the constant times the integral of the function. 
+        \item \textbf{integration (definite integrals)} Define \(T \in \mathcal{L}(\mathcal{P}(\mathbb{R}), \mathcal{P}(\mathbb{R}))\) such that \[T(p) = \int_{0}^{1} p(x) dx.\] $T$ is also linear with similar reasons as the previous example. 
+        \item \textbf{multiplication by \(x^2\)} Define \(T \in \mathcal{L}(\mathcal{P}(\mathbb{R}), \mathcal{P}(\mathbb{R}))\) such that \[(Tp)(x) = x^2 p(x).\]
+        \item \textbf{backward shift} Recall that \textbf{F}\(^{\infty}\) is the vector space of all sequences of elements of \textbf{F}. Define \(B \in \mathcal{L}(\textbf{F}^{\infty}, \textbf{F}^{\infty})\) such that \[B(x_1,x_2,x_3, \dots) = (x_2, x_3, \dots).\]
+        \item \textbf{forward shift} Define \(F \in \mathcal{L}(\textbf{F}^{\infty}, \textbf{F}^{\infty})\) such that \[F(x_1, x_2, x_3, \dots) = (0, x_1, x_2, x_3, \dots).\]
+        \item \textbf{recurrence relation} Consider the Fibonacci sequence such taht \[a_{n+2} = a_n + a_{n+1}, \qquad n \geq 3.\] For example, we have \((a_1, a_2, a_3, a_4, a_5, \dots) = (1,1,2,3,5, \dots). \) We can also write the reccurence in terms of the backward (and forward) shfit operators:
+        \begin{align*}
+            a &= (a_1, a_2, a_3, a_4, a_5, \dots) \\
+            Ba &= (a_2, a_3, a_4, a_5, a_6, \dots) \\
+            B^2 a = B(Ba) &= (a_3, a_4, a_5, a_6, a_7, \dots)
+        \end{align*}
+        Cosnider the equation \(B^2 a = Ba + a\). We can do algebra with such equation: \[B^2 a - Ba - a = 0 \qquad \Leftrightarrow \qquad (B^2 - B - I)a = 0.\]
+        \item \textbf{from \(\mathbb{R}^3\) to \(\mathbb{R}^2\)} Define \(T \in \mathcal{L}(\mathbb{R}^3, \mathbb{R}^2)\) by \[T(x,y,z) = (2x-y + 3z, 7x + 5y - 6z).\]
+        \item \textbf{from \textbf{F}\(^n\) to \textbf{F}\(^m\)} Let $m$ and $n$ be positive integers, and let \(A_{j,k} \in \textbf{F}\) for \(j = 1, \dots, m\) and \(k = 1, \dots, n\), and define \(T \in \mathcal{L}(\textbf{F}^n, \textbf{F}^m)\) by \[T(x_1, \dots, x_n) = (A_{1,1} x_1 + \dots + A_{1,n} x_n, \dots, A_{m,1} x_1, \dots + A_{m,n} x_n).\]
+    \end{enumerate}
+
+    \subsection{Linear maps and basis of domain}
+
+    Suppose \(v_1, \dots, v_n\) is a basis of $V$  and \(w_1, \dots, w_n \in W\). Then there exists a unique linear map \(T:V \rightarrow W\) such that \[Tv_j = w_j\] for each \(j = 1, \dots, n\).
+
+    \begin{proof}
+        Let us prove the existence of a linear map $T$ with the desired property. Define \(T:V \rightarrow W\) by \[T(c_1 v_1 + \dots + c_n v_n) = c_1 w_1 + \dots + c_n w_n,\] where \(c_1, \dots, c_n\) are arbitrary elements of \textbf{F}. Since \(v_1, \dots, v_n\) is a basis of $V$, the equation does define a function $T$ since each element of $V$ can be uniquely written in the form of \(c_1 v_1 + \dots + c_n v_n\). Suppose that \(c_j = 1\) and the other $c$'s being equal to 0, then we have \(Tv_j = w_j\).
+
+        \vspace{1em}
+        
+        If \(u,v \in V\) with \(u = a_1 v_1 + \dots + a_n v_n\) and \(v = c_1 v_1 + \dots + c_n v_n\), then 
+        \begin{align*}
+            T(u + v) &= T((a_1 + c_1)v_1 + \dots + (a_n + c_n)v_n) \\
+                     &= (a_1 + c_1)w_1 + \dots + (a_n + c_n) w_n \\
+                     &= (a_1 w_1 + \dots + a_n w_n) + (c_1 w_1 + \dots + c_n w_n) \\
+                     &= Tu + Tv.
+        \end{align*}
+        If \(\lambda \in \textbf{F}\) and \(v = c_1 v_1 + \dots + c_n v_n\), then
+        \begin{align*}
+            T(\lambda v) &= T(\lambda c_1 v_1 + \dots + \lambda c_n v_n) \\
+                         &= \lambda c_1 w_1 + \dots + \lambda c_n w_n \\
+                         &= \lambda (c_1 w_1 + \dots + c_n w_n) \\
+                         &= \lambda Tv.
+        \end{align*}
+        Thus, $T$ is a linear map from $V$ to $W$. Now we need to prove that it is unique. Suppose that \(T \in \mathcal{L}(V,W)\) and that \(Tv_j = w_j\) for \(j = 1, \dots, n\). Let \(c_1, \dots, c_n \in \textbf{F}\). The homogeneity property of $T$ implies that \(T(c_j v_j) = c_j w_j\). The additivity of $T$ now implies that \[T(c_1 v_1 + \dots + c_n v_n) = c_1 w_1 + \dots + c_n w_n.\] Then $T$ is unqiuely determined on span\((v_1, \dots,v_n)\). Because \(v_1, \dots, v_n\) is a basis of $V$, this implies that $T$ is uniquely determined on $V$.
+    \end{proof}
+
+
+    \section{Algebraic Operations on \(\mathcal{L}(V,W)\)}
+
+    \subsection{Addition and scalar multiplication on \(\mathcal{L}(V,W)\) }
+
+    Suppose $S,T \in \mathcal{L}(V,W)$ and \(\lambda \in \textbf{F}\). The \emph{sum} \(S + T\) and the \emph{product} \(\lambda T\) are the linear maps from $V$ to $W$ defined by \[(S+T)(v) = Sv + Tv \qquad \text{and} \qquad (\lambda T)(v) = \lambda (Tv)\] for all \(v \in V\).
+
+    \subsection{\(\mathcal{L}(V,W)\) is a vector space}
+
+    With the operations of addition and scalar multiplication as defined above, \(\mathcal{L}(V,W)\) is a vector space (it holds all the 8 laws of vector space). Note that the additive identity is the zero linear map or function. 
+
+    \subsection{Product of linear maps}
+
+    If \(T \in \mathcal{L}(U,V)\) and \(S \in \mathcal{L}(V,W)\), then the \emph{product} \(ST \in \mathcal{L}(U,W)\) is defined by \[(ST)(u) = S(Tu)\] for \(u \in U\). In other words, $ST$ is the composition \(S \circ T\) of two functions. Note that $ST$ is defined only when $T$ maps into the domain of $S$.
+
+    \subsection{Algebraic properties of products of linear maps}
+
+    \begin{enumerate}
+        \item Associativity: \[(T_1 T_2)T_3 = T_1 (T_2 T_3)\] where \(T_3\) maps into the domain of \(T_2\), and \(T_2\) maps into the domain of \(T_1\). 
+        \item Identity: \[TI = IT = T\] where \(I \in \mathcal{L}(W,W)\) and \(T \in \mathcal{L}(V,W)\). 
+        \item Distributive properties: \[(S_1 + S_2)T = S_1 T + S_2 T \qquad \text{and} \qquad S(T_1 + T_2) = ST_1 + ST_2\] where \(T, T_1, T_2 \in \mathcal{L}(U,V)\) and \(S,S_1,S_2 \in \mathcal{L}(V,W)\). 
+        \item Powers: If \(T \in \mathcal{L}(V,V)\), we define \(T^n \in \mathcal{L}(V,V)\) by 
+        \begin{align*}
+            T^2 &= TT \qquad (\text{i.e. } T^2 v = T(Tv))\\
+            T^3 &= TTT \\
+            &\vdots \\
+            T^n &= TT^{n-1}.
+        \end{align*}
+    \end{enumerate}
+
+    \subsection{Example}
+
+    Suppose that \(D \in \mathcal{L}(\mathcal{P}(\mathbb{R}), \mathcal{P}(\mathbb{R}))\) is the differentiation map and \(T \in \mathcal{L}(\mathcal{P}(\mathbb{R}), \mathcal{P}(\mathbb{R}))\) is the multiplication by \(x^2\). Show that \(TD \neq DT\). 
+
+    \begin{proof}[\unskip\nopunct]
+        We have \[((TD)p)(x) = x^2 p'(x)\] but \[((DT)p)(x) = x^2 p'(x) + 2x p(x).\] In other words, differentiating and then multiplying by \(x^2\) is not the same as multiplying by \(x^2\) and then differentiating. 
+    \end{proof}
+
+    \subsection{Linear maps take 0 to 0}
+
+    Suppose $T$ is a linear map from $V$ to $W$. Then \(T(0) = 0\).
+
+    \begin{proof}
+        We can prove this by additivity or homogeneity.
+        \begin{itemize}
+            \item By additivity: \(T(0) = T(0+0) = T(0) + T(0)\). Then add the additive inverse of \(T(0)\) to each side of the equation to conclude \(T(0) = 0\).
+            \item By homogeneity: Suppose that \(\lambda = 0\) and \(u = 0\). Then \(T(0 \cdot 0) = 0 \cdot T(0) \Rightarrow T(0) = 0.\)
+        \end{itemize}
+    \end{proof}
+
+\end{document}

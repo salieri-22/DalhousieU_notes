@@ -1,0 +1,444 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{graphicx}
+\graphicspath{ {./img/} }
+
+\setlength{\parindent}{0cm}
+\let\emptyset\varnothing
+
+\title{\textbf{MATH 2135 Linear Algebra} \\ Chapter 3 Linear Maps}
+\author{Alyssa Motas}
+
+\begin{document}
+
+    \maketitle
+
+    \pagebreak
+
+    \tableofcontents
+
+    \pagebreak
+
+    \section{The Vector Spaces of Linear Maps (3.A)}
+
+    \subsection{Definition and Examples of Linear Maps}
+
+    The words ``map,'' ``mapping,'' ``function'' all mean exactly the same thing. Let $X,Y$ be sets. A \emph{function} \(f:X \rightarrow Y\) is an operation that assigns to each element \(x \in X\) a unique element \(y \in Y\), called \(y = f(x)\). $X$ is called the \emph{domain} of $f$, and $Y$ is called the \emph{codomain} of $f$. We also say that $f$ is a ``map'' from $X$ to $Y$.
+
+    \subsubsection{Definition of a linear map}
+
+    A \emph{linear map} or \emph{linear transformation} from $V$ to $W$ is a function \(T:V \rightarrow W\) with the following properties:
+    \begin{enumerate}
+        \item Additivity. \[T(u+v) = Tu + Tv \text{ for all } u,v \in V\]
+        \item Homogeneity. \[T(\lambda v) = \lambda (Tv) \text{ for all } \lambda \in \textbf{F} \text{ and all } v \in V.\]
+    \end{enumerate}
+
+    \subsubsection{Notation \(\mathcal{L}(V,W)\)}
+
+    The set of all linear maps from $V$ to $W$ is denoted by \[\mathcal{L}(V,W) = \{T:V \rightarrow W \mid T \text{ is linear }\}.\] In the case that \(V=W\), a linear function \(T:V \rightarrow V\) is called an \emph{operator} on $V$. In other words, \(\mathcal{L}(V,V)\) is the set of operators on $V$.
+
+    \subsubsection{Examples of linear maps}
+
+    \begin{enumerate}
+        \item \textbf{zero function} The zero function is denoted by \(0 \in \mathcal{L}(V,W)\) and defined with \[0v = 0 \quad \text{or} \quad f(v) = 0.\] The 0 on the left side is a function from \(V to W\), whereas the right one is the additive identity in $W$. The zero function is linear.
+        \item \textbf{identity function} The identity map, denoted by $I$, is the function that takes each element to itself. It is defined as \(I \in \mathcal{L}(V,V)\) such that \[Iv = v.\] The identity map is linear.
+        \item \textbf{differentiation} Define \(D \in \mathcal{L}(\mathcal{P}(\mathbb{R}), \mathcal{P}(\mathbb{R}))\) by \[Dp = p'.\] $D$ is a linear function because: \((f + g)' = f' + g'\) and \((\lambda f)' = \lambda f'\) whenever $f,g$ are differentiable and $\lambda$ is a constant.
+        \item \textbf{integration (antiderivative)} Define \(T \in \mathcal{L}(\mathcal{P}(\mathbb{R}), \mathcal{P}(\mathbb{R}))\) such that \[T(p) = \int_{0}^{x} p(t) dt.\] $T$ is a linear function since the integral of the sum of two functions equals the sum of the integrals, and the integral of a constant times a function equals the constant times the integral of the function. 
+        \item \textbf{integration (definite integrals)} Define \(T \in \mathcal{L}(\mathcal{P}(\mathbb{R}), \mathcal{P}(\mathbb{R}))\) such that \[T(p) = \int_{0}^{1} p(x) dx.\] $T$ is also linear with similar reasons as the previous example. 
+        \item \textbf{multiplication by \(x^2\)} Define \(T \in \mathcal{L}(\mathcal{P}(\mathbb{R}), \mathcal{P}(\mathbb{R}))\) such that \[(Tp)(x) = x^2 p(x).\]
+        \item \textbf{backward shift} Recall that \textbf{F}\(^{\infty}\) is the vector space of all sequences of elements of \textbf{F}. Define \(B \in \mathcal{L}(\textbf{F}^{\infty}, \textbf{F}^{\infty})\) such that \[B(x_1,x_2,x_3, \dots) = (x_2, x_3, \dots).\]
+        \item \textbf{forward shift} Define \(F \in \mathcal{L}(\textbf{F}^{\infty}, \textbf{F}^{\infty})\) such that \[F(x_1, x_2, x_3, \dots) = (0, x_1, x_2, x_3, \dots).\]
+        \item \textbf{recurrence relation} Consider the Fibonacci sequence such taht \[a_{n+2} = a_n + a_{n+1}, \qquad n \geq 3.\] For example, we have \((a_1, a_2, a_3, a_4, a_5, \dots) = (1,1,2,3,5, \dots). \) We can also write the reccurence in terms of the backward (and forward) shfit operators:
+        \begin{align*}
+            a &= (a_1, a_2, a_3, a_4, a_5, \dots) \\
+            Ba &= (a_2, a_3, a_4, a_5, a_6, \dots) \\
+            B^2 a = B(Ba) &= (a_3, a_4, a_5, a_6, a_7, \dots)
+        \end{align*}
+        Cosnider the equation \(B^2 a = Ba + a\). We can do algebra with such equation: \[B^2 a - Ba - a = 0 \qquad \Leftrightarrow \qquad (B^2 - B - I)a = 0.\]
+        \item \textbf{from \(\mathbb{R}^3\) to \(\mathbb{R}^2\)} Define \(T \in \mathcal{L}(\mathbb{R}^3, \mathbb{R}^2)\) by \[T(x,y,z) = (2x-y + 3z, 7x + 5y - 6z).\]
+        \item \textbf{from \textbf{F}\(^n\) to \textbf{F}\(^m\)} Let $m$ and $n$ be positive integers, and let \(A_{j,k} \in \textbf{F}\) for \(j = 1, \dots, m\) and \(k = 1, \dots, n\), and define \(T \in \mathcal{L}(\textbf{F}^n, \textbf{F}^m)\) by \[T(x_1, \dots, x_n) = (A_{1,1} x_1 + \dots + A_{1,n} x_n, \dots, A_{m,1} x_1, \dots + A_{m,n} x_n).\]
+    \end{enumerate}
+
+    \subsubsection{Linear maps and basis of domain}
+
+    Suppose \(v_1, \dots, v_n\) is a basis of $V$  and \(w_1, \dots, w_n \in W\). Then there exists a unique linear map \(T:V \rightarrow W\) such that \[Tv_j = w_j\] for each \(j = 1, \dots, n\).
+
+    \begin{proof}
+        Let us prove the existence of a linear map $T$ with the desired property. Define \(T:V \rightarrow W\) by \[T(c_1 v_1 + \dots + c_n v_n) = c_1 w_1 + \dots + c_n w_n,\] where \(c_1, \dots, c_n\) are arbitrary elements of \textbf{F}. Since \(v_1, \dots, v_n\) is a basis of $V$, the equation does define a function $T$ since each element of $V$ can be uniquely written in the form of \(c_1 v_1 + \dots + c_n v_n\). Suppose that \(c_j = 1\) and the other $c$'s being equal to 0, then we have \(Tv_j = w_j\).
+
+        \vspace{1em}
+        
+        If \(u,v \in V\) with \(u = a_1 v_1 + \dots + a_n v_n\) and \(v = c_1 v_1 + \dots + c_n v_n\), then 
+        \begin{align*}
+            T(u + v) &= T((a_1 + c_1)v_1 + \dots + (a_n + c_n)v_n) \\
+                     &= (a_1 + c_1)w_1 + \dots + (a_n + c_n) w_n \\
+                     &= (a_1 w_1 + \dots + a_n w_n) + (c_1 w_1 + \dots + c_n w_n) \\
+                     &= Tu + Tv.
+        \end{align*}
+        If \(\lambda \in \textbf{F}\) and \(v = c_1 v_1 + \dots + c_n v_n\), then
+        \begin{align*}
+            T(\lambda v) &= T(\lambda c_1 v_1 + \dots + \lambda c_n v_n) \\
+                         &= \lambda c_1 w_1 + \dots + \lambda c_n w_n \\
+                         &= \lambda (c_1 w_1 + \dots + c_n w_n) \\
+                         &= \lambda Tv.
+        \end{align*}
+        Thus, $T$ is a linear map from $V$ to $W$. Now we need to prove that it is unique. Suppose that \(T \in \mathcal{L}(V,W)\) and that \(Tv_j = w_j\) for \(j = 1, \dots, n\). Let \(c_1, \dots, c_n \in \textbf{F}\). The homogeneity property of $T$ implies that \(T(c_j v_j) = c_j w_j\). The additivity of $T$ now implies that \[T(c_1 v_1 + \dots + c_n v_n) = c_1 w_1 + \dots + c_n w_n.\] Then $T$ is unqiuely determined on span\((v_1, \dots,v_n)\). Because \(v_1, \dots, v_n\) is a basis of $V$, this implies that $T$ is uniquely determined on $V$.
+    \end{proof}
+
+
+    \subsection{Algebraic Operations on \(\mathcal{L}(V,W)\)}
+
+    \subsubsection{Addition and scalar multiplication on \(\mathcal{L}(V,W)\) }
+
+    Suppose $S,T \in \mathcal{L}(V,W)$ and \(\lambda \in \textbf{F}\). The \emph{sum} \(S + T\) and the \emph{product} \(\lambda T\) are the linear maps from $V$ to $W$ defined by \[(S+T)(v) = Sv + Tv \qquad \text{and} \qquad (\lambda T)(v) = \lambda (Tv)\] for all \(v \in V\).
+
+    \subsubsection{\(\mathcal{L}(V,W)\) is a vector space}
+
+    With the operations of addition and scalar multiplication as defined above, \(\mathcal{L}(V,W)\) is a vector space (it holds all the 8 laws of vector space). Note that the additive identity is the zero linear map or function. 
+
+    \subsubsection{Product of linear maps}
+
+    If \(T \in \mathcal{L}(U,V)\) and \(S \in \mathcal{L}(V,W)\), then the \emph{product} \(ST \in \mathcal{L}(U,W)\) is defined by \[(ST)(u) = S(Tu)\] for \(u \in U\). In other words, $ST$ is the composition \(S \circ T\) of two functions. Note that $ST$ is defined only when $T$ maps into the domain of $S$.
+
+    \subsubsection{Algebraic properties of products of linear maps}
+
+    \begin{enumerate}
+        \item Associativity: \[(T_1 T_2)T_3 = T_1 (T_2 T_3)\] where \(T_3\) maps into the domain of \(T_2\), and \(T_2\) maps into the domain of \(T_1\). 
+        \item Identity: \[TI = IT = T\] where \(I \in \mathcal{L}(W,W)\) and \(T \in \mathcal{L}(V,W)\). 
+        \item Distributive properties: \[(S_1 + S_2)T = S_1 T + S_2 T \qquad \text{and} \qquad S(T_1 + T_2) = ST_1 + ST_2\] where \(T, T_1, T_2 \in \mathcal{L}(U,V)\) and \(S,S_1,S_2 \in \mathcal{L}(V,W)\). 
+        \item Powers: If \(T \in \mathcal{L}(V,V)\), we define \(T^n \in \mathcal{L}(V,V)\) by 
+        \begin{align*}
+            T^2 &= TT \qquad (\text{i.e. } T^2 v = T(Tv))\\
+            T^3 &= TTT \\
+            &\vdots \\
+            T^n &= TT^{n-1}.
+        \end{align*}
+    \end{enumerate}
+
+    \subsubsection{Example}
+
+    Suppose that \(D \in \mathcal{L}(\mathcal{P}(\mathbb{R}), \mathcal{P}(\mathbb{R}))\) is the differentiation map and \(T \in \mathcal{L}(\mathcal{P}(\mathbb{R}), \mathcal{P}(\mathbb{R}))\) is the multiplication by \(x^2\). Show that \(TD \neq DT\). 
+
+    \begin{proof}[\unskip\nopunct]
+        We have \[((TD)p)(x) = x^2 p'(x)\] but \[((DT)p)(x) = x^2 p'(x) + 2x p(x).\] In other words, differentiating and then multiplying by \(x^2\) is not the same as multiplying by \(x^2\) and then differentiating. 
+    \end{proof}
+
+    \subsubsection{Linear maps take 0 to 0}
+
+    Suppose $T$ is a linear map from $V$ to $W$. Then \(T(0) = 0\).
+
+    \begin{proof}
+        We can prove this by additivity or homogeneity.
+        \begin{itemize}
+            \item By additivity: \(T(0) = T(0+0) = T(0) + T(0)\). Then add the additive inverse of \(T(0)\) to each side of the equation to conclude \(T(0) = 0\).
+            \item By homogeneity: Suppose that \(\lambda = 0\) and \(u = 0\). Then \(T(0 \cdot 0) = 0 \cdot T(0) \Rightarrow T(0) = 0.\)
+        \end{itemize}
+    \end{proof}
+
+    \pagebreak
+
+    \section{Null Spaces and Ranges (3.B)}
+
+    \subsection{Null Space and Injectivity}
+
+    \subsubsection{Definition of null space}
+
+    For \(T \in \mathcal{L}(V,W)\), the \emph{null space} or \emph{kernel} of $T$, denoted null $T$, is the subset of $V$ consisting of those vectors that $T$ maps to 0: \[\text{null } T = \{v \in V \mid Tv = 0\}.\]
+
+    \subsubsection{Examples of null spaces}
+
+    \begin{itemize}
+        \item If \(T:V \rightarrow W\) is the zero map where \(Tv = 0\) for every \(v \in V\), then null \(T = V\). 
+        \item If \(T:V \rightarrow V\) is the identity function, then null \(T = \{0\}\). 
+        \item Suppose \(\phi \in \mathcal{L}(\mathbb{R}^3, \textbf{F})\) is defined by \(\phi (z_1, z_2, z_3) = z_1 + 2z_2 + 3z_3\). Then null \(\phi = \{(z_1, z_2, z_3) \in \mathbb{C}^3 \mid z_1 + 2 z_2 + 3 z_3 = 0\}.\) A basis of null \(\phi\) is \((-2,1,0), (-3,0,1)\). 
+        \item Suppose \(D \in \mathcal{L}(\mathcal{P}(\mathbb{R}), \mathcal{P}(\mathbb{R}))\) is the differentiation map defined by \(Dp = p'\). The only functions whose derivative equals the zero function are the constant functions. Then, the null space of $D$ equals the set of constant functions. \[\text{null } D = \{ a_0 \mid a_0 \in \mathbb{R} \}.\]
+        \item Suppose \(T \in \mathcal{L}(\mathcal{P}(\mathbb{R}), \mathcal{P}(\mathbb{R}))\) is the multiplication by \(x^2\) map defined by \((Tp)(x) = x^2 p(x)\). The only polynomial $p$ such that \(x^2 p(x) = 0\) for all \(x \in \mathbb{R}\) is the 0 polynomial. Then null \(T = \{0\}\). 
+        \item Suppose \(B \in \mathcal{L}(\textbf{F}^{\infty}, \textbf{F}^{\infty})\) is the backward shift defined by \[ B(x_1, x_2, x_3, \dots) = (x_2, x_3, \dots).\] Then \(B(x_1,x_2,x_3,\dots) = 0\) if and only if \(x_2 = x_3 = \dots = 0\). So we have null \(B = \{ (a,0,0,\dots) \mid a \in \textbf{F} \}\). 
+    \end{itemize}
+
+    \subsubsection{The null space is a subspace}
+
+    Suppose \(T \in \mathcal{L}(V,W)\). Then null \(T\) is a subspace of $V$.
+
+    \begin{proof}
+        Since $T$ is a linear map, we know that \(T(0) = 0\) then \(0 \in\) null $T$.  Suppose $u,v \in \text{null } T$, then \[ T(u+v) = Tu + Tv = 0 + 0 = 0. \] Since \(u+v \in \) null $T$, then it is closed under addition. Suppose that \(u \in \) null $T$ and \(\lambda \in \textbf{F}\). Then \[ T(\lambda u) = \lambda Tu = \lambda 0 = 0. \] Hence \(\lambda u \in \) null $T$ and it is closed under scalar multiplication. Thus, null $T$ is a subspace of $V$. 
+    \end{proof}
+
+    \subsubsection{Injective}
+
+    A function \(T:V \rightarrow W\) is called \emph{injective} or \emph{one-to-one} if \(Tu = Tv\) implies \(u = v\). This can be rephrased to say that $T$ is injective if \(u \neq v\) implies that \(Tu \neq Tv\). 
+
+    \subsubsection{Injectivity is equivalent to null space equals \(\{0\}\)}
+
+    Let \(T \in \mathcal{L}(V,W)\). Then $T$ is injective if and only if null $T = \{0\}$.
+
+    \begin{proof}
+        Suppose $T$ is injective. We want to prove that null $T = \{ 0 \}$. We already know that \(\{0\} \subset \text{null } T\) since \(0 \in \text{null } T\). To prove that null \(T \subset \{0\}\), suppose \(v \in\) null $T$. Then \[ T(v) = 0 = T(0). \] Since $T$ is injective, the equation above implies $v = 0$, then we can conclude that null \(T = \{0\}\), as desired.
+
+        Suppose that null \(T = \{0\}\) and we need to show that $T$ is injective. Suppose \(u,v \in V\) and \(Tu = Tv\). Then \[0 = Tu - Tv = T(u-v).\] Then \(u - v \in \) null $T$, which equals \(\{0\}\). Hence \(u - v = 0 \Rightarrow u = v\) which implies $T$ is injective, as desired. 
+    \end{proof}
+
+    \subsection{Range and Surjectivity}
+
+    \subsubsection{Definition of range}
+
+    For $T$ a function from $V$ to $W$, the \emph{range} of $T$ is the subset of $W$ consisting of those vectors that are of the form $Tv$ for some $v \in V$: \[ \text{range } T = \{Tv \mid v \in V\}. \]
+
+    \subsubsection{Examples of range}
+
+    \begin{itemize}
+        \item If $T$ is the zero map from $V$ to $W$, in other words if $Tv = 0$ for every $v \in V$, then range $T = \{0\}$.
+        \item Suppose \(T \in \mathcal{L}(\mathbb{R}^2, \mathbb{R}^3)\) is defined by \(T(x,y) = (2x, 5y, x + y)\), then range $T = \{(2x, 5y, x+y) \mid x,y \in \mathbb{R}\}$. A basis of range $T$ is \((2,0,1),(0,5,1)\). 
+        \item Suppose \(D \in \mathcal{L}(\mathcal{P}(\mathbb{R}), \mathcal{P}(\mathbb{R}))\) is the differentiation map by \(Dp = p'\). Because for every polynomial \(q \in \mathcal{P}(\mathbb{R})\) there exists a polynomial \(p \in \mathcal{P}(\mathbb{R})\) such that \(p' = q\), the range of $D$ is \(\mathcal{P}(\mathbb{R})\). 
+        \item Suppose \(B \in \mathcal{L}(\textbf{F}^{\infty}, \textbf{F}^{\infty})\) is the backshift operator defined by \(B(x_1, x_2, x_3, \dots) = (x_2, x_3, x_4, \dots)\). Then
+        \begin{align*}
+            \text{range } B &= \{B(x_1, x_2, \dots) \mid (x_1, x_2, dots) \in \textbf{F}^{\infty}\} \\
+            &= \{(x_2, x_3, x_4, \dots) \mid x_1, x_2, \dots \in \textbf{F}\} \\
+            &= \textbf{F}^{\infty}.
+        \end{align*}
+        \item Let \(F \in \mathcal{L}(\textbf{F}^{\infty}, \textbf{F}^{\infty})\) be the forward shift operator defined by \(F(x_1, x_2, x_3, \dots) = (0, x_1, x_2, \dots)\). Then 
+        \begin{align*}
+            \text{range } F &= \{F(x_1, x_2, \dots) \mid (x_1, x_2, \dots) \in \textbf{F}^{\infty}\} \\
+            &= \{(0, x_1, x_2, \dots) \mid x_1, x_2, \dots \in \textbf{F}\}.
+        \end{align*}
+        This is a proper subspace of \(\textbf{F}^{\infty}\). 
+    \end{itemize}
+
+    \subsubsection{The range is a subspace}
+
+    If \(T \in \mathcal{L}(V,W)\), then range $T$ is a subspace of $W$.
+
+    \begin{proof}
+        Suppose \(T \in \mathcal{L}(V,W)\), then \(T(0) = 0\) which implies that \(0 \in \) range $T$. If \(w_1, w_2 \in \) range $T$, then there exist \(v_1, v_2 \in V\) such that \(Tv_1 = w_1\) and \(Tv_2 = w_2\). So \[T(v_1 + v_2) = Tv_1 + Tv_2 = w_1 + w_2.\] Hence \(w_1 + w_2 \in \) range $T$, so it is closed under addition. If \(w \in \) range $T$ and \(\lambda \in \textbf{F}\), then there exists \(v \in V\) such that \(Tv = w\). Thus \[T(\lambda v) = \lambda Tv = \lambda w.\] Hence \(\lambda w \in \) range $T$, and it is closed under scalar multiplication. Hence, range $T$ is a subspace of $W$. 
+    \end{proof}
+
+    \subsubsection{Surjective}
+
+    A function \(T:V \rightarrow W\) is called \emph{surjective} or \emph{onto} if its range equals $W$. 
+
+    \subsubsection{Example}
+
+    The differentiation map \(D \in \mathcal{L}(\mathcal{P}_5 (\mathbb{R}), \mathcal{P}_5 (\mathbb{R}))\) defined by \(Dp = p'\) is not surjective, because the polynomial $x^5$ is not in the range of $D$. However, the differentiation map \(S \in \mathcal{L}(\mathcal{P}_5 (\mathbb{R}), \mathcal{P}_4 (\mathbb{R}))\) defined by \(Sp = p'\) is surjective, because its range equals \(\mathcal{P}_4 (\mathbb{R})\), which is now the vector space into which $S$ maps. 
+
+    \subsection{Fundamental Theorem of Linear Maps}
+
+    Suppose $V$ is finite-dimensional and \(T \in \mathcal{L}(V,W)\). Then range $T$ is finite-dimensional and \[\dim V = \dim \text{null } T + \dim \text{range } T.\]
+
+    \begin{proof}
+        Let \(u_1, \dots, u_m\) be a basis of null $T$, then dim null $T = m$. The linearly independent list \(u_1, \dots, u_m\) can be extended to a basis \[u_1, \dots, u_m, v_1, \dots, v_n\] of $V$, thus dim $V = m + n$. We need to show that range $T$ is finite-dimensional and dim range $T = n$. We will do this by proving that \(Tv_1, \dots, Tv_n\) is a basis of range $T$.
+
+        \vspace{1em}
+
+        Let \(v \in V\). Since \(u_1, \dots, u_m, v_1, \dots, v_n\) spans $V$, we can write \[v = a_1 u_1 + \dots + a_m u_m + b_1 v_1 + \dots + b_n v_n\] where \(a_1, \dots, a_m, b_1, \dots, b_n \in \textbf{F}\). Applying $T$ to both sides, we get \[Tv = b_1 Tv_1 + \dots + b_n T v_n,\] where all the terms of \(Tu_j\) disappeared since \(u_j \in \) null $T$. The equation above implies that \(Tv_1, \dots, Tv_n\) spans range $T$, then range $T$ is finite-dimensional. 
+
+        \vspace{1em}
+        To show that \(Tv_1, \dots, Tv_n\) is linearly independent, suppose \(c_1, \dots, c_n \in \textbf{F}\) and \(c_1 Tv_1 + \dots + c_n T v_n = 0.\) Then \[T(c_1 v_1 + \dots + c_n v_n) = 0\] and \(c_1 v_1 + \dots + c_n v_n \in \) null $T$. Because \(u_1, \dots, u_m\) spans null $T$, we can write \(c_1 v_1 + \dots + c_n v_n = d_1 u_1 + \dots + d_m u_m\) where \(d_1, \dots, d_m \in \textbf{F}\). The equation implies all $c$'s and $d$'s are 0 (since \(u_1, \dots, u_m, v_1, \dots, v_n\) is linearly independent). Thus \(Tv_1, \dots, Tv_n\) is linearly independent and hence is a basis of range $T$, as desired.
+    \end{proof}
+
+    \subsubsection{A map to a smaller dimensional space is not injective}
+
+    Suppose $V$ and $W$ are finite-dimensional vector spaces such that \(\dim V > \dim W\). Then no linear map from $V$ to $W$ is injective. 
+
+    \begin{proof}
+        Let \(T \in \mathcal{L}(V,W)\). Then 
+        \begin{align*}
+            \text{dim null } T &= \dim V - \dim \text{ range } T \\
+                               &\geq \dim V - \dim W \\
+                               &> 0.
+        \end{align*}
+        The inequality states that dim null $T > 0$ which means null $T$ contains vectors other than 0. Thus, $T$ is not injective since null $T \neq \{0\}$. 
+    \end{proof}
+
+    \subsubsection{A map to a larger dimensional space is not surjective}
+
+    Suppose $V$ and $W$ are finite-dimensional vector spaces such that \(\dim V < \dim W\). Then no linear map from $V$ to $W$ is surjective.
+
+    \begin{proof}
+        Let \(T \in \mathcal{L}(V,W)\). Then 
+        \begin{align*}
+            \dim \text{ range } T &= \dim V - \dim \text{ null } T \\
+                                  &\leq \dim V \\
+                                  &< \dim W.
+        \end{align*}
+        The inequality states that \(\dim \text{range } T < \dim W\). This means that range $T$ \(\neq W\), so $T$ is not surjective. 
+    \end{proof}
+
+    \subsubsection{Homogenous system of linear equations}
+    
+    A homogenous system of linear equations with more variables than equations has nonzero solutions. 
+
+    \begin{proof}
+        Consider \(T: \textbf{F}^n \rightarrow \textbf{F}^m\) defined by \[T(x_1, \dots, x_n) = \left( \sum_{k=1}^{n} A_{1,k} x_k, \dots, \sum_{k=1}^{n} x_k \right)\] where \(T(x_1, \dots, x_n) = 0\) and 0 here is the additive identity in \(\textbf{F}^m\), which is the list of length $m$ of all 0's. We have a homogenous system of $m$ linear equations with $n$ variables. If \(\dim \textbf{F}^n = n > \dim \textbf{F}^m = m\), then $T$ is not injective. We also have null \(T \neq \{0\}\) which implies that there exists some \(v \in\) null $T$ such that \(v \neq 0\). So, the system \(Tv = 0\) has nonzero solutions. 
+    \end{proof}
+
+    \subsubsection{Inhomogenous system of linear equations}
+
+    An inhomogenous system of linear equations with more equations than variables has no solution for some choice of the constant terms.
+
+    \begin{proof}
+        Define \(T: \textbf{F}^n \rightarrow \textbf{F}^m\) by \[T(x_1, \dots, x_n) = \left( \sum_{k=1}^{n} A_{1,k} x_k, \dots, \sum_{k=1}^{n} A_{m,k} x_k \right)\] where \(T(x_1, \dots, x_n) = (c_1, \dots, c_m)\). We have a system of $m$ equations with $n$ variables \(x_1, \dots, x_n\). We see that $T$ is not surjective if \(n < m\) since range \(T \neq \textbf{F}^m\).
+    \end{proof}
+
+    \pagebreak
+
+    \section{Matrices (3.C)}
+
+    \subsection{Representing a Linear Map by a Matrix}
+
+    \subsubsection{Definition of a matrix}
+
+    Let $m$ and $n$ denote positive integers. An $m$-by-$n$ \emph{matrix} is a rectangular array of elements of \textbf{F} with $m$ rows and $n$ columns:
+    \begin{equation*}
+        A = \begin{bmatrix}
+                A_{1,1} & \dots & A_{1,n} \\
+                \vdots  &       &  \vdots \\
+                A_{m,1} & \dots &  A_{m,n}
+            \end{bmatrix}
+    \end{equation*}
+    The notation \(A_{j,k}\) denotes the entry in row $j$, column $k$ of $A$.
+
+    \subsubsection{Definition of the matrix of a linear map}
+
+    Suppose \(T \in \mathcal{L}(V,W)\) and \(v_1, \dots, v_n\) is a basis of $V$ and \(w_1, \dots, w_m\) is a basis of $W$. The \emph{matrix} of $T$ with respect to these bases is the $m$-by-$n$ matrix \(\mathcal{M}(T)\) whose entries \(A_{j,k}\) are defined by \[Tv_k = A_{1,k} w_1 + \dots + A_{m,k} w_m.\] If the bases are not clear from the context, then the notation \(\mathcal{M}(T,(v_1, \dots, v_n),(w_1, \dots, w_n))\) is used.
+    \begin{equation*}
+        \mathcal{M}(T) = A = \begin{bmatrix}
+                                a_{1,1} & a_{1,2} & \dots & a_{1,n} \\
+                                \vdots  &  \vdots     &       &   \vdots \\
+                                a_{m,1} & a_{m,2} & \dots & a_{m,n}
+                             \end{bmatrix}
+    \end{equation*}
+
+    \subsubsection{Example}
+    Suppose \(T \in \mathcal{L}(\textbf{F}^2, \textbf{F}^3)\) is defined by \(T(x,y) = (x+3y, 2x+5y, 7x + 9y).\) Find the matrix of $T$ with respect to the standard bases of \(\textbf{F}^2\) and \(\textbf{F}^3\). 
+
+    \begin{proof}[\unskip\nopunct]
+        Since \(T(1,0) = (1,2,7)\) and \(T(0,1) = (3,5,9)\), then
+        \begin{equation*}
+            \mathcal{M}(T) = \begin{bmatrix}
+                               1 & 3 \\
+                               2 & 5 \\
+                               7 & 9
+                             \end{bmatrix}.
+        \end{equation*}
+    \end{proof}
+    Suppose \(D \in \mathcal{L}(\mathcal{P}_3 (\mathbb{R}), \mathcal{P}_2 (\mathbb{R}))\) is the differentiation map defined by \(Dp = p'\). Find the matrix of $D$ with respect to the standard bases of \(\mathcal{P}_3 (\mathbb{R})\) and \(\mathcal{P}_2 (\mathbb{R})\).
+
+    \begin{proof}[\unskip\nopunct]
+        Since \((x^n)' = nx^{n-1}\), then we have
+        \begin{equation*}
+            \mathcal{M}(D) = \begin{bmatrix}
+                                0 & 1 & 0 & 0 \\
+                                0 & 0 & 2 & 0 \\
+                                0 & 0 & 0 & 3
+                             \end{bmatrix}
+        \end{equation*}
+    \end{proof}
+
+    \subsection{Addition and Scalar Multiplication of Matrices}
+
+    \subsubsection{Definition of matrix addition}
+
+    The \emph{sum of two matrices of the same size} is the matrix obtained by adding corresponding entries in the matrices:
+    \begin{equation*}
+        \begin{bmatrix}
+            A_{1,1} & \dots & A_{1,n} \\
+            \vdots  &       & \vdots  \\
+            A_{m,1} & \dots & A_{m,n}
+        \end{bmatrix} + \begin{bmatrix}
+                            C_{1,1} & \dots & C_{1,n} \\
+                            \vdots  &       &  \vdots \\
+                            C_{m,1} & \dots & C_{m,n}
+                        \end{bmatrix} = \begin{bmatrix}
+                                            A_{1,1} + C_{1,1} & \dots & A_{1,n} + C_{1,n} \\
+                                            \vdots            &       &   \vdots          \\
+                                            A_{m,1} + C_{m,1} & \dots & A_{m,n} + C_{m,n}
+                                        \end{bmatrix}
+    \end{equation*}
+    In other words, \((A+C)_{j,k} = A_{j,k} + C_{j,k}.\)
+
+    \subsubsection{The matrix of the sum of linear maps}
+
+    Suppose \(S,T \in \mathcal{L}(V,W)\). Then \(\mathcal{M}(S + T) = \mathcal{M}(S) + \mathcal{M}(T)\). 
+
+    \subsubsection{Definition of scalar multiplication of a matrix}
+
+    The product of a scalar and a matrix is the matrix obtained by mutliplying each entry in the matrix by the scalar:
+    \begin{equation*}
+        \lambda \begin{bmatrix}
+                    A_{1,1} & \dots & A_{1,n} \\
+                    \vdots  &       &  \vdots \\
+                    A_{m,1} & \dots & A_{m,n}
+                \end{bmatrix} = \begin{bmatrix}
+                                    \lambda A_{1,1} & \dots & \lambda A_{1,n} \\
+                                    \vdots          &       & \vdots \\
+                                    \lambda A_{m,1} & \dots & \lambda A_{m,n}
+                                \end{bmatrix}
+    \end{equation*}
+    In other words, \((\lambda A)_{j,k} = \lambda A_{j,k}\)
+
+    \subsubsection{The matrix of a scalar times a linear map}
+
+    Suppose \(\lambda \in \textbf{F}\) and \(T \in \mathcal{L}(V,W)\). Then \(\mathcal{M}(\lambda T) = \lambda \mathcal{M}(T)\). 
+
+    \subsubsection{Notation of \(\textbf{F}^{m,n}\)}
+
+    For $m$ and $n$ positive integers, the set of all $m$-by$n$ matrices with entries in \textbf{F} is denoted by \(\textbf{F}^{m,n}\).
+
+    \subsubsection{\(\dim \textbf{F}^{m,n} = mn\)}
+
+    Suppose $m$ and $n$ are positive integers. With addition and scalar multiplication defined as above, \(\textbf{F}^{m,n}\) is a vector space with dimension $mn$. 
+
+    \subsection{Matrix Multiplication}
+
+    \subsubsection{Definition of matrix multiplication}
+
+    Suppose $A$ is an $m$-by-$n$ matrix and $C$ is an $n$-by-$p$ matrix. Then $AC$ is defined to be the $m$-by-$p$ matrix whose entry in row $j$, column $k$, is given by the following equation: \[(AC)_{j,k} = \sum_{r=1}^{n} A_{j,r} C_{r,k}.\] In other words, the entry in row $j$, column $k$, of $AC$ is computed by taking row $j$ of $A$ and column $k$ of $C$, multiplying together corresponding entries, and then summing. Matrix multiplication is not commutative, but it is associative and distributive. 
+
+    \subsubsection{The matrix of the product of linear maps}
+
+    If \(T \in \mathcal{L}(U,V)\) and \(S \in \mathcal{L}(V,W)\), then \(\mathcal{M}(ST) = \mathcal{M}(S) \mathcal{M}(T)\). 
+
+    \subsection{Isomorphism}
+
+    \subsubsection{Definition of isomorphism}
+
+    Let $V,W$ be vector spaces over \textbf{F} and let \(T \in \mathcal{L}(V,W)\). We say that $T$ is an \emph{isomorphism} if $T$ is bijective (i.e. injective and surjective. 
+
+    \subsubsection{Inverse function}
+
+    If \(T \in \mathcal{L}(V,W)\) is an isomorphism, then the inverse function \(T^{-1} \in \mathcal{L}(W,V)\) exists and is linear.
+
+    \vspace{1em}
+
+    \emph{Example.} Let \(V = \mathbb{R}^4\) and let \(W = \mathcal{P}_3 (\mathbb{R})\). A basis of $V$ is \(v_1 = (1,0,0,0), v_2 = (0,1,0,0), v_3 = (0,0,1,0), v_4 = (0,0,0,1)\), and a basis of \(\mathcal{P}_3 (\mathbb{R})\) is \(w_1 = 1, w_2 = x, w_3 = x^2, w_4 = x^3\). Define an isomorphism \(T \in \mathcal{L}(\mathbb{R}^4 \rightarrow \mathcal{P}_3 (\mathbb{R}))\), namely the unique linear map such that \[T(v_1) = w_1, \dots, T(v_4) = w_4.\] The inverse \(T^{-1} \in \mathcal{L}(\mathcal{P}_3 (\mathbb{R}) \rightarrow \mathbb{R}^4)\) is the unique linear map such that \[T^{-1} w_1 = v_1, \dots, T^{-1} w_4 = v_4.\] More concretely, we can describe $T$ and $T^{-1}$ like this:
+    \begin{equation*}
+        T \begin{bmatrix}
+            a \\
+            b \\
+            c \\
+            d  
+          \end{bmatrix} = a + bx + cx^2 + dx^3
+    \end{equation*}
+    and
+    \begin{equation*}
+        T^{-1} (a + bx + cx^2 + dx^3) = \begin{bmatrix}
+                                            a \\
+                                            b \\
+                                            c \\
+                                            d
+                                        \end{bmatrix}
+    \end{equation*}
+
+    \subsubsection{Definition of isomorphic}
+    Vector spaces $V,W$ are \emph{isomorphic} if there exists an isomorphism between them.
+
+    \subsubsection{Finite-dimensional vector spaces are isomorphic}
+    
+    Finite-dimensional vector spaces are isomorphic if and only if they have the same dimension. 
+
+\end{document}
