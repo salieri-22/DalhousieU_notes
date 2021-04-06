@@ -1,0 +1,248 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{graphicx}
+\graphicspath{ {./img/} }
+
+\setlength{\parindent}{0cm}
+\let\emptyset\varnothing
+
+\title{\textbf{MATH 2135 Linear Algebra} \\ Chapter 5 Eigenvalues, Eigenvectors, and Invariant Subspaces}
+\author{Alyssa Motas}
+
+\begin{document}
+
+    \maketitle
+
+    \pagebreak
+
+    \tableofcontents
+
+    \pagebreak
+
+    \section{5.A Invariant Subspaces}
+
+    \subsection{Definition of Invariant Subspace}
+
+    Suppose \(T \in \mathcal{L}(V)\). A subspace $U$ of $V$ is called \textbf{\emph{invariant}} under $T$ if \(u \in U\) implies \(Tu \in U\).
+
+    \subsubsection{Example}
+
+    Suppose \(T \in \mathcal{L}(V)\). Show that each of the following subspaces of $V$ is invariant under $T$:
+    \begin{enumerate}
+        \item \(\{0\}\): If \(u \in \{0\}\), then $u=0$ and hence \(Tu = 0 \in \{0\}\). Thus \(\{0\}\) is invariant under $T$.
+        \item $V$: If \(u \in V\), then \(Tu \in V\). Thus $V$ is invariant under $T$.
+        \item null $T$: If \(u \in \text{null } T\), then \(Tu = 0\), hence \(Tu \in \text{null } T\). Thus null $T$ is invariant under $T$.
+        \item range $T$: If \(u \in \text{range } T\), then \(Tu \in \text{range } T\). Thus range $T$ is invariant under $T$.
+        \item Suppose that \(T \in \mathcal{L}(\mathcal{P}(\mathbb{R}))\) is defined by \(Tp = p'\). Then \(\mathcal{P}_4(\mathbb{R})\), which is a subspace of \(\mathcal{P}(\mathbb{R})\), is invariant under $T$ because if \(p \in \mathcal{P}(\mathbb{R})\) has degree at most 4, then \(p'\) also has degree at most 4.
+    \end{enumerate}
+
+    \subsection{Eigenvalues and Eigenvectors}
+
+    Suppose \(T \in \mathcal{L}(V)\). A number \(\lambda \in \textbf{F}\) is called an \textbf{\emph{eigenvalue}} of $T$ if there exists \(v \in V\) such that \(v \neq 0\) and \(Tv = \lambda v.\) The vector \(v \in V\) is called an \textbf{\emph{eigenvector}} of $T$ corresponding to \(\lambda\).
+
+    \subsubsection{Equivalent conditions to be an eigenvalue}
+
+    Recall that \(I\) is the identity operator. Suppose $V$ is finite-dimensional, \(T \in \mathcal{L}(V)\), and \(\lambda \in \textbf{F}\). Then the following are equivalent:
+    \begin{enumerate}
+        \item \(\lambda\) is an eigenvalue of $T$;
+        \item \(T - \lambda I\) is not injective;
+        \item \(T - \lambda I\) is not surjective;
+        \item \(T - \lambda I\) is not invertible.
+    \end{enumerate}
+
+    \subsubsection{Example}
+
+    Suppose \(T \in \mathcal{L}(\textbf{F}^2)\) is defined by \[T(w,z) = (-z,w).\] Find the eigenvalues and eigenvectors of $T$ if \(\textbf{F} = \mathbb{C}\).
+
+    \begin{proof}[\unskip\nopunct]
+        \emph{Solution:} To find eigenvalues of $T$, we must find the scalars \(\lambda\) such that \[T(w,z) = \lambda(w,z)\] has some solution other than \(w = z=  0.\) The equation above is equivalent to \[-z = \lambda w, \quad w = \lambda z.\] Substituting the value for $w$, we get \[-z = \lambda^2 z.\] Now $z$ cannot equal to 0, so we have \[-1 = \lambda^2\] and the solutions are \(\lambda = i\) and \(\lambda = -i\). The eigenvectors corresponding to the eigenvalue $i$ are the vectors of the form \((w,-wi)\), with \(w \in \mathbb{C}\) and \(w \neq 0\). For the eigenvalue \(-i\) are the vectors of the form \(w,wi\), with \(w \in \mathbb{C}\) and \(w \neq 0\). 
+    \end{proof}
+
+    \subsubsection{Linearly independent eigenvectors}
+
+    Let \(T \in \mathcal{L}(V)\). Suppose \(\lambda_1, \dots, \lambda_m\) are distinct eigenvalues of $T$ and \(v_1, \dots, v_m\) are corresponding eigenvectors. Then \(v_1, \dots, v_m\) is linearly independent. 
+
+    \begin{proof}
+        Suppose \(v_1, \dots, v_m\) are linearly dependent. We will derive a contradiction. Let $k$ be the smallest index such that \[v_k \in \text{span}(v_1, \dots, v_{k-1}).\] Then there exist \(a_1, \dots, a_k\) such that \[v_k = a_1 v_1 + \dots + a_{k-1} v_{k-1}.\] Appply $T$ to both sides of this equation, getting \[\lambda_k v_k = a_1 \lambda_1 v_1 + \dots + a_{k-1} \lambda_{k-1} v_{k-1}.\] Multiply both sides of \(v_k\) by \(\lambda_k\) and then subtract the equation above, getting \[0 = a_1 (\lambda_k - \lambda_1) v_1 + \dots + a_{k-1} (\lambda_k - \lambda_{k-1}) v_{k-1}.\] Since $k$ was the smallest index satisfying \(v_k \in \text{span}(v_1, \dots, v_{k-1})\), then \(v_1, \dots, v_{k-1}\) is linearly independent. Thus all the $a$'s are 0. Since \(\lambda_1, \dots, \lambda_m\) were assumed to be distinct, then \(\lambda_1 - \lambda_k \neq 0, \dots, \lambda_{k-1} - \lambda_k \neq 0\). We have \[a_1, \dots, a_{k-1} = 0\] and we get \(v_k = 0\) which contradicts our assumption. 
+    \end{proof}
+
+    \subsubsection{Number of eigenvalues}
+
+    Suppose $V$ is finite-dimensional. Then each opeartor on $V$ has at most dim $V$ distinct eigenvalues. 
+
+    \begin{proof}
+        Let \(T \in \mathcal{L}(V)\). Suppose \(\lambda_1, \dots, \lambda_m\) are distinct eigenvalues of $T$. Let \(v_1, \dots, v_m\) be corresponding eigenvectors. Then the previous theorem implies that the list \(v_1, \dots, v_m\) is linearly independent. Thus \(m \leq \dim V\) as desired. 
+    \end{proof}
+
+    \section{5.B Eigenvectors and Upper-Triangular Matrices}
+
+    \subsection{Polynomials Applied to Operators}
+
+    Suppose \(T \in \mathcal{L}(V)\) and $m$ is a positive integer.
+    \begin{itemize}
+        \item \(T^m\) is defined by 
+        \begin{equation*}
+            T^m = \underbrace{T \dots T}_{m \text{ times}}
+        \end{equation*}
+        \item \(T^0\) is defined to be the identity operator $I$ on $V$.
+        \item If $T$ is invertible with inverse \(T^{-1}\), then \(T^{-m}\) is defined by \[T^{-m} = (T^{-1})^m.\]
+        \item If $T$ is an operator, then \[T^m T^n = T^{m+n} \quad \text{and} \quad (T^m)^n = T^{mn}.\]
+    \end{itemize}
+
+    \subsubsection{Definition of \(p(T)\)}
+
+    Suppose \(T \in \mathcal{L}(V)\) and \(p \in \mathcal{P}(\textbf{F})\) is a polynomial given by \[p(z) = a_0 + a_1 z + a_2 z^2 + \dots + a_m z^m\] for \(z \in \textbf{F}\). Then \(p(T)\) is the operator defined by \[p(T) = a_0 I + a_1 T + a_2 T^2 + \dots + a_m T^m.\]
+
+    \subsubsection{Example}
+
+    Suppose \(D \in \mathcal{L}(\mathcal{P}(\mathbb{R}))\) is the differentiation operator defined by \(Dq = q'\) and $p$ is the polynomial defined by \(p(x) = 7 - 3x + 5x^2\). Then \(p(D) = 7I - 3D + 5D^2\); thus \[(p(D))q = 7q - 3q' + 5q''\] for every \(q \in \mathcal{P}(\mathbb{R})\).
+
+    \subsection{Existence of Eigenvalues}
+
+    Every operator on a finite-dimensional, nonzero, complex vector space has an eigenvalue. 
+
+    \begin{proof}
+        Suppose $V$ is a complex vector space with dimension \(n>0\) and \(T \in \mathcal{L}(V)\). Choose a nonzero vector \(v \in V\) then \[v, Tv, T^2 v, \dots, T^n v\] is not linearly independent, because $V$ has dimension $n$ and we have \(n+1\) vectors. Thus, there exist complex numbers \(a_0, \dots, a_n\) such that \[0 = a_0 v + a_1 Tv + \dots + a_n T^{n}v.\] Note that \(a_1, \dots, a_n\) cannot all be 0 because the equation becomes \(a_0 v = 0\) which forces \(a_0 = 0.\) Make \(a_0, \dots, a_n\) be the coefficients of a polynomial, which by the Fundamental Theorem of Algebra has a factorization \[a_0 + a_1 z + \dots + a_n z^n = c(z - \lambda_1) \dots (z - \lambda_m)\] where $c$ is a nonzero complex number, each \(\lambda_j\) is in \(\mathbb{C}\), and the equation holds for all \(z \in \mathbb{C}\). We then have 
+        \begin{align*}
+            0 &= a_0 v + a_1 Tv + \dots + a_n T^n v \\
+              &= (a_0 I + a_1 T + \dots + a_n T^n)v \\
+              &= c(T - \lambda_1 I) \dots (T - \lambda_m I)v.
+        \end{align*}
+        Thus \(T - \lambda_j I\) is not injective for at least one $j$. In other words, $T$ has an eigenvalue. 
+    \end{proof}
+
+    \emph{Note:} The theorem above requires a \emph{complex} vector space. Note that for a \emph{real} vector space, this theorem would not hold. 
+
+    \section{5.C Eigenspaces and Diagonal Matrices}
+
+    A \textbf{\emph{diagonal matrix}} is a square matrix that is 0 everywhere except possibly along the diagonal.
+
+    \vspace{1em}
+
+    Let $V$ be a finite-dimensional vector space over a field \textbf{F}. Let \(B = v_1, \dots, v_n\) be a basis of $V$ and let \(T \in \mathcal{L}(V)\). Then the following are equivalent:
+    \begin{enumerate}
+        \item \(\mathcal{M}(T,B,B)\) is diagonal,
+        \item Each \(v_1, \dots, v_n\) is an eigenvector of $T$. 
+    \end{enumerate}
+
+    \begin{proof}
+        (2) implies (1). Assume \(v_1, \dots, v_n\) are eigenvectors of $T$, with respective eigenvalues \(\lambda_1, \dots, \lambda_n\). Then \(\mathcal{M}(T)\) is computed as follows:
+        \begin{align*}
+            Tv_1 &= \lambda_1 v_1 = \lambda_1 v_1 + 0 v_2 + \dots + 0 v_n \\
+            Tv_2 &= \lambda_2 v_2 = 0 v_1 + \lambda_2 v_2 + \dots + 0 v_n \\
+            \vdots & \\
+            Tv_n &= \lambda_n v_n = 0v_1 + 0 v_2 + \dots + \lambda_n v_n.
+        \end{align*}
+        Then 
+        \begin{equation*}
+            \mathcal{M}(T) = \begin{bmatrix}
+                                \lambda_1 & 0 & \dots & 0 \\
+                                0 & \lambda_2 & \dots & 0 \\
+                                \vdots & \vdots & \ddots & \vdots \\
+                                0 & 0 & \dots & \lambda_n
+                             \end{bmatrix}
+        \end{equation*}
+        is diagonal.
+
+        \vspace{1em}
+
+        (1) implies (2). Assume \(\mathcal{M}(T)\) is diagonal. This means that 
+        \begin{align*}
+            Tv_1 &= a_n v_1 + 0 v_2 + \dots + 0 v_n \\
+            \vdots & \\
+            Tv_n &= )v_1 + 0v_2 + \dots + a_m v_n.
+        \end{align*}
+        So we have 
+        \begin{align*}
+            Tv_1 &= a_{11} v_1 \\
+            Tv_2 &= a_{22} v_2 \\
+            \vdots & \\
+            Tv_n &= a_{mm} v_n
+        \end{align*}
+        and all of \(v_1, \dots, v_n\) are eigenvectors.
+    \end{proof}
+
+    \subsection{Definition of Eigenspace, \(E(\lambda, T)\)}
+
+    Suppose \(T \in \mathcal{L}(V)\) and \(\lambda \in \textbf{F}\). The \textbf{\emph{eigenspace}} of $T$ corresponding to \(\lambda\), denoted \(E(\lambda, T)\), is defined by \[E(\lambda, T) = \text{null}(T - \lambda I).\] In other words, \(E(\lambda, T)\) is the set of all eigenvectors of $T$ corresponding to \(\lambda\), along with the 0 vector. 
+    
+    \subsection{Definition of Diagonalizable}
+
+    An operator \(T \in \mathcal{L}(V)\) is called \textbf{\emph{diagonalizable}} if the operator has a diagonal matrix with respect to some basis of $V$. 
+
+    \subsubsection{Example}
+
+    Define \(T \in \mathcal{L}(\mathbb{R}^2)\) by \[T(x,y) = (41x + 7y, -20x + 74y).\] The matrix of $T$ with respect to the standard basis of \(\mathbb{R}^2\) is 
+    \begin{equation*}
+        \begin{pmatrix}
+            41 & 7 \\ 
+            -20 & 74
+        \end{pmatrix}
+    \end{equation*}
+    which is not a diagonal matrix. However, $T$ is diagonalizable, because the matrix of $T$ with respect to the basis \((1,4),(7,5)\) is 
+    \begin{equation*}
+        \begin{pmatrix}
+            69 & 0 \\
+            0 & 46
+        \end{pmatrix}.
+    \end{equation*}
+
+    \subsection{Conditions equivalent to diagonalizability}
+
+    Suppose $V$ is finite-dimensional and \(T \in \mathcal{L}(V)\). Let \(\lambda_1, \dots, \lambda_m\) denote the distinct eigenvalues of $T$. Then the following are equivalent:
+    \begin{enumerate}
+        \item $T$ is diagonalizable;
+        \item $V$ has a basis consisting of eigenvectors of $T$;
+        \item \(\dim V = \dim E(\lambda_1, T) + \dots + \dim E(\lambda_m, T). \)
+    \end{enumerate}
+    \begin{proof}
+        (1) implies (2). By the previous proposition.
+        (3) implies (2). Assume (3) and
+        \begin{align*}
+            &\text{Let } V_{1,1}, \dots, V_{1, k_1} \text{ be a basis of } E_{\lambda_1}(T). \\
+            &\text{Let } V_{2,1}, \dots, V_{2, k_2} \text{ be a basis of } E_{\lambda_2}(T). \\
+            & \vdots \\
+            &\text{Let } V_{m,1}, \dots, V_{m, k_m} \text{ be a basis of } E_{\lambda_m}(T). \\
+        \end{align*}
+        Then all of the \(V_{i,j}\) are linearly independent (by previous theorem). And by assumption (3), there are \(n = \dim V\) of them. So they form a basis of $V$ consisting of eigenvectors of $T$. So (2) holds.
+    \end{proof}
+
+    \subsection{Enough eigenvalues implies diagonalizability}
+
+    If \(T \in \mathcal{L}(V)\) has dim $V$ distinct eigenvalues, then $T$ is diagonalizable.
+
+    \begin{proof}
+        In this case, let \(v_1, \dots, v_n\) be the corresponding eigenvectors. They are linearly indepndent by theorem, so a basis. 
+    \end{proof}
+
+    \subsubsection{Example}
+
+    \begin{itemize}
+        \item For the matrix \(\begin{bmatrix}
+                                1 & 0 & 0 \\
+                                0 & 2 & 0 \\
+                                0 & 0 & 3
+                            \end{bmatrix}\), there are 3 distinct eigenvalues and it is diagonalizable.
+        \item For the matrix \(\begin{bmatrix}
+                                1 & 0 & 0 \\
+                                0 & 2 & 0 \\
+                                0 & 0 & 2
+                            \end{bmatrix}\), there are 2 distinct eigenvalues, and 3 linearly independent eigenvectors. It is also diagonalizable.
+        \item For the matrix \(\begin{bmatrix}
+                                2 & 0 & 0 \\
+                                0 & 2 & 0 \\
+                                0 & 0 & 2
+                            \end{bmatrix}\), there is 1 distinct eigenvalue, 3 linearly independent eigenvectors, and it is diagonalizable.
+        \item For the matrix \(\begin{bmatrix}
+                                1 & 0 & 0 \\
+                                0 & 2 & 1 \\
+                                0 & 0 & 2
+                            \end{bmatrix}\) there are 2 distinct eigenvalues and 2 linearly independent eigenvectors. However, it is not diagonalizable.
+    \end{itemize}
+
+\end{document}

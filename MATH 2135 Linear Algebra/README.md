@@ -26,3 +26,9 @@ This course is a continutation of MATH 1030 with an emphasis on foundations and 
 ## Chapter 3 Linear Maps
 - 3.A The Vector Space of Linear Maps
 - 3.B Null Spaces and Ranges
+- 3.C Matrices
+
+## Chapter 5 Eigenvalues, Eigenvectors, and Invariant Subspaces
+- 5.A Invariant Subspaces
+- 5.B Eigenvectors and Upper-Triangular Matrices
+- 5.C Eigenspaces and Diagonal Matrices
