@@ -32,3 +32,8 @@ This course is a continutation of MATH 1030 with an emphasis on foundations and 
 - 5.A Invariant Subspaces
 - 5.B Eigenvectors and Upper-Triangular Matrices
 - 5.C Eigenspaces and Diagonal Matrices
+
+## Chapter 6 Inner Product Spaces
+- 6.A Inner Products and Norms
+- 6.B Orthonormal Bases
+- 6.C Orthogonal Complements and Minimization Problems
