@@ -358,8 +358,354 @@
         as desired.
     \end{proof}
 
+    \pagebreak
+
     \section{6.B Orthonormal Bases}
 
+    \subsection{Definition of orthonormal}
+
+    \begin{itemize}
+        \item A list of vectors is called \textbf{\emph{orthonormal}} if each vector in the list has norm 1 and is orthogonal to all the other vectors in the list.
+        \item In other words, a list \(e_1, \dots, e_m\) of vectors in $V$ is orthonormal if 
+        \begin{equation*}
+            \langle e_j, e_k \rangle = \begin{cases}
+                1 & \text{if } j = k, \\
+                0 & \text{if } j \neq k.
+            \end{cases}
+        \end{equation*}
+    \end{itemize}
+
+    \subsubsection{Examples}
+
+    \begin{itemize}
+        \item The standard basis in \(\textbf{F}^n\) is an orthonormal list. 
+        \item In \(\mathbb{R}^2\), we have \[v_1 = \begin{bmatrix}
+            1 \\ 0 \\ 0
+        \end{bmatrix}, v_2 = \begin{bmatrix}
+            0 \\ 1 \\ 1
+        \end{bmatrix}, v_3 = \begin{bmatrix}
+            0 \\ 1 \\ -1
+        \end{bmatrix}.\] \(v_1, v_2, v_3\) is orthogonal but \emph{not} orthonormal. 
+
+        \item In \(\mathbb{R}^3\), we have \[w_1 = \begin{bmatrix}
+            1 \\ 0 \\ 0
+        \end{bmatrix}, w_2 = \frac{1}{\sqrt{2}} \begin{bmatrix}
+            0 \\ 1 \\ 1
+        \end{bmatrix}, w_3 = \frac{1}{\sqrt{2}} \begin{bmatrix}
+            0 \\ 1 \\ -1
+        \end{bmatrix}.\] \(w_1, w_2, w_3\) is orthonormal. 
+    \end{itemize}
+
+    \emph{Note:} If \(v_1, \dots, v_n\) is orthogonal and all are non-zero, then \[\frac{v_1}{||v_1||}, \frac{v_2}{||v_2||}, \dots, \frac{v_n}{||v_n||}\] is orthonormal. 
+
+    \subsection{The norm of an orthonormal linear combination}
+
+    If \(e_1, \dots, e_m\) is an orthonormal list of vectors in $V$, then \[||a_1 e_1 + \dots + a_m e_m ||^2 = |a_1 |^2 + \dots + |a_m|^2\] for all \(a_1, \dots, a_m \in \textbf{F}\). 
+
+    \begin{proof}
+        \begin{align*}
+            ||v||^2 &= \langle v,v \rangle \\
+                    &= \langle a_1 e_1 + \dots + a_n e_n, a_1 e_1 + \dots + a_n e_n \rangle \\
+                    &= a_1 \overline{a_1} \langle e_1, e_1 \rangle + a_1 \overline{a_2} \langle e_1, e_2 \rangle + \dots + a_1 \overline{a_n} \langle e_1, e_n \rangle \\
+                    & \quad + a_2 \overline{a_1} \langle e_2, e_1 \rangle + a_2 \overline{a_3} \langle e_2, e_3 \rangle + \dots + a_2 \overline{a_n} \langle e_2, e_n \rangle \\
+                    & \quad + \dots \\
+                    & \quad + a_n \overline{a_1} \langle e_n, e_1 \rangle + a_n \overline{a_2} \langle e_n, e_2 \rangle + \dots + a_n \overline{a_n} \langle e_n, e_n \rangle \\
+                    &= a_1 \overline{a_1} + a_2 \overline{a_2} + \dots + a_n \overline{a_n} \\
+                    &= |a_1|^2 + |a_2|^2 + \dots + |a_n|^2.
+        \end{align*}
+    \end{proof}
+
+    \subsection{An orthonormal list is linearly independent}
+    
+    Every orthonormal list of vectors is linearly independent. 
+    \begin{proof}
+        Let \(e_1, \dots, e_n\) be orthonormal. Take any \(a_1, \dots, a_n\) and assume \[a_1 e_1 + \dots + a_n e_n = 0.\] We need to show that \(a_i = 0\) for all $i$. Consider any index $i$ and we have 
+        \begin{align*}
+            0 = \langle 0, e_i \rangle &= \langle a_1 e_1 + \dots + a_n e_n, e_i \rangle \\
+                                       &= a_1 \langle e_1, e_i \rangle + a_2 \langle e_2, e_i \rangle + \dots + a_i \langle e_i, e_i \rangle + \dots + a_n \langle e_n, e_i \rangle \\
+                                       &= 0 a_1 + 0 a_2 + \dots + 1 a_1 + \dots + 0 a_n \\
+                                       &= a_i.
+        \end{align*}
+        Since $i$ was arbitrary, we have \(a_1 = 0, \dots, a_n = 0\) as desired. 
+    \end{proof}
+
+    \subsection{Definition of orthonormal basis}
+
+    An \textbf{\emph{orthonormal basis}} of $V$ is an orthonormal list of vectors in $V$ that is also a basis of $V$. For example, the standard basis is an orthonormal basis of \(\textbf{F}^n\). 
+
+    \subsection{An orthonormal list of the right length is an orthonormal basis}
+
+    Every orthonormal list of vectors in $V$ with length dim $V$ is an orthonormal basis of $V$. 
+
+    \begin{proof}
+        Since an orthonormal list is linearly independent, any such list must be linearly independent as well; because it has the right length, it is a basis. 
+    \end{proof}
+
+    \subsubsection{Example}
+
+    Show that \[\frac{1}{2} \begin{bmatrix}
+        1 \\ 1 \\ 1 \\ 1
+    \end{bmatrix}, \frac{1}{2}\begin{bmatrix}
+        1 \\ 1 \\ -1 \\ 1
+    \end{bmatrix}, \frac{1}{2} \begin{bmatrix}
+        1 \\ -1 \\ -1 \\ 1
+    \end{bmatrix}, \frac{1}{2} \begin{bmatrix}
+        -1 \\ 1 \\ -1 \\ 1
+    \end{bmatrix}\] is an orthonormal basis of \(\textbf{F}^4\).
+
+    \begin{proof}[\unskip\nopunct]
+        \emph{Solution:} We have \[\bigg| \bigg| \left(\frac{1}{2}, \frac{1}{2}, \frac{1}{2}, \frac{1}{2} \right) \bigg| \bigg| = \sqrt{\left(\frac{1}{2}\right)^2 + \left(\frac{1}{2}\right)^2 + \left(\frac{1}{2}\right)^2 + \left(\frac{1}{2}\right)^2} = 1.\] Similarly, the other three vectors also have norm 1. The inner product of any two distinct vectors in the list above equals 0. Thus, the list above is orthonormal. Because we have an orthonormal list of length four in the four-dimensional vector space \(\textbf{F}^4\), this list is an orthonormal basis. 
+    \end{proof}
+
+    \subsection{Writing a vector as linear combination of orthonormal basis}
+
+    Suppose \(e_1, \dots, e_n\) is an orthonormal basis of $V$ and \(v \in V\). Then \[v = \langle v, e_1 \rangle e_1 + \dots + \langle v, e_n \rangle e_n\] and \[||v||^2 = |\langle v, e_1 \rangle|^2 + \dots + |\langle v, e_n \rangle |^2. \]
+
+    \begin{proof}
+        Because \(e_1, \dots, e_n\) is a basis of $V$, there exist coordinates \(a_1, \dots, a_m\) such that \[v = a_1 e_1 + \dots + a_n e_n.\] Then 
+        \begin{align*}
+            \langle v, e_i \rangle &= \langle a_1, e_1 + \dots a_n e_n, e_i \rangle \\
+                                   &= a_1 \langle e_1, e_i \rangle + \dots + a_n \langle e_n, e_i \rangle \\
+                                   &= a_i.
+        \end{align*}
+        Plugging \(a_i = \langle v, e_i \rangle\) into $v$, we get \[v = \langle v,e_1 \rangle e_1 + \dots + \langle v,e_n \rangle e_n.\] The second claim follows from the fact that the norm of an orthonormal linear combination. 
+    \end{proof}
+
+    \subsection{Fourier coefficients}
+
+    Let \(e_1, \dots, e_n\) be an orthonormal basis, and let \(v \in V\). In the formula, \[v = \langle v, e_1 \rangle e_1 + \dots + \langle v, e_n \rangle e_n\] the coefficients \(\langle v, e_1 \rangle, \dots, \langle v, e_n \rangle\) are the \textbf{Fourier coefficients} of $v$. 
+
+    \vspace{1em}
+
+    \emph{Note:} Almost the same trick works if \(e_1, \dots, e_n\) is an orthogonal basis (instead of an orthonormal one). In that case, the formula changes slightly as follows: When \(v = a_1 e_1 + \dots + a_n e_n\) then we get 
+    \begin{align*}
+        \langle v, e_i \rangle &= \langle a_1 e_1 + \dots + a_n e_n, e_i \rangle \\
+                               &= a_1 \langle e_1, e_i \rangle + \dots + a_i \langle e_i, e_i \rangle + \dots + a_n \langle e_n, e_i \rangle \\
+                               &= a_i \langle e_i, e_i \rangle.
+    \end{align*}
+    Then the formula for the Fourier coeffiecients becomes \[a_i = \frac{\langle v, e_i \rangle}{\langle e_i, e_i \rangle}\] and so we have \[v = \frac{\langle v, e_1 \rangle}{\langle e_1, e_1 \rangle} e_1 + \dots + \frac{\langle v, e_n \rangle}{\langle e_n, e_n \rangle} e_n\] which are the Fourier coefficients for orthogonal basis. 
+
+    \subsection{Existence of orthonormal basis}
+
+    Every finite-dimensional inner product space has an orthonormal basis. (And therefore, it also has an orthonormal basis as well, by normalizing the basis vector.)
+
+    \begin{proof}
+        Since $V$ is finite-dimensional, it has some basis, say \(v_1, \dots, v_n\). However, this basis may not be orthogonal. We will give a procedure for ``turning'' \(v_1, \dots, v_n\) into an orthogonal basis \(w_1, \dots, w_n\). (The Gram-Schmidt Procedure)
+    \end{proof}
+
+    \subsection{Gram-Schmidt Procedure}
+
+    \emph{Note:} This version is different than the one in 6.31. I compute an orthogonal basis and Axler computes and orthonormal basis. Axler's computation uses a lot of square roots, and mine does not!
+
+    \vspace{1em}
+
+    We compute:
+    \begin{align*}
+        w_1 &= v_1 \\
+        w_2 &= v_2 - \frac{\langle v_2, w_1 \rangle}{\langle w_1, w_1 \rangle} w_1 \\
+        w_3 &= v_3 - \frac{\langle v_3, w_1 \rangle}{\langle w_1, w_1 \rangle} w_1 - \frac{\langle v_3, w_2 \rangle}{\langle w_2, w_2 \rangle} w_2 \\
+        &\vdots \\
+        w_n &= v_n - \frac{\langle v_n, w_1 \rangle}{\langle w_1, w_1 \rangle} w_1 - \dots - \frac{\langle v_n, w_{n-1} \rangle}{\langle w_{n-1}, w_{n-1} \rangle} w_{n-1}
+    \end{align*}
+
+    \emph{Claim:} \(w_1, \dots, w_n\) is an orthogonal basis of $V$.
+
+    \begin{proof}
+        To prove the claim above, we must show that
+        \begin{enumerate}
+            \item \(w_1,\dots, w_n\) are orthogonal.
+            \item span(\(w_1, \dots, w_n\)) \( = \text{span}(v_1, \dots, v_n)\) 
+        \end{enumerate}
+
+        For (1), we can prove by induction on $n$.
+        \begin{itemize}
+            \item Base case: \(n=1\). Then $w_1$ is an orthogonal list of vectors (because there is only one vector).
+            \item Induction step: By the induction hypotheses, \(w_1, \dots, w_{n-1}\) are orthogonal. We need to show that \(w_1, \dots, w_n\) are orthogonal. So specifically, we only need to prove that \(w_n\) is orthogonal to each \(w_1, \dots, w_{n-1}\). Let \(i \in \{1, \dots, n-1\}\). We compute: 
+            \begin{align*}
+                \langle w_n, w_i \rangle &= \bigg\langle v_n - \frac{\langle v_n, w_1 \rangle}{\langle w_1, w_1 \rangle} w_1 - \dots - \frac{\langle v_n, w_{n-1} \rangle}{\langle w_{n-1}, w_{n-1} \rangle} w_{n-1}, w_i \bigg\rangle \\
+                &= \langle v_n, w_i \rangle - \frac{\langle v_n, w_i \rangle}{\langle w_1, w_1 \rangle} \langle w_1, w_i \rangle - \dots - \frac{\langle v_n, w_i \rangle}{\langle w_i, w_i \rangle} \langle w_i, w_i \rangle - \dots \\
+                &\quad - \frac{\langle v_n w_{n-1} \rangle}{\langle w_{n-1}, w_{n-1} \rangle} \langle w_{n-1},w_i \rangle \\
+                &= \langle v_n, w_i \rangle - \frac{\langle v_n, w_i \rangle}{\langle w_i, w_i \rangle} \langle w_i, w_i \rangle \\
+                &= \langle v_n, w_i \rangle - \langle v_n, w_i \rangle = 0.
+            \end{align*}
+        \end{itemize}
+
+        For (2), we can prove by induction on $n$.
+        \begin{itemize}
+            \item Base case: When \(n=1\), \(w_1 = v_1\), so true. 
+            \item Induction step: Assume \(\text{span}(w_1,\dots, w_{n-1}) = \text{span}(v_1, \dots, v_{n-1})\). We need to show that \(\text{span}(w_1,\dots, w_n) = \text{span}(v_1, \dots, v_n).\) We only need to show that \(w_n \in \text{span}(v_1, \dots, v_n)\) and \(v_n \in \text{span}(w_1, \dots, w_n)\).
+            
+            But from \[w_n = v_n - \frac{\langle v_n, w_1 \rangle}{\langle w_1, w_1 \rangle} w_1 - \dots - \frac{\langle v_n, w_{n-1} \rangle}{\langle w_{n-1}, w_{n-1}} w_{n-1} \] we get \[w_n \in \text{span}(w_1, \dots, w_{n-1}, vn) = \text{span}(v_1, \dots, v_{n-1}, v_n).\] Also, from \[v_n = w_n + \frac{\langle v_n, w_1 \rangle}{\langle w_1, w_1 \rangle} w_1 + \dots + \frac{\langle v_n, w_{n-1} \rangle}{\langle w_{n-1}, w_{n-1} \rangle} w_{n-1}\] we have \(v_n \in \text{span}(w_1, \dots, w_n)\).
+        \end{itemize}
+
+        Thus, we proved (1) and (2). 
+    \end{proof}
+
+    \subsection{Examples}
+
+    \begin{enumerate}
+        \item[(a)] Let \(V = \mathbb{R}^3\) with the dot product \(\langle v,w \rangle = v \cdot w\). Let \[v_1 = \begin{bmatrix}
+            1 \\ 1 \\ 0
+        \end{bmatrix}, v_2 = \begin{bmatrix}
+            0 \\ 1 \\ 1
+        \end{bmatrix}, v_3 = \begin{bmatrix}
+            1 \\ 1 \\ 1
+        \end{bmatrix}.\] Use the Gram-Schmidt method to get an orthogonal basis (and then an orthonormal basis) of \(\mathbb{R}^3\). 
+        
+        \begin{proof}[\unskip\nopunct]
+            We have \[w_1 = v_1 = \begin{bmatrix}
+                1 \\ 1 \\0
+            \end{bmatrix}. \]
+
+            For \(w_2\), let's compute: 
+            \begin{align*}
+                \langle v_2, w_1 \rangle &= \begin{bmatrix}
+                    0 \\ 1 \\ 1
+                \end{bmatrix} \cdot \begin{bmatrix}
+                    1 \\ 1 \\ 0
+                \end{bmatrix} = 1 \\
+                \langle w_1, w_1 \rangle &= \begin{bmatrix}
+                    1 \\ 1 \\ 0 
+                \end{bmatrix} \cdot \begin{bmatrix}
+                    1 \\ 1 \\ 0
+                \end{bmatrix} = 2.
+            \end{align*}
+
+            Then we have
+            \begin{align*}
+                w_2 &= v_2 - \frac{\langle v_3, w_1 \rangle}{\langle w_1, w_1 \rangle} w_1 = v_2 - \frac{1}{2} w_1 \\
+                    &= \begin{bmatrix}
+                        0 \\ 1 \\ 1
+                    \end{bmatrix} - \frac{1}{2} \begin{bmatrix}
+                        1 \\ 1 \\ 0
+                    \end{bmatrix} = \begin{bmatrix}
+                        -\frac{1}{2} \\ \frac{1}{2} \\ 1.
+                    \end{bmatrix}
+            \end{align*}
+
+            For \(w_3\), let's compute:
+            \begin{align*}
+                \langle v_3, w_1 \rangle &= \begin{bmatrix}
+                    1 \\ 1 \\ 1
+                \end{bmatrix} \cdot \begin{bmatrix}
+                    1 \\ 1 \\ 0
+                \end{bmatrix} = 2 \\
+                \langle w_1, w_1 \rangle &= 2 \\
+                \langle v_3, w_2 \rangle &= \begin{bmatrix}
+                    1 \\ 1 \\ 1
+                \end{bmatrix} \cdot \begin{bmatrix}
+                    - \frac{1}{2} \\ \frac{1}{2} \\ 1
+                \end{bmatrix} = 1 \\
+                \langle w_3, w_2 \rangle &= \begin{bmatrix}
+                    - \frac{1}{2} \\ \frac{1}{2} \\ 1
+                \end{bmatrix} \cdot \begin{bmatrix}
+                    -\frac{1}{2} \\ \frac{1}{2} \\ 1
+                \end{bmatrix} = \frac{3}{2}.
+            \end{align*}
+            Then we have
+            \begin{align*}
+                w_3 &= v_3 - \frac{2}{2} w_1 - \frac{1}{\frac{3}{2}} w_2 \\
+                    &= v_3 - w_1 - \frac{2}{3} w_2 \\
+                    &= \begin{bmatrix}
+                        1 \\ 1 \\ 1
+                    \end{bmatrix} - \begin{bmatrix}
+                        1 \\ 1 \\ 0
+                    \end{bmatrix} - \frac{2}{3} \begin{bmatrix}
+                        - \frac{1}{2} \\ \frac{1}{2} \\ 1
+                    \end{bmatrix} = \begin{bmatrix}
+                        \frac{1}{3} \\ - \frac{1}{3} \\ \frac{1}{3}.
+                    \end{bmatrix}
+            \end{align*}
+            So the orthogonal basis are: \[w_1 = \begin{bmatrix}
+                1 \\ 1 \\ 0
+            \end{bmatrix}, w_2 = \begin{bmatrix}
+                - \frac{1}{2} \\ \frac{1}{2} \\ 1
+            \end{bmatrix}, w_3 = \begin{bmatrix}
+                \frac{1}{3} \\ - \frac{1}{3} \\ \frac{1}{3}
+            \end{bmatrix}.\] To get an orthonormal basis, we just have to normalize the vectors:
+            \begin{align*}
+                e_1 &= \frac{w_1}{||w_1||} = \frac{1}{\sqrt{2}} \begin{bmatrix}
+                    1 \\ 1 \\ 0
+                \end{bmatrix}, \\
+                e_2 &= \frac{w_2}{||w_2||} = \sqrt{\frac{2}{3}} \begin{bmatrix}
+                    - \frac{1}{2} \\ \frac{1}{2} \\ 1
+                \end{bmatrix} = \frac{1}{\sqrt{6}} \begin{bmatrix}
+                    -1 \\ 1 \\ 2
+                \end{bmatrix}, \\
+                e_3 &= \frac{w_3}{||w_3||} = \sqrt{3} \begin{bmatrix}
+                    \frac{1}{3} \\ - \frac{1}{3} \\ \frac{1}{3}
+                \end{bmatrix} = \frac{1}{\sqrt{3}} \begin{bmatrix}
+                    1 \\ -1 \\ 1
+                \end{bmatrix}.
+            \end{align*}
+        \end{proof}
+
+        \item[(b)] Let \(V = \mathbb{R}^3\), with the inner product \[ \langle v,w \rangle = x_1 y_1 + 2x_2 y_2 + 3 x_3 y_3.\] Let \[v_1 = \begin{bmatrix}
+            1 \\ 1 \\ 0
+        \end{bmatrix}, v_2 = \begin{bmatrix}
+            0 \\ 1 \\ 1
+        \end{bmatrix}, v_3 = \begin{bmatrix}
+            1 \\ 1 \\ 1
+        \end{bmatrix}.\] Apply the Gram-Schmidt Procedure to get an orthogonal basis.
+        
+        \begin{proof}[\unskip\nopunct]
+            We have \[w_1 = v_1 = \begin{bmatrix}
+                1 \\ 1 \\ 0
+            \end{bmatrix}.\] For \(w_2\), let's compute:
+            \begin{align*}
+                \langle v_2, w_1 \rangle &= 0 \cdot 1 + 2 \cdot 1 \cdot 1 + 3 \cdot 1 \cdot 0 = 2 \\
+                \langle w_1, w_1 \rangle &= 1 \cdot 2 \cdot 1 \cdot 1 + 3 \cdot 0 \cdot 0 = 3
+            \end{align*}
+            Then we have
+            \begin{align*}
+                w_2 &= v_2 - \frac{\langle v_2, w_1 \rangle}{\langle w_1, w_1 \rangle} w_1 = v_2 - \frac{2}{3} w_1 \\
+                    &= \begin{bmatrix}
+                        0 \\ 1 \\ 1
+                    \end{bmatrix} - \frac{2}{3} \begin{bmatrix}
+                        1 \\ 1 \\ 0
+                    \end{bmatrix} = \begin{bmatrix}
+                        - \frac{2}{3} \\ \frac{1}{3} \\ 1
+                    \end{bmatrix} = \frac{1}{3} \begin{bmatrix}
+                        -2 \\ 1 \\ 3
+                    \end{bmatrix}.
+            \end{align*}
+            For \(w_3\), let's compute:
+            \begin{align*}
+                \langle v_3, w_1 \rangle &= 1 \cdot + 2 \cdot 1 \cdot 1 + 3 \cdot 1 \cdot 0 = 3 \\
+                \langle v_3, w_2 \rangle &= 1 \left(- \frac{2}{3}\right) + 2 \cdot 1 \cdot \frac{1}{3} + 3 \cdot 1 \cdot 1 = 3 \\
+                \langle w_2, w_2 \rangle &= \left(- \frac{2}{3}\right)^2 + 2 \left(\frac{1}{3}\right)^2 + 3 \cdot 1^2 = \frac{11}{3}.
+            \end{align*}
+            Then we have 
+            \begin{align*}
+                w_3 &= v_3 - \frac{\langle v_3, w_1 \rangle}{\langle w_1, w_1} w_1 - \frac{\langle v_3, w_2}{\langle w_2, w_2 \rangle} w_2 \\
+                &= v_3 - \frac{3}{3} w_1 - \frac{3}{\frac{11}{3}} w_2 \\
+                &= v_3 - w_1 - \frac{9}{11} w_2 \\
+                &= \begin{bmatrix}
+                    1 \\ 1 \\ 1
+                \end{bmatrix} - \begin{bmatrix}
+                    1 \\ 1 \\ 0
+                \end{bmatrix} - \frac{9}{11} \cdot \frac{1}{3} \begin{bmatrix}
+                    -2 \\ 1 \\ 3
+                \end{bmatrix} \\
+                &= \begin{bmatrix}
+                    \frac{6}{11} \\ - \frac{3}{11} \\ \frac{2}{11}
+                \end{bmatrix} = \frac{1}{11} \begin{bmatrix}
+                    6 \\ -3 \\ 2
+                \end{bmatrix}.
+            \end{align*}
+        \end{proof}
+    \end{enumerate}
+
+    \subsection{Orthonormal list extends to orthonormal basis}
+
+    Suppose $V$ is finite-dimensional. Then every orthonormal list of vectors in $V$ can be extended to an orthonormal basis of $V$.
+
+    \begin{proof}
+        Suppose \(e_1, \dots, e_m\) is an orthonormal list of vectors in $V$. Then \(e_1, \dots, e_m\) is linearly independent. Hence this list can be extended to a basis \(e_1, \dots, e_m, v_1, \dots, v_n\) of $V$. Now apply the Gram-Schmidt Procedure to \(e_1, \dots, e_m, v_1, \dots, v_n\), producing an orthonormal list \[e_1, \dots, e_m, f_1, \dots, f_n;\] here the formula given by the Gram-Schmidt Procedure leaves the first $m$ vectors unchanged because they are already orthonormal. The list above is an orthonormal basis of $V$. 
+    \end{proof}
     \section{6.C Orthogonal Complements and Minimization Problems}
+
+    
+ 
 
 \end{document}
