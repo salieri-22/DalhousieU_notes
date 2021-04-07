@@ -1,0 +1,357 @@
+\documentclass[11pt]{article}
+
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{blkarray}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\graphicspath{ {./img/} }
+
+\setlength{\parindent}{0cm}
+\let\emptyset\varnothing
+
+\title{\textbf{CSCI/MATH 2113 Discrete Structures} \\ Chapter 8 The Principle of Inclusion and Exclusion}
+\author{Alyssa Motas}
+
+\begin{document}
+
+    \maketitle
+
+    \pagebreak
+
+    \tableofcontents
+
+    \pagebreak
+
+    \section{8.1 The Principle of Inclusion and Exclusion}
+
+    Let $S$ represent the set of 100 students. Now let \(c_1, c_2\) denote the following conditions satisfied by some of the elements of S:
+    \begin{enumerate}
+        \item[] \(c_1:\) a student is enrolled in Writing
+        \item[] \(c_2:\) a student is enrolled in Economics  
+    \end{enumerate}
+    Suppose that 35 students are enrolled in Writing and 30 of them are enrolled in Economics. We shall denote this by \[N(c_1) = 35 \quad \text{and} \quad N(c_2) = 30.\] If nine of the students are enrolled in both Writing and Economics, we write \(N(c_1 c_2) = 9\). Furthermore, there are \(100-35 = 65\) who are \emph{not} taking Writing and we denote this by writing \[N(\overline{c_1}) = N - N(c_1) = 65.\] Similarly, \[N(\overline{c_2}) = N - N(c_2) = 100 - 30 = 70.\] The number who are taking Writing and who are \emph{not} taking Economics is \[N(c_1 \overline{c_2}) = N(c_1) - N(c_1c_2) = 35 - 9 = 26.\] Conversely, we also have \[N(\overline{c_1}c_2) = N(c_2) - N(c_1 c_2) = 30 - 9 = 21.\] For students who are not taking Writing and Economics, we have \[N(\overline{c_1} \overline{c_2}) = N(\overline{c_1}) - N(\overline{c_1}c_2) = 65 - 21 = 44\] because we have \(N(\overline{c_1}) = N(\overline{c_1}c_2) + N(\overline{c_1}\overline{c_2}).\) Note that
+    \begin{align*}
+        N(\overline{c_1} \overline{c_2}) &= N(\overline{c_1}) - N(\overline{c_1}c_2) = [N - N(c_1)] - [N(c_2) - N(c_1c_2)] \\
+        &= N - N(c_1) - N(c_2) + N(c_1 c_2) = N - [N(c_1) + N(c_2)] + N(c_1c_2) \\
+        &= 100 - [35 + 30] + 9 = 44, \text{ as we saw above.}
+    \end{align*}
+
+    \pagebreak
+
+    In diagrams, we have 
+    \begin{figure}[H]
+        \centering
+        \definecolor{wqwqwq}{rgb}{0.3764705882352941,0.3764705882352941,0.3764705882352941}
+        \begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm, scale=0.75]
+        \clip(-10.91458017238551,-3.5392626762349315) rectangle (0.4224909155544797,3.5871077269545055);
+        \fill[line width=1pt, opacity=0] (-9.64,-2.70534) -- (-9.641115312975392,3.0544385355708354) -- (-0.7717691617945537,3.0544385355708354) -- (-0.77,-2.70534) -- cycle;
+        \draw [line width=1pt,color=wqwqwq,fill=wqwqwq,fill opacity=0.2] (-4,0.19) circle (1.7138163884526878cm);
+        \draw [line width=1pt,color=wqwqwq,fill=wqwqwq,fill opacity=0.2] (-6.774726315541629,0.19032576908185145) circle (1.71382cm);
+        \draw [line width=1pt] (-9.64,-2.70534)-- (-9.641115312975392,3.0544385355708354);
+        \draw [line width=1pt] (-9.641115312975392,3.0544385355708354)-- (-0.7717691617945537,3.0544385355708354);
+        \draw [line width=1pt] (-0.7717691617945537,3.0544385355708354)-- (-0.77,-2.70534);
+        \draw [line width=1pt] (-0.77,-2.70534)-- (-9.64,-2.70534);
+        \draw (-9.497543897563253,2.906291447522077) node[anchor=north west] {$S$};
+        \draw (-7.3032938206135025,0.28662880709729993) node[anchor=north west] {$c_1$};
+        \draw (-3.936213308203127,0.28662880709729993) node[anchor=north west] {$c_2$};
+        \draw (-2.0607565071399832,-2.0370267553133785) node[anchor=north west] {$\overline{c_1} \overline{c_2}$};
+        \draw (-6.079052591181377,2.6472852542597405) node[anchor=north west] {$c_1 c_2$};
+        \draw [->,line width=1pt] (-5.4707368485933197,2.1359330269903856) -- (-5.416322700043123,0.1749601369164817);
+        \end{tikzpicture}
+    \end{figure}
+
+    Suppose that we introduce a new condition:
+    \begin{enumerate}
+        \item[] \(c_3:\) a student enrolled in Programming 
+    \end{enumerate}
+    We then have 
+    \begin{align*}
+        N(\overline{c_1} \overline{c_2} \overline{c_3}) &= N - [N(c_1) + N(c_2) + N(c_3)] + [N(c_1 c_2) + N(c_1 c_3) + N(c_2 c_3)] \\
+        & \quad- N(c_1 c_2 c_3). 
+    \end{align*}
+    In diagrams, we have
+    \begin{figure}[H]
+        \centering
+        \definecolor{uququq}{rgb}{0.25098039215686274,0.25098039215686274,0.25098039215686274}
+        \begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm, scale=0.75]
+        \clip(-12.63963174510942,-6.037267858369393) rectangle (2.2153222646646755,3.557589002865877);
+        \fill[line width=1pt, opacity=0] (-10.74,3.0499369993834726) -- (-10.74,-4.75006300061653) -- (0.54,-4.75006300061653) -- (0.54,3.0499369993834726) -- cycle;
+        \draw [line width=1pt,color=uququq,fill=uququq,fill opacity=0.11] (-3.946128116229986,0.008731767303742977) circle (1.724345436057072cm);
+        \draw [line width=1pt,color=uququq,fill=uququq,fill opacity=0.11] (-6.848216738095661,0.06198109981503919) circle (1.7243454360570685cm);
+        \draw [line width=1pt,color=uququq,fill=uququq,fill opacity=0.11] (-5.357235427779352,-2.028055201253359) circle (1.7243454360570705cm);
+        \draw [line width=1pt] (-10.74,3.0499369993834726)-- (-10.74,-4.75006300061653);
+        \draw [line width=1pt] (-10.74,-4.75006300061653)-- (0.54,-4.75006300061653);
+        \draw [line width=1pt] (0.54,-4.75006300061653)-- (0.54,3.0499369993834726);
+        \draw [line width=1pt] (0.54,3.0499369993834726)-- (-10.74,3.0499369993834726);
+        \draw (-10.208205611845662,2.709265064457232) node[anchor=north west] {$S$};
+        \draw (-1.1355454275013444,-3.847884145611534) node[anchor=north west] {$\overline{c_1} \overline{c_2} \overline{c_3}$};
+        \draw (-7.743773693967466,1.1029835465544804) node[anchor=north west] {$c_1$};
+        \draw (-3.343002412042115,1.2680124696266808) node[anchor=north west] {$c_2$};
+        \draw (-5.767357201727776,-2.846708678973518) node[anchor=north west] {$c_3$};
+        \draw (-6.186413119667364,2.687261208047605) node[anchor=north west] {$c_1 c_2 c_3$};
+        \draw [->,line width=1pt] (-5.3572354277793455,2.032206402733018) -- (-5.410484760290642,-0.12439156397449924);
+        \end{tikzpicture}
+    \end{figure}
+
+    \subsection{Theorem}
+
+    Let $S$ be a set with \(|S| = N\), and conditions \(c_i, 1 \leq i \leq t\), each of which may be satisfied by some of the elements of $S$. The number of elements of $S$ that satisfy \emph{none} of the conditions \(c_i, 1 \leq i \leq t\), is denoted by \(\overline{N} = N(\overline{c_1} \overline{c_2} \overline{c_3} \dots \overline{c_t})\) where 
+    \begin{align*}
+        \overline{N} &= N - [N(c_1) + N(c_2) + N(c_3) + \dots + N(c_t)] \\
+                     & \quad + [N(c_1 c_2) + N(c_1 c_3) + \dots + N(c_1 c_t) + N(c_2 c_3) + \dots + N(c_{t-1} c_t)] \\ 
+                     & \quad - [N(c_1 c_2 c_3) + N(c_1 c_2 c_4) + \dots + N(c_1 c_2 c_t) + N(c_1 c_3 c_4) + \dots \\
+                     & \quad + N(c_1 c_3 c_t) + \dots + N(c_{t-2}, c_{t-1}, c_t)] + \dots + (-1)^t N(c_1 c_2 c_3 \dots c_t),
+    \end{align*}
+    or 
+    \begin{align*}
+        \overline{N} &= N - \sum_{1 \leq i \leq t} N(c_i) + \sum_{1 \leq i < j \leq t} N(c_i c_j) - \sum_{1 \leq i < j < k \leq t} N(c_i c_j c_k) + \dots \\
+                     & \quad + (-1)^t N(c_1 c_2 c_3 \dots c_t).
+    \end{align*}
+
+    \begin{proof}
+        We give a combinatorial proof. For \(x \in S\), we have:
+        \begin{itemize}
+            \item If $x$ satisfies none of the conditions then $x$ contributes 1 to each side of the equality.
+            \item If $x$ satisfies exactly $r$ of the conditions (\(1 \leq r \leq t\)) then $x$ contributes 0 to the LHS of the equality. 
+        \end{itemize}
+        Considering the RHS, we get that $x$ adds to 
+        \begin{itemize}
+            \item 1 time in $N$
+            \item $r$ times in \(\sum N(c_i)\)
+            \item \(\binom{r}{2}\) times in \(\sum N(c_i c_j)\)
+            \item \(\binom{r}{3}\) times in \(\sum (c_i c_j c_k)\) \\
+            \vdots
+            \item \(\binom{r}{r}\) times in \(\sum N(c_{i_1} c_{i_2} \dots c_{i_r})\).
+        \end{itemize}
+        In total, the contribution of $x$ is \[1 - r + \binom{r}{2} - \binom{r}{3} + \dots + (-1)^r \binom{r}{r} \Rightarrow (1+(-1))^r = 0.\] This completes the proof.
+    \end{proof}
+
+    \subsection{Corollary: At least one condition}
+
+    Under the hypotheses of the previous theorem, the number of elements in $S$ that satisfy at least one of the conditions \(c_i\), where \(1 \leq i \leq t\), is given by \[N(c_1 \text{ or } c_2 \text{ or } \dots \text{ or } c_t) = N - \overline{N}.\]
+
+    \subsection{Notation}
+
+    To simplify the theorem above, we write 
+    \begin{align*}
+        S_0 &= N, \\
+        S_1 &= [N(c_1) + N(c_2) + \dots + N(c_t)], \\
+        S_2 &= [N(c_1 c_2) + N(c_1 c_3) + \dots + N(c_1 c_t) + N(c_2 c_3) + \dots + N(c_{t-1} c_t)],
+    \end{align*}
+    and, in general, \[S_k = \sum N(c_{i_1} c_{i_2} \dots c_{i_k}), 1 \leq k \leq t,\] where the summation is taken over all selections of size $k$ from the collection of $t$ conditions. Hence \(S_k\) has \(\binom{t}{k}\) summands in it. We can also rewrite the equation above as \[\overline{N} = S_0 - S_1 + S_2 - S_3 + \dots + (-1)^t S_t.\]
+
+    \emph{Remark:} Let \(U_1, \dots, U_t\) be sets. Then we have \[\bigg| \bigcup_{i=1}^{t} U_i \bigg|\] is the number of elements that belong to at least one of the \(U_i\). Thinking of \(x \in U_i\) as ``$x$ satisfies condition \(c_i\)'' then we have
+    \begin{align*}
+        \bigg| \bigcup_{i=1}^{t} U_i \bigg| &= N - \overline{N} = N - (S_0 - S_1 + S_2 - \dots + (-1)^t S_t) \\ 
+        &= S_1 - S_2 + \dots + (-1)^{t+1} S_t.
+    \end{align*}
+    Alternatively, we could write \[\bigg| \bigcup_{i=1}^{t} U_i \bigg| = \sum_{1 \leq i \leq t} | U_i | - \sum_{1 \leq i < j \leq t} |U_i \cap U_j| + \dots + (-1)^{t+1} |U_1 \cap U_2 \cap \dots \cap U_t|,\] or more concisely as \[\sum_{\emptyset \neq J \subseteq{1, \dots, t}} (-1)^{|J| + 1} \bigg| \bigcap_{j \in J} U_j \bigg|.\]
+
+    \emph{Remark:} When \(t = 2\), we get the ``usual'' equality: \[| A \cup B = |A| + |B| - |A \cap B|.\]
+
+    \subsection{Examples}
+    \begin{enumerate}
+        \item[(a)] How many integers $n$ (\(1 \leq n \leq 100\)) are not divisble by \(2,3\), or $5$? Let
+        \begin{enumerate}
+            \item[] \(c_1:\) $x$ is divisible by $2$
+            \item[] \(c_2:\) $x$ is divisible by $3$
+            \item[] \(c_3:\) $x$ is divisible by $5$   
+        \end{enumerate}
+        We are looking for \(N(\overline{c_1} \overline{c_2} \overline{c_3})\). We have the following:
+        \begin{itemize}
+            \item \(N(c_1) = \lfloor \frac{100}{2} \rfloor = 50\);
+            \item \(N(c_2) = \lfloor \frac{100}{3} \rfloor = 33\);
+            \item \(N(c_3) = \lfloor \frac{100}{5} \rfloor = 20\);
+            \item \(N(c_1 c_2) = \lfloor \frac{100}{6} \rfloor = 16\);
+            \item \(N(c_1 c_3) = \lfloor \frac{100}{10} \rfloor = 10\);
+            \item \(N(c_2 c_3) = \lfloor \frac{100}{15} \rfloor = 6\);
+            \item \(N(c_1 c_2 c_3) = \lfloor \frac{100}{30} \rfloor = 3\).
+        \end{itemize}
+        Hence, we have \[N(\overline{c_1} \overline{c_2} \overline{c_3}) = S_0 - S_1 + S_2 - S_3 = 100 - (50 + 33 + 20) + (16 + 10 + 6) - 3 = 26.\]
+
+        \item[(b)] Let $A$ and $B$ be sets with \(|A| = m \geq n = |B|.\) Let \(A = \{a_1, a_2, \dots, a_m\}\) and \(B = \{b_1, b_2, \dots, b_n\}\). Let us count the number of surjective functions from $A$ to $B$. For \(1 \leq i \leq n\), we define the condition \(c_i\) by \[b_i \text{ is not in the range of } f.\] Note that \(c_i\) is a condition on functions $A$ to $B$. If $f$ satisfies \emph{none} of the conditions, then $f$ is onto. So we are looking for \(N(\overline{c_1} \overline{c_2} \dots \overline{c_n})\). We have 
+        \begin{itemize}
+            \item \(N(c_i) = (n-1)^m \Rightarrow S_1 = n \cdot (n-1)^m\)
+            \item \(N(c_i c_j) = (n-2)^m \Rightarrow S_2 = \binom{n}{2} (n-2)^m\)
+            \item In general, for \(1 \leq k \leq n\) we have \(S_k = \binom{n}{k} (n-k)^m.\)
+        \end{itemize} 
+        Therefore, we have 
+        \begin{align*}
+            N(\overline{c_1} \overline{c_2} \dots \overline{c_n}) &= S_0 - S_1 + S_2 + S_3 + \dots + (-1)^n S_n \\
+            &= \sum_{i=0}^{n} (-1)^i S_i \\
+            &= \sum_{i=0}^{n} (-1)^i \binom{n}{i} (n-i)^m \\
+            &= \sum_{i=0}^{n} (-1)^i \binom{n}{n-i} (n-i)^m,
+        \end{align*}
+        which is the number of surjections from $A$ to $B$. 
+
+        \item[(c)] In how many ways can the 26 letters of the alphabet be arranged so that none of the patterns ``car,'' ``dog,'' ``pun,'' or ``byte'' appear? Let \(c_1\) be the condition ``the arrangement does contain the pattern car.'' Similarly \(c_2, c_3,\) and \(c_4\) are defined for dog, pun, or byte, respectively. Then, we are looking for \(\overline{N} = N(\overline{c_1} \overline{c_2} \overline{c_3} \overline{c_4})\). By the Inclusion-Exclusion Principle, we have 
+        \begin{align*}
+            \overline{N} &= N - (N(c_1) + N(c_2) + N(c_3) + N(4)) \\
+                         & \quad + (N(c_1 c_2) + N(c_1 c_3) + N(c_1 c_4) + N(c_2 c_3) + N(c_2 c_4) + N(c_3 c_4)) \\
+                         & \quad - (N(c_1 c_2 c_3) + N(c_1 c_2 c_4) + N(c_1 c_3 c_4) + N(c_2 c_3 c_4)) \\
+                         & \quad + N(c_1 c_2 c_3 c_4).
+        \end{align*} 
+        Then we have the following:
+        \begin{itemize}
+            \item \(N = 26!\)
+            \item \(N(c_1) = 24! = N(c_2) = N(c_3)\) which is the number of ways we can arrange the ``letter'' CAR and the 23 remaining letters
+            \item \(N(c_4) = 23!\) since ``byte'' has 4 letters
+            \item \(N(c_1 c_2) = 22! = N(c_1 c_3) = N(c_2 c_3)\)
+            \item \(N(c_i c_4) = 21!\)
+            \item \(N(c_1 c_2 c_3) = 20!\)
+            \item \(N(c_i c_j c_4) = 19!\)
+            \item \(N(c_1 c_2 c_3 c_4) = 17!\)
+        \end{itemize}
+        Hence, we have 
+        \begin{align*}
+            \overline{N} &= 26! - (3(24!) + 23!) + (3(22!) + 3(21!)) + (20! + 3(19!)) + 17!
+        \end{align*}
+
+        \item[(d)] How many arrangements contain the words ``bald'' and ``blad''? Aside, fun problem to look at: superpermutations.
+        
+        \item[(e)] There are 5 villages. You want to devise a system of roads connecting the villages such that no village is completely isolated. In how many ways can you do this?
+        
+        \begin{figure}[H]
+            \centering
+            \definecolor{ududff}{rgb}{0.30196078431372547,0.30196078431372547,1}
+                \begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+                \clip(-12.200851344065438,-5.576472928631878) rectangle (0.7481100836721135,3.8202959061665895);
+                \draw [line width=1pt] (-10.098186329797528,2.6432534952283517)-- (-7.743773693967466,1.389033679879628);
+                \draw [line width=1pt] (-11.264390719507746,-1.526477294395914)-- (-9.185026288798019,-0.2832594072520036);
+                \draw [line width=1pt] (-9.185026288798019,-0.2832594072520036)-- (-8.40388938625627,-2.8027009661542643);
+                \draw [line width=1pt] (-8.40388938625627,-2.8027009661542643)-- (-11.264390719507746,-1.526477294395914);
+                \draw [line width=1pt] (-5.235334063270022,-1.4824695815766604)-- (-3.15596963256029,-0.23925169443275007);
+                \draw [line width=1pt] (-3.15596963256029,-0.23925169443275007)-- (-1.7147170377297343,1.4330413926988814);
+                \draw [line width=1pt] (-1.7147170377297343,1.4330413926988814)-- (-4.069129673559807,2.6872612080476053);
+                \draw (-10.307486063603765,3.283616481541547) node[anchor=north west] {$a$};
+                \draw (-7.341112516585348,1.644304784505054) node[anchor=north west] {$b$};
+                \draw (-8.951150790460476,0.23918047275948887) node[anchor=north west] {$c$};
+                \draw (-11.810188452553884,-1.497709301481557) node[anchor=north west] {$d$};
+                \draw (-8.592463711060407,-2.9125914209475776) node[anchor=north west] {$e$};
+                \draw (-4.3942545850078405,3.264100866100636) node[anchor=north west] {$a$};
+                \draw (-1.4278810379894231,1.7613984771505178) node[anchor=north west] {$b$};
+                \draw (-2.9403412346599977,-0.21943649010191088) node[anchor=north west] {$c$};
+                \draw (-5.701800819548853,-1.3513421856747272) node[anchor=north west] {$d$};
+                \draw (-2.208505655625849,-2.6979196510975605) node[anchor=north west] {$e$};
+                \draw (-10.892954526831083,-4.512871887102249) node[anchor=north west] {$\text{No village is isolated.}$};
+                \draw (-4.042973507071449,-4.512871887102249) node[anchor=north west] {$\text{Village $e$ is isolated.}$};
+                \begin{scriptsize}
+                \draw [fill=ududff] (-10.098186329797528,2.6432534952283517) circle (2.5pt);
+                \draw [fill=ududff] (-7.743773693967466,1.389033679879628) circle (2.5pt);
+                \draw [fill=ududff] (-9.185026288798019,-0.2832594072520036) circle (2.5pt);
+                \draw [fill=ududff] (-11.264390719507746,-1.526477294395914) circle (2.5pt);
+                \draw [fill=ududff] (-8.40388938625627,-2.8027009661542643) circle (2.5pt);
+                \draw [fill=ududff] (-4.069129673559807,2.6872612080476053) circle (2.5pt);
+                \draw [fill=ududff] (-1.7147170377297343,1.4330413926988814) circle (2.5pt);
+                \draw [fill=ududff] (-3.15596963256029,-0.23925169443275007) circle (2.5pt);
+                \draw [fill=ududff] (-5.235334063270022,-1.4824695815766604) circle (2.5pt);
+                \draw [fill=ududff] (-2.3748327300185377,-2.758693253335011) circle (2.5pt);
+                \end{scriptsize}
+                \end{tikzpicture}
+        \end{figure}
+    \end{enumerate}
+
+    Let $S$ be the set of all (undirected, loop-free) graphs on the vertices \(\{a,b,c,d,e\}\). We know that \[|S| = 2^{\binom{5}{2}} = 2^{10.}\] Now, for \(i \in \{1, \dots, 5\}\), the condition \(c_i\) is ``the system of roads isolates the $i$-th village.'' Then for \(N(c_1)\), we have the roads \(\{b,c\}, \{b,d\}, \{b,e\}, \{c,d\}, \{c,e\}, \{d,e\}\). Thus \[N(c_1) = 2^6.\] Similarly, \(N(c_i) = 2^6\) for \(1 \leq i \leq 5\). Reasoning in the same way, we find that \(N(c_1 c_2) = 2^3\) and similarly \(N(c_i c_j) = 2^3\). Finally, \(N(c_i c_j c_k) = 2^1\) and \(N(c_i c_j c_k c_l) = 2^0 = N(c_1 c_2 c_3 c_4 c_5)\). In total, we have \[N(\overline{c_1} \overline{c_2} \overline{c_3} \overline{c_4} \overline{c_5}) = 2^{10} - \binom{5}{1} 2^6 + \binom{5}{2} 2^3 - \binom{5}{3} 2^1 + \binom{5}{4} 2^0 - \binom{5}{5} 2^1.\]
+
+    \section{8.3 Derangements: Nothing Is in Its Right Place}
+
+    A professor wants the students to grade the assignments. In this case, we would like every student to receive a single assignment and not their own. This is a derangement. 
+
+    \vspace{1em}
+
+    Write \([n] = \{1,2, \dots, n\}\). A \emph{derangement} of \([n]\) is a permutation of \([n]\) such that no element is left in place.
+    \begin{align*}
+        [2] \Rightarrow &21 \text{ since the ``standard'' order is } 12 \\
+        [3] \Rightarrow &312, 231 \\
+        [4] \Rightarrow &4123 \quad 3142 \quad 2143 \\
+             &3412 \quad 4312 \quad 2413 \\
+             &2341 \quad 3421 \quad 4321
+    \end{align*}
+
+    \subsection{Definition}
+
+    We write \(d(n)\) for the number of derangements of \([n]\).
+
+    \vspace{1em}
+
+    \emph{Proposition:} We have \[d(n) = \sum_{k=0}^{n} (-1)^k \cdot \frac{n!}{k!}\]
+
+    \begin{proof}
+        Write $T$ for the set of all permutations of \([n]\). Then we have \(|T| = n!\). Now, let \(T_i, 1 \leq i \leq n\), be the collection of permutations that fix $i$. For example, \([3] \Rightarrow 213 \in T_3\). Then
+        \begin{equation*}
+            d(n) = n! - \underbrace{\bigg| \bigcup_{i=1}^{n} T_i \bigg|}_{\text{all the perm. that fix $i$}}
+        \end{equation*}
+        By Inclusion-Exclusion, we have 
+        \begin{align*}
+            \bigg| \bigcup_{i=1}^{n} T_i \bigg| &= \sum_{i} |T_i| - \sum_{i<j} |T_i \cap T_j| + \sum_{i < j < k} |T_i \cap T_j \cap T_k | \\
+            & \quad - \dots + (-1)^{n+1} \bigg| \bigcap_{i} T_i \bigg|.
+        \end{align*}
+        \begin{itemize}
+            \item For \(\sum |T_i|\), we have \(|T_i| = (n-1)!\) hence \[\sum_{i} |T_i| = n \cdot (n-1)!\]
+            \item For \(\sum_{i<j}\), we have \(|T_i \cap T_j| = (n-2)!\) hence \[\sum_{i<j} |T_i \cap T_j| = \binom{n}{2} (n-2)!\]
+        \end{itemize}
+        Hence we have 
+        \begin{align*}
+            \bigg| \bigcup_{i=1}^{n} T_i \bigg| &= n \cdot (n-1)! - \binom{n}{2} (n-2)! + \binom{n}{3} (n-3)! - \dots \\
+            &= \sum_{k=1}^{n} (-1)^{k+1} \binom{n}{k} (n-k)!
+        \end{align*}
+
+        Therefore, we have 
+        \begin{align*}
+            d(n) &= n! - \bigg| \bigcup_{i} T_i \bigg| \\
+                 &= n! - \sum_{k=1}^{n} (-1)^{k+1} \binom{n}{k} (n-k)! \\
+                 &= n! + \sum_{k=1}^{n} (-1)^k \binom{n}{k} (n-k)! \\
+                 &= \sum_{k=0}^{n} (-1)^k \binom{n}{k} (n-k)! \\
+                 &= \sum_{k=0}^{n} (-1)^k \cdot \frac{n!}{k!}
+        \end{align*}
+        where \(\binom{n}{k} = \dfrac{n!}{k! (n-k)!}\). 
+    \end{proof}
+
+    \subsection{Euler's totient function}
+
+    Let \(n \geq 2\), then we have \[\phi (n) = |\{x \in [n] \mid \text{gcd}(x,n) = 1\}|\] is \emph{Euler's totient function}. For example, we have 
+    \begin{itemize}
+        \item For \(n=2\), we have \(\phi(2) = 1\) which is 1.
+        \item For \(n=3\), we have \(\phi(3) = 2\) which is 1 and 2.
+        \item For \(n=4\), we have \(\phi(4) = 2\) which is 1 and 3.
+        \item For \(n=5\), we have \(\phi(5) = 4\) which is 1,2,3 and 4.
+    \end{itemize}
+
+    \emph{Remark:} If $n$ is prime, then \(\phi(n) = n-1\).
+
+    \vspace{1em}
+
+    \emph{Proposition:} We have \[\phi(n) = n \cdot \prod_{p \mid n} (1 - \frac{1}{p})\] where the product is taken over the primes that divide $n$.
+
+    \begin{proof}
+        Given $n$, we write it as \[n = P_1^{e_1} P_2^{e_2} \dots P_t^{e_t}\] where \(P_i\) are primes and \(e_i \geq 1\). Suppose, for simplicity, that \(t = 4\). Let \(S = [n]\) and let \(c_i\) be the condition ``x is divisible by \(P_i\)'' for \(1 \leq i \leq 4\). Then \[\phi(n) = N(\overline{c_1 c_2 c_3 c_4}).\] Now, 
+        \begin{itemize}
+            \item \(N(c_i) = \dfrac{n}{P_i}\)
+            \item \(N(c_i c_j) = \dfrac{n}{P_i P_j}\)
+            \item \(N(c_i c_j c_k) = \dfrac{n}{P_i P_j P_k}\)
+            \item \(N(c_1 c_2 c_3 c_4) = \dfrac{n}{P_1 P_2 P_3 P_4}\)
+        \end{itemize}
+        Then, we have 
+        \begin{align*}
+            \phi(n) &= S_0 - S_1 + S_2 - S_3 + S_4 \\
+                    &= n - \left( \frac{n}{P_1} + \dots + \frac{n}{P_4} \right) + \left(\frac{n}{P_1 P_2} + \dots + \frac{n}{P_3 P_4}\right) \\
+                    & \quad - \left(\frac{n}{P_1 P_2 P_3} + \dots + \frac{n}{P_2 P_3 P_4}\right) + \frac{n}{P_1 P_2 P_3 P_4} \\
+                    &= \frac{n}{P_1 P_2 P_3 P_4} ( P_1 P_2 P_3 P_4 - (P_2 P_3 P_4 + \dots + P_1 P_2 P_3) \\
+                    & \quad - (P_4 + \dots + P_1) + 1 ) \\
+                    &= \frac{n}{P_1 P_2 P_3 P_4} ((P_1 - 1) (P_2 - 1) (P_3 - 1) (P_4 - 1)) \\
+                    &= n \left(\frac{P_1 - 1}{P_1} \cdot \frac{P_2 - 1}{P_2} \cdot \frac{P_3 - 1}{P_3} \cdot \frac{P_4 - 1}{P_4}\right) \\ 
+                    &= n \cdot \prod_{i=1}^{4} \left( 1 - \frac{1}{P_i}\right),
+        \end{align*}
+        which finishes the proof.
+    \end{proof}
+
+\end{document}

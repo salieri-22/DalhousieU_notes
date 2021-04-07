@@ -28,7 +28,9 @@ This class continues the exploration of discrete mathematics started in Discrete
 - 7.4 Equivalence Relations and Partitions
 
 ## Chapter 8 The Principle of Inclusion and Exclusion
-
-## Chapter 10 Recurrence Relations
+- 8.1 The Principle of Inclusion and Exclusion
+- 8.3 Derangements: Nothing Is in Its Right Place
 
 ## Chapter 11 An Introduction to Graph Theory
+
+## Appendix 3 Countable and Uncountable Sets
