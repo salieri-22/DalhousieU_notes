@@ -1,0 +1,234 @@
+\documentclass[11pt]{article}
+
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{blkarray}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\graphicspath{ {./img/} }
+
+\setlength{\parindent}{0cm}
+\let\emptyset\varnothing
+
+\title{\textbf{MATH 2135 Linear Algebra} \\ Chapter 7 Operators Inner Product Spaces}
+\author{Alyssa Motas}
+
+\begin{document}
+
+    \maketitle
+
+    \pagebreak
+
+    \tableofcontents
+
+    \pagebreak
+
+    \section{7.A Self-Adjoint and Normal Operators}
+
+    \emph{Definition} An \(n \times n\)-matrix $A$ is called \emph{symmetric} if \(A = A^T\). 
+
+    \subsection{Definition of adjoint, \(T^*\)}
+
+    Suppose \(T \in \mathcal{L}(V,W)\). The \textbf{\emph{adjoint}} of $T$ is the function \(T^*: W \rightarrow V\) such that \[\langle Tv,w \rangle = \langle v, T^* w \rangle\] for every \(v \in V\) and every \(w \in W\). Or in other words, let $A$ be a complex \(n \times n\)-matrix. The adjoint of $A$ is the complex conjugate of the tranpose of $A$, written \[A^* = \overline{A^T}.\]
+
+    \subsubsection{Example}
+
+    \begin{align*}
+        A = \begin{bmatrix}
+            i & 5 & 1 + i \\
+            0 & 2i & -i \\
+            -7 & 3-i & 0
+        \end{bmatrix} && A^T &= \begin{bmatrix}
+            i & 0 & -7 \\
+            5 & 2i & 3-i \\
+            1+i & -i & 0
+        \end{bmatrix} \\
+        && A^* = \overline{A^T} &= \begin{bmatrix}
+            -i & 0 & -7 \\
+            5 & -2i & 3+i \\
+            1 - i & i & 0
+        \end{bmatrix}
+    \end{align*}
+
+    \subsection{Definition of self-adjoint}
+
+    An operator \(T \in \mathcal{L}(V)\) is called \textbf{\emph{self-adjoint}} if \(T = T^*\). In other words, \(T \in \mathcal{L}(V)\) is self-adjoint if and only if \[\langle Tv, w \rangle = \langle v, Tw \rangle\] for all \(v,w \in V\). Alternative, an \(n \times n\)-matrix $A$ is called self-adjoint or hermitian if \[A = A^*.\]
+
+    \subsubsection{Example}
+
+    \[A = \begin{bmatrix}
+        1 & i & 1+i \\
+        -i & 2 & 5 \\
+        1-i & 5 & 3
+    \end{bmatrix}\] $A$ is self-adjoint if for all \(j,k\), \(a_{jk} = \overline{a_{jk}}\). 
+
+    \emph{Remark:} If $A$ is self-adjoint, the diagonal entries of $A$ are \emph{real} numbers. 
+
+    \subsection{Orthogonal Property}
+
+    A \emph{real} \(n \times n\)-matrix $A$ is called \textbf{\emph{orthogonal}} if $A$ is invertible and \(A^{-1} = A^T\).
+
+    \vspace{1em}
+
+    \emph{Remark:} The following are equivalent:
+    \begin{enumerate}
+        \item $A$ is orthogonal
+        \item \(AA^T = I\)
+        \item \(A^T A = I\)
+        \item The columns of $A$ form an orthonormal basis of \(\mathbb{R}^n\).
+        \item The rows of $A$ form an orthonormal basis of \(\mathbb{R}^n\). 
+    \end{enumerate}
+
+    \begin{proof}
+        For \((1) \Leftrightarrow (2) \Leftrightarrow (3)\), it is obvious. To prove \((3) \Leftrightarrow (4)\), we write \[A = \begin{bmatrix}
+            a_{11} & a_{12} & \dots & a_{1n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{n1} & \dots & \dots & a_{nn} \\
+        \end{bmatrix} \quad A^T = \begin{bmatrix}
+            a_{11} & \dots & a_{n1} \\
+            a_{12} & \dots & \vdots \\
+            \vdots & \ddots & \vdots \\
+            a_{1n} & \dots & a_{nn}
+        \end{bmatrix}.\] Condition (3) states that \(A^T A = I\). 
+        \[\begin{bmatrix}
+            a_{11} & a_{12} & \dots & a_{1n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{n1} & \dots & \dots & a_{nn} \\
+        \end{bmatrix} \begin{bmatrix}
+            a_{11} & \dots & a_{n1} \\
+            a_{12} & \dots & \vdots \\
+            \vdots & \ddots & \vdots \\
+            a_{1n} & \dots & a_{nn}
+        \end{bmatrix} = \begin{bmatrix}
+            1 & 0 & \dots & 0 \\
+            0 & 1 & \dots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \dots & 1
+        \end{bmatrix}\] \[\begin{bmatrix}
+            a_{11} \\ \vdots \\ a_{n1}
+        \end{bmatrix} \cdot \begin{bmatrix}
+            a_{11} \\ \vdots \\ a_{n1}
+        \end{bmatrix} = 1, \text{i.e. } \Bigg| \Bigg| \begin{bmatrix}
+            a_{11} \\ \vdots \\ a_{n1}
+        \end{bmatrix} \Bigg| \Bigg|\] \[\begin{bmatrix}
+            a_{11} \\ \vdots \\ a_{n1}
+        \end{bmatrix} \cdot \begin{bmatrix}
+            a_{12} \\ \vdots \\ a_{n2}
+        \end{bmatrix} = 0.\] So if \[v_1 = \begin{bmatrix}
+            a_{11} \\ \vdots \\ a_{n1}
+        \end{bmatrix}, v_2 = \begin{bmatrix}
+            a_{12} \\ \vdots \\ a_{n2}
+        \end{bmatrix}, \dots, v_n = \begin{bmatrix}
+            a_{1n} \\ \vdots \\ a_{nn}
+        \end{bmatrix},\] the condition \(A^T A = I\) means exactly that \[\langle v_i, v_j \rangle = \begin{cases}
+            1 & \text{if } i = j \\
+            0 & \text{otherwise}.
+        \end{cases}\] This ist he case if and only if \(v_1, \dots, v_n\) are orthonormal.
+    \end{proof}
+
+    \subsubsection{Example}
+
+    The following matrices are orthogonal: \[A = \begin{bmatrix}
+        1 & 0 \\ 0 & 1
+    \end{bmatrix}, A = \begin{bmatrix}
+        0 & 1 \\ 1 & 0
+    \end{bmatrix}, A = \frac{1}{\sqrt{2}} \begin{bmatrix}
+        1 & 1 \\ 1 & -1
+    \end{bmatrix}\]
+
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=10cm, scale=0.5]
+            \clip(-5,-0.25) rectangle (19.177882975511878,1);
+            \draw [->,line width=1pt] (-4.062978484854644,0.18317503392130224) -- (-4.218392962417389,0.7693351424694705);
+            \draw [->,line width=1pt] (-4.062978484854644,0.18317503392130224) -- (-0.6438599784742323,0.5495251017639073);
+            \draw [->,line width=1pt] (-4.062978484854644,0.18317503392130224) -- (0.6438599784742349,0.055630936227950845);
+            \draw [->,line width=1pt] (4.10714909090661,0.5101692548119314) -- (9.949013823482536,0.5128829590181729);
+            \draw [->,line width=1pt] (15.4526394833816,0.12075983717774731) -- (11.500671339643201,0.4246947082767975);
+            \draw [->,line width=1pt] (15.4526394833816,0.12075983717774731) -- (15.186214664702606,0.6662143826322927);
+            \draw [->,line width=1pt] (15.4526394833816,0.12075983717774731) -- (18.383312488850525,0.5251017639077337);
+            \draw (-5.342808450616331,0.5136189824730586) node[anchor=north west] {$e_3$};
+            \draw (-2.6405281710022015,0.09973321698317994) node[anchor=north west] {$e_1$};
+            \draw (-1.4228339709291682,0.4075989834313163) node[anchor=north west] {$e_2$};
+            \draw (3.5,0.6481828274106546) node[anchor=north west] {$\text{orthogonal matrix}$};
+            \draw (12.639031928544355,0.24245244646244846) node[anchor=north west] {$v_3$};
+            \draw (14.223702462885974,0.5115801363376405) node[anchor=north west] {$v_2$};
+            \draw (17.55985095623675,0.33827821482710013) node[anchor=north west] {$v_1$};
+        \end{tikzpicture}
+    \end{figure}
+
+    \section{7.B The Spectral Theorem}
+
+    \subsection{The real Spectral Theorem}
+
+    Let $A$ be a real symmetric \(n \times n\)-matrix. Then
+    \begin{enumerate}
+        \item There exists an \emph{orthonormal} basis of \(\mathbb{R}^n\) consisting of eigenvectors of $A$.
+        \item $A$ is diagonalizable as \(D = S^{-1} A S\) where $S$ is an orthogonal matrix.
+    \end{enumerate}
+
+    \emph{Remark:} The columns of $S$ are the orthonormal eigenvectors of $A$. Since $S$ is orthogonal, we have \[S^{-1} = S^T\] so we have \(D = S^T AS\).
+
+    \subsection{The complex Spectral Theorem}
+
+    ``Unitary'' is the complex version of ``orthogonal'' (for matrices). A \emph{complex} \(n \times n\)-matrix $A$ is called \emph{unitary} if $A$ is invertible and \(A^{-1} = A^*\). 
+
+    \vspace{1em}
+
+    \emph{Remark:} $A$ is unitary if and only if the columns of $A$ form an orthonormal basis of \(\mathbb{C}^n\). 
+
+    \vspace{1em}
+
+    \emph{Examples:}
+    \begin{align*}
+        A &= \begin{bmatrix}
+            1 & 0 \\ 0 & i
+        \end{bmatrix} \qquad A^{-1} = \begin{bmatrix}
+            1  & 0 \\ 0 & -i
+        \end{bmatrix} \\
+        A^T &= \begin{bmatrix}
+            1 & 0 \\ 0 & i
+        \end{bmatrix} \qquad A^* = \begin{bmatrix}
+            1 & 0 \\ 0 & -i
+        \end{bmatrix}
+    \end{align*}
+
+    \subsubsection{The complex Spectral Theorem, Version 1}
+
+    Let $A$ be a \emph{complex self-adjoint} \(n \times n\)-matrix. Then
+    \begin{enumerate}
+        \item There exists an orthonormal basis of \(\mathbb{C}^n\) consisting of eigenvectors of $A$.
+        \item $A$ is diagonalizable as \(D = S^{-1} AS\) where $S$ is a unitary matrix.
+        \item The eigenvalues of $A$ are real.
+    \end{enumerate}
+
+    \subsubsection{The complex Spectral Theorem, Version 2}
+
+    Let $A$ be unitary \(n \times n\)-matrix. Then
+    \begin{enumerate}
+        \item There exists an orthonormal basis of \(\mathbb{C}^n\) consisting of eigenvectors of $A$.
+        \item Therefore, $A$ is diagonalizable as \(D = S^{-1} AS\) where $S$ is unitary.
+        \item All the eigenvalues (the diagonal entries of $D$) satisfy \(|\lambda | = 1\).
+    \end{enumerate}
+
+    \subsubsection{The complex Spectral Theorem, Version 3}
+
+    A matrix $A$ is called \emph{normal} if \[A^* A = AA^*.\] \emph{Remark:} Self-adjoint matrices are normal because \(A = A^* \Rightarrow A^* A = A^2 = AA^*\). Unitary matrices are normal because \(A^{-1} = A^* = A^* A = A^{-1} A = I = AA^{-1} = AA^*.\)
+
+    \vspace{1em}
+
+    Let $A$ be a \emph{normal} matrix. Then
+    \begin{enumerate}
+        \item There exists an orthonormal basis of \(\mathbb{C}^n\) consisting of eigenvectors of $A$.
+        \item Therefore, $A$ is diagonalizable as \(D = S^{-1} AS\) where $S$ is unitary.
+    \end{enumerate}
+
+\end{document}

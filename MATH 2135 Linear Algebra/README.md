@@ -37,3 +37,7 @@ This course is a continutation of MATH 1030 with an emphasis on foundations and 
 - 6.A Inner Products and Norms
 - 6.B Orthonormal Bases
 - 6.C Orthogonal Complements and Minimization Problems
+
+## Chapter 7 Operators on Inner Product Spaces
+- 7.A Self-Adjoint and Normal Operators
+- 7.B The Spectral Theorem
