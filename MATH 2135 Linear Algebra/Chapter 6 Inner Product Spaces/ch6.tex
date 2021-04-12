@@ -778,9 +778,301 @@
     \begin{proof}
         Suppose \(e_1, \dots, e_m\) is an orthonormal list of vectors in $V$. Then \(e_1, \dots, e_m\) is linearly independent. Hence this list can be extended to a basis \(e_1, \dots, e_m, v_1, \dots, v_n\) of $V$. Now apply the Gram-Schmidt Procedure to \(e_1, \dots, e_m, v_1, \dots, v_n\), producing an orthonormal list \[e_1, \dots, e_m, f_1, \dots, f_n;\] here the formula given by the Gram-Schmidt Procedure leaves the first $m$ vectors unchanged because they are already orthonormal. The list above is an orthonormal basis of $V$. 
     \end{proof}
+
     \section{6.C Orthogonal Complements and Minimization Problems}
 
-    
- 
+    \subsection{Definition of orthogonal complement, \(U^{\perp}\)}
 
+    If $U$ is a subset of $V$, then the \textbf{\emph{orthogonal complement}} of $U$, denoted \(U^{\perp}\), is the set of all vectors in $V$ that are orthogonal to every vector in $U$: \[U^{\perp} = \{ v \in V \mid \langle v,u \rangle = 0 \text{ for every } u \in U\}.\]
+
+    \subsection{Basic properties of orthogonal complement}
+
+    \begin{enumerate}
+        \item[(a)] If $U$ is a subet of $V$, then \(U^{\perp}\) is a subspace of $V$.
+        \item[(b)] \(\{0\}^{\perp} = V.\)
+        \item[(c)] \(V^{\perp} = \{0\}.\)
+        \item[(d)] If $U$ is a subset of $V$, then \(U \cap U^{\perp} \subset \{0\}.\)
+        \item[(e)] If $U$ and $W$ are subsets of $V$ and \(U \subset W\), then \(W^{\perp} \subset U^{\perp}.\) 
+    \end{enumerate}
+
+    \subsection{Direct sum of a subspace and its orthogonal complement}
+
+    Suppose $U$ is a finite-dimensional subspace of $V$. Then \[V = U \oplus U^{\perp}.\]
+
+    \subsection{Dimension of the orthogonal complement}
+
+    Suppose $V$ is finite-dimensional and $U$ is a subspace of $V$. Then \[\dim U^{\perp} = \dim V - \dim U.\]
+
+    \subsection{The orthogonal complement of the orthogonal complement}
+
+    Suppose $U$ is a finite-dimensional subspace of $V$. Then \[U = (U^{\perp})^{\perp}.\]
+
+    \subsection{Definition of orthogonal projection}
+
+    Let $V$ be an inner product space and let $W$ be a subspce of $V$. Let \(v \in V\) be some vector. The \textbf{\emph{orthogonal projection}} of $v$ onto $W$ is a vector \(v' \in W\) such that \(||v - v'||\) is as small as possible.
+
+    \begin{figure}[H]
+        \centering
+        \definecolor{qqqqff}{rgb}{0,0,1}
+        \definecolor{qqwuqq}{rgb}{0,0.39215686274509803,0}
+        \definecolor{zzttqq}{rgb}{0.6,0.2,0}
+        \begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+            \clip(0.2438503090261066,1.9374698685533895) rectangle (12.14016637021091,9.579999799788148);
+            \fill[line width=1pt,color=zzttqq,fill=zzttqq,fill opacity=0.10000000149011612] (0.5521786686481327,4.026560234782296) -- (5.5181827089781015,7.433469983380768) -- (11.48806468522535,7.1965766468586825) -- (9.433996245291898,3.121538677442209) -- cycle;
+            \draw [line width=1pt,color=zzttqq] (0.5521786686481327,4.026560234782296)-- (5.5181827089781015,7.433469983380768);
+            \draw [line width=1pt,color=zzttqq] (5.5181827089781015,7.433469983380768)-- (11.48806468522535,7.1965766468586825);
+            \draw [line width=1pt,color=zzttqq] (11.48806468522535,7.1965766468586825)-- (9.433996245291898,3.121538677442209);
+            \draw [line width=1pt,color=zzttqq] (9.433996245291898,3.121538677442209)-- (0.5521786686481327,4.026560234782296);
+            \draw [line width=1pt,dotted] (10.155329763000745,8.765570084538997)-- (10.13660592299114,6.423348043998096);
+            \draw [->,line width=1pt,color=qqwuqq] (7.148928644344495,5.917453161062451) -- (10.13660592299114,6.423348043998096);
+            \draw [->,line width=1pt,color=qqwuqq] (7.148928644344495,5.917453161062451) -- (10.155329763000745,8.765570084538997);
+            \draw [->,line width=1pt,color=qqqqff] (7.148928644344495,5.917453161062451) -- (7.829992692900607,6.76482354705668);
+            \draw [->,line width=1pt,color=qqqqff] (7.148928644344495,5.917453161062451) -- (8.819911368127514,5.7986629200352215);
+            \draw [line width=1pt,color=zzttqq] (4.715237427186998,6.8826121737798935)-- (11.189369655545773,6.603999708546105);
+            \draw [line width=1pt,color=zzttqq] (3.618682092713435,6.1303242117573316)-- (10.71706308161288,5.666997228704729);
+            \draw [line width=1pt,color=zzttqq] (2.078615217710234,5.073766704487692)-- (10.090707669542928,4.424379389438747);
+            \draw [line width=1pt,color=zzttqq] (2.6661767921934336,3.811152312082317)-- (6.784578857786799,7.383217598116931);
+            \draw [line width=1pt,color=zzttqq] (5.154508824081151,3.557601266787237)-- (8.306950875025048,7.322807729374747);
+            \draw [line width=1pt,color=zzttqq] (7.408330652642454,3.327945869831605)-- (9.701732951827696,7.267460809417263);
+            \draw (6.161040158727977,5.929362449457941) node[anchor=north west] {$0$};
+            \draw (7.695912204591504,5.78651142270589) node[anchor=north west] {$\color{qqqqff} u_1$};
+            \draw (6.77372090267835,6.596000574300849) node[anchor=north west] {$\color{qqqqff} u_2$};
+            \draw (8.60857154217406,6.711872910606633) node[anchor=north west] {$\color{qqwuqq} v'$};
+            \draw (8.576826869562494,7.949915142457746) node[anchor=north west] {$\color{qqwuqq} v$};
+            \draw (11.132273014793652,5.46906469659022) node[anchor=north west] {$\color{zzttqq} W$};
+            \begin{scriptsize}
+                \draw [fill=black] (7.148928644344495,5.917453161062451) circle (2.5pt);
+                \draw [fill=black] (10.13660592299114,6.423348043998096) circle (2.5pt);
+                \draw [fill=black] (10.155329763000745,8.765570084538997) circle (2.5pt);
+            \end{scriptsize}
+        \end{tikzpicture}
+    \end{figure}
+
+    \subsubsection{Existence and uniqueness of orthogonal projections}
+
+    Orthogonal projections exist and are unique. Moreover, if \(e_1, \dots, e_k\) is an orthonormal basis of $W$, then the orthogonal projection of $v$ onto $W$ can be computed as follows: 
+    \begin{align*}
+        v' &= \langle v, e_1 \rangle e_1 + \langle v, e_2 \rangle e_2 + \dots + \langle v, e_k \rangle e_k \\
+           &= a_1 e_1 + a_2 e_2 + \dots + a_k e_k.
+    \end{align*}
+
+    \begin{proof}
+        In case \(v \in W\). Then \(v' = v\), we have \(|| v - v' || = 0\). By previous proposition, we have \[v = \langle v, e_1 \rangle e_1 + \dots + \langle v, e_k \rangle e_k.\] So we are done. Then, consider the case where \(v \notin W\). Let \(W' = \text{span}(e_1, \dots, e_k, v).\) Apply the Gram-Schmidt Procedure to \(e_1, \dots, e_k, v\) to obtain an orthonormal basis \(e_1, \dots, e_k, e_{k+1}\) of $W$. Note that since \(e_1, \dots, e_k\) are already orthogonal, the Gram-Schmidt Procedure does not change these vectors. Rather, only the last vector is updated from $v$ to \(e_{k+1}\). Since \(v \in W'\), we can write \(v = a_1 e_1 + \dots + a_k e_k + a_{k+1} e_{k+1}\). Moreover, again by proposition 6.30, \(a_j = \langle v, e_j \rangle.\) 
+        
+        Now consider any \(w \in W\). Since \(e_1, \dots, e_k\) is a basis of $W$, we can write \(w = x_1 e_1 + \dots + x_k e_k\). The distance of $v$ to $w$ is
+        \begin{align*}
+            ||v-w||^2 &= ||(a_1 - x_1)e_1 + (a_2 - x_2)e_2 + \dots + (a_k - x_k) e_k + a_{k+1} e_{k+1}||^2 \\
+                      &= |a_1 - x_1|^2 + \dots + |a_k - x_k|^2 + |a_{k+1}|^2/
+        \end{align*}
+        This quantity takes its smallest value when \(x_j = a_j\) for \(j = 1, \dots, k\). So the minimum occurs when 
+        \begin{align*}
+            w &= a_1 e_1 + \dots + a_k e_k \\
+              &= \langle v, e_1 \rangle e_1 + \dots + \langle v, e_k \rangle e_k = v'.
+        \end{align*}
+    \end{proof}
+
+    \emph{Remark.} If $v'$ is the orthogonal projection of $v$ onto $W$, then \(v-v'\) is orthogonal to $W$.
+
+    \begin{proof}
+        \(v - v' = (a_1 e_1 + \dots + a_k e_k + a_{k+1} e_{k+1}) - (a_1 e_1 + \dots + a_k e_k)\) and we also have \(v - v' = a_{k+1} e_{k+1}\). Since \(e_{k+1}\), then \(v-v'\) is orthogonal to \(e_1, \dots, e_k\), and therefore to all of $W$.
+    \end{proof}
+
+    \subsection{Examples}
+
+    \begin{itemize}
+        \item In \(\mathbb{R}^3\), let \[W = \text{span}\{ \begin{bmatrix}
+            1 \\ 1 \\ 0
+        \end{bmatrix}, \begin{bmatrix}
+            0 \\ 1 \\ 1
+        \end{bmatrix}\}.\] Find the closest approximation to \[v = \begin{bmatrix}
+            1 \\ 1 \\ 1
+        \end{bmatrix}\] in $W$.
+    
+        \begin{proof}[\unskip\nopunct]
+            \emph{Solution.} First, we need an orthonormal basis of $W$. Using Gram-Schmidt, we have 
+            \begin{align*}
+                u_1 &= v_1 = \begin{bmatrix}
+                    1 \\ 1 \\ 0
+                \end{bmatrix} \\
+                u_2 &= v_2 - \frac{\langle v_2, u_1 \rangle}{\langle u_1, u_1 \rangle} u_1 \\
+                    &= \begin{bmatrix}
+                        0 \\ 1 \\ 1
+                    \end{bmatrix} - \frac{1}{2} \begin{bmatrix}
+                        1 \\ 1 \\ 0
+                    \end{bmatrix} \\
+                    &= \begin{bmatrix}
+                        - \frac{1}{2} \\ \frac{1}{2} \\ 1
+                    \end{bmatrix}.
+            \end{align*}
+            Normalize these vectors and we have \[e_1 = \frac{1}{\sqrt{2}} \begin{bmatrix}
+                1 \\ 1 \\ 0
+            \end{bmatrix}, e_2 = \sqrt{\frac{2}{3}} \begin{bmatrix}
+                - \frac{1}{2} \\ \frac{1}{2} \\ 1
+            \end{bmatrix} = \frac{1}{\sqrt{6}} \begin{bmatrix}
+                -1 \\ 1 \\ 2
+            \end{bmatrix}.\] Then, we do an orthogonal projection of $v$ onto $W$:
+    
+            \begin{align*}
+                v' &= \langle v,e_1 \rangle e_1 + \langle v, e_2 \rangle e_2 \\
+                   &= \sqrt{2} e_1 + \frac{2}{\sqrt{6}} e_2 \\
+                   &= \begin{bmatrix}
+                       1 \\ 1 \\ 0
+                   \end{bmatrix} + \frac{2}{6} \begin{bmatrix}
+                       -1 \\ 1 \\ 2
+                   \end{bmatrix} \\
+                   &= \begin{bmatrix}
+                       1 \\ 1 \\ 0
+                   \end{bmatrix} + \begin{bmatrix}
+                       - \frac{1}{3} \\ \frac{1}{3} \\ \frac{2}{3}
+                   \end{bmatrix} = \begin{bmatrix}
+                       \frac{2}{3} \\ \frac{4}{3} \\ \frac{2}{3}
+                   \end{bmatrix}.
+            \end{align*}
+        \end{proof}
+
+        \item Consider the vector space $V$ of real-valued (continuous) functions on the interval \([-1,1]\) with the inner product \[\langle f,g \rangle = \int_{-1}^{1} f(x) g(x) dx.\] Let $f$ be the function defined by \[f(x) = 1 - |x|.\] Find the polynomial of degree 2 (or 4, or 6, \(\dots\)) that is the ebst fit for this function.
+        
+        \begin{proof}[\unskip\nopunct]
+            We already have an orthogonal basis for the space of polynomials, namely the Legendre polynomials. \[p_0(x) = 1, p_1(x) = x, p_2(x) = x^2 - \frac{1}{3}.\] Turn these into an orthonormal basis:
+            \begin{align*}
+                \langle p_0, p_0 \rangle &= \int_{-1}^{1} 1 dx = 2 \\
+                \langle p_1, p_1 \rangle &= \int_{-1}^{1} x \cdot x dx = \frac{2}{3} \\
+                \langle p_2, p_2 \rangle &= \int_{-1}^{1} \left(x^2 - \frac{1}{3}\right) \left(x^2 - \frac{1}{3}\right) dx \\
+                &= \int_{-1}^{1} \left(x^4 - \frac{2}{3} x^2 + \frac{1}{9}\right) = \frac{x^5}{5} - \frac{2x^3}{9} + \frac{x}{9} \bigg|_{-1}^{1} \\
+                &= \frac{2}{5} - \frac{4}{9} + \frac{2}{9} = \frac{8}{45}.
+            \end{align*}
+            We have \[||p_0|| = \sqrt{2}, ||p_1|| = \sqrt{\frac{2}{3}}, ||p_2|| = \sqrt{\frac{8}{45}}\] Then, the orthonormal basis is: \[e_0 (x) = \frac{1}{\sqrt{2}}, e_1(x) = \sqrt{\frac{3}{2}} x, e_2 (x) = \sqrt{\frac{45}{8}} \left(x^2 - \frac{1}{3}\right).\] Now, the best approximation of \(f(x) = 1 - |x|\) is 
+            \begin{align*}
+                f'(x) &= \langle f, e_0 \rangle e_0 + \langle f, e_1 \rangle e_1 + \langle f, e_2 \rangle e_2 \\
+                      &= \frac{1}{2} p_0 + \frac{0}{\frac{2}{3}} p_1 + \frac{\frac{1}{6}}{\frac{8}{45}} p_2 \\
+                      &= \frac{1}{2} - \frac{15}{16} \left(x^2 - \frac{1}{3}\right) \\
+                      &= \frac{13}{16} - \frac{15}{16} x^2
+            \end{align*}
+        \end{proof}
+
+        \item Find the best approximation by polynomials \[f(x) = \begin{cases}
+            0 & \text{if } x < 0  \\
+            1 & \text{if } x \geq 0
+        \end{cases}\]
+
+        \item Find the best approximation by polynomials \[f(x) = \begin{cases}
+            0 & -1 \leq x < - \frac{1}{2} \\
+            x + \frac{1}{2} & - \frac{1}{2} \leq x < \frac{1}{2} \\
+            1 & \frac{1}{2} \leq x \leq 1
+        \end{cases}\]
+    \end{itemize}
+
+    \subsection{Fourier Series}
+
+    Recall that \[v' = \langle v,e_1 \rangle e_1 + \dots + \langle v, e_k \rangle e_k\] where \(e_1, \dots, e_k\) is an orthonormal basis of $W$. 
+
+    \subsubsection{Terminology:}
+    \begin{itemize}
+        \item \(v'\) is called the \emph{orthogonal projection} of $v$ onto $W$.
+        \item \(v'\) is called the \emph{least squares approximation} of $v$ in $W$.
+        \item The coefficients \(a_1 = \langle v, e_1 \rangle, a_2 = \langle v, e_2 \rangle, \dots, a_k = \langle v, e_k \rangle\) in the linear combination \(v' = a_1 e_1 + \dots + a_k e_k\) are called the \emph{(generalized) Fourier coefficients} of $v$ with respect to \(e_1, \dots, e_k\).
+    \end{itemize}
+
+    \subsubsection{(Generalized) Fourier Series}
+
+    Suppose \(e_1, e_2, e_3, \dots\) is an infinite list of orthonormal vectors in $V$. 
+    \begin{align*}
+        v_1 &= \langle v, e_1 \rangle e_1 \\
+        v_2 &= \langle v, e_1 \rangle e_1 + \langle v, e_2 \rangle e_2 \\
+        v_3 &= \langle v, e_1 \rangle e_1 + \langle v, e_2 \rangle e_2 + \langle v, e_3 \rangle e_3 \\
+        \vdots &
+    \end{align*}
+    The sequence of vectors \(v_1, v_2, v_3, \dots\) is called the (generalized) Fourier series of $v$ with respect to \(e_1, e_2, e_3, \dots\). 
+
+    \vspace{1em}
+
+    \emph{Note:} \(||v-v_1||^2 \geq ||v-v_2||^2 \geq ||v-v_3||^2 \geq \dots\)
+
+    \subsubsection{What if the basis is orthogonal (instead of orthonormal)?}
+
+    Assume \(u_1, \dots, u_k\) is an orthogonal basis of $W$ and let \(v \in V\). Then the least squares approximation of $v$ in $W$ is given by \[v' = \frac{\langle v, u_1 \rangle}{\langle u_1, u_1 \rangle} u_1 + \dots + \frac{\langle v, u_k \rangle}{\langle u_k, u_k \rangle} u_k.\]
+
+    \begin{proof}
+        Let \(e_i = \dfrac{u_i}{||u_i||}\). Then \(e_1, \dots, e_k\) is an orthonormal basis of $W$, We have:
+        \begin{align*}
+            v' &= \langle v, e_1 \rangle e_1 + \dots + \langle v, e_k \rangle e_k \\
+               &= \bigg\langle v, \frac{u_1}{||u_1||} \bigg\rangle \frac{u_1}{||u_1||} + \dots + \bigg\langle v, \frac{u_k}{||u_k||} \bigg\rangle \frac{u_k}{||u_k||} \\
+               &= \frac{1}{||u_1||^2} \langle v, u_1 \rangle u_1 + \dots + \frac{1}{||u_k||^2} \langle v, u_k \rangle u_k \\
+               &= \frac{\langle v, u_1 \rangle}{\langle u_1, u_1 \rangle} u_1 + \dots + \frac{\langle v, u_k \rangle}{\langle u_k, u_k \rangle} u_k.
+        \end{align*}
+    \end{proof}
+
+    \subsection{Trigonometric Approximations}
+
+    Consider functions \(f:\mathbb{R} \rightarrow \mathbb{R}\) that are \emph{periodic} with period \(2 \pi\). Recall that $f$ is periodic if \[f(x + 2 \pi) = f(x)\] for all \(x \in \mathbb{R}\)
+
+    \vspace{1em}
+
+    \emph{Examples.}
+
+    \begin{itemize}
+        \begin{figure}[H]
+            \centering
+            \definecolor{qqqqff}{rgb}{0,0,1}
+            \begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+                \begin{axis}[
+                    x=0.4cm,y=0.8cm,
+                    axis lines=middle,
+                    xmin=-7.748521809914048,
+                    xmax=26.26504670810407,
+                    ymin=-0.8833107191316149,
+                    ymax=1.7299864314789684,
+                    xtick={-6.28,-3.14,...,25.13},
+                    ytick={0,3.141592653589793,...,0},]
+                    \clip(-7.748521809914048,-0.8833107191316149) rectangle (26.26504670810407,1.7299864314789684);
+                    \draw [line width=2pt,color=qqqqff] (-6.283185307179586,0)-- (0,0.8941655359565803);
+                    \draw [line width=2pt,color=qqqqff] (0,0.8941655359565803)-- (0,0);
+                    \draw [line width=2pt,color=qqqqff] (0,0)-- (6.283185307179586,0.88602);
+                    \draw [line width=2pt,color=qqqqff] (6.283185307179586,0.88602)-- (6.283185307179586,0);
+                    \draw [line width=2pt,color=qqqqff] (6.283185307179586,0)-- (12.566370614359172,0.89);
+                    \draw [line width=2pt,color=qqqqff] (12.566370614359172,0.89)-- (12.566370614359172,0);
+                    \draw [line width=2pt,color=qqqqff] (12.566370614359172,0)-- (18.84955592153876,0.89);
+                    \draw [line width=2pt,color=qqqqff] (18.84955592153876,0.89)-- (18.84955592153876,0);
+                    \draw [line width=2pt,color=qqqqff] (18.84955592153876,0)-- (25.132741228718345,0.89);
+                    \draw [line width=2pt,color=qqqqff] (25.132741228718345,0.89)-- (25.132741228718345,0);
+                \end{axis}
+            \end{tikzpicture}
+        \end{figure}
+        \item We have \(f_0(x) = 1, f_1(x) = \sin x, f_2(x) = \cos x, f_3(x) = \sin 2x, f_4(x) = \cos 2x, f_5(x) = \sin 3x, f_6(x) = \cos 3x, \dots\)
+    \end{itemize}
+
+    \emph{Proposition.} With respect to the inner product \[\langle f,g \rangle = \int_{0}^{2\pi} f(x)g(x)dx\] the functions \(f_0, f_1, f_2, f_3, \dots\) form an \emph{orthogonal} sequence of functions. 
+
+    \vspace{1em}
+
+    \emph{Examples.}
+
+    \begin{align*}
+        \langle f_0, f_1 \rangle &= \int_{0}^{2\pi} 1 \cdot \sin x dx = - \cos x \bigg|_{0}^{2\pi} = 0. \\
+        \langle f_0, f_2 \rangle &= \int_{0}^{2\pi} 1 \cdot \cos x dx = 0. \\
+        \langle f_1, f_3 \rangle &= \int_{0}^{2\pi} \sin x \cdot \sin 2x dx = 0.
+    \end{align*}
+
+    Another example: Find the Fourier series of the Sawtooth periodic function:
+
+    \begin{proof}[\unskip\nopunct]
+        The Fourier series is \(a_0 f_0 + a_1 f_1 + a_2 f_2 + \dots\) where \[a_0 = \frac{\langle f, f_0 \rangle}{\langle f_0, f_0 \rangle}, a_1 = \frac{\langle f, f_1 \rangle}{\langle f_1, f_1 \rangle}, a_2 = \frac{\langle f, f_2 \rangle}{\langle f_2, f_2 \rangle}, \dots\] We calculate:
+        \begin{align*}
+            \langle f, f_0 \rangle &= \int_{0}^{2\pi} (x - \pi) dx = 0. \\
+            \langle f, f_1 \rangle & = \int_{0}^{2\pi} (x - \pi) \sin x dx = - 2\pi \\
+            \langle f, f_2 \rangle &= 0 \\
+            \langle f, f_3 \rangle &= - \pi \\
+            \langle f, f_4 \rangle &= 0 \\
+            \vdots & \\
+            \langle f_0, f_0 \rangle &= \int_{0}^{2\pi} dx = 2\pi \\
+            \langle f_1, f_1 \rangle &= \pi \\
+            \langle f_2, f_2 \rangle &= \pi \\
+            \vdots &
+        \end{align*}
+        Then, we obtain the Fourier series \[f(x) = - 2 \sin x - \frac{2}{2} \sin 2x - \frac{2}{3} \sin 3x - \frac{2}{4} \sin 4x - \dots\]
+    \end{proof}
+
+    \subsection{Fourier series and audio signals}
+
+    Watch the video at \href{https://www.youtube.com/watch?v=3IAMpH4xF9Q}{YouTube}.
 \end{document}
