@@ -1,0 +1,137 @@
+\documentclass[11pt]{article}
+
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{blkarray}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\graphicspath{ {./img/} }
+
+\setlength{\parindent}{0cm}
+\let\emptyset\varnothing
+
+\title{\textbf{MATH 2135 Linear Algebra} \\ Proofs}
+\author{Alyssa Motas}
+
+\begin{document}
+
+    \maketitle
+
+    \pagebreak
+
+    \tableofcontents
+
+    \pagebreak
+
+    \section{What is a proof?}
+
+    A proof is \emph{evidence} for the validity of a theorem. This evidence is subject to very \emph{strict} rules. Your first task is to learn threse rules, then you should be able to tell the difference between a proof and a non-proof. Your next task is to get good at proving things.
+
+    \begin{enumerate}
+        \item The goal of a proof is to show that a given \emph{conclusion} follows from given \emph{assumptions}.
+        
+        \vspace{1em}
+
+        \emph{Example:} ``Every spanning list in a vector space can be reduced to a basis of the vector space.'' This statement is an English description of the following more precise statements:
+
+        Assumptions/``Hypotheses:''
+
+        \begin{itemize}
+            \item Let $F$ be a field.
+            \item Let $V$ be a vector space over $F$.
+            \item Let \(v_1, \dots, v_n\) be a list of elements of $V$.
+        \end{itemize}
+
+        Conclusion:
+
+        \begin{itemize}
+            \item If \(v_1, \dots, v_n\) is spanning, then \(v_1, \dots, v_n\) can be reduced to a basis of $V$.
+        \end{itemize}
+
+        Our goal is to show that the conclusion follows from the assumptions.
+
+        \item In the course of proving things, the assumptions and conclusion can change. We will see examples of this.
+        \item To do any proof, we first need to understand what kind of statement the conclusion is. There are several different kinds of statements:
+        \begin{itemize}
+            \item ``and statement'' or ``conjunction:'' ``$n$ is an odd prime'' \(\Leftrightarrow\) ``$n$ is odd and $n$ is prime.''
+            \item ``or statement'' or ``disjunction:'' ``$n$ is even or odd'' \(\Leftrightarrow\) ``$n$ is even or $n$ is odd.''
+            \item ``if-then statement'' or ``implication:'' ``if \(v_1, \dots, v_n\) is spanning, then \(v_1, \dots, v_n\) can be reduced to a basis of $V$.''
+            \item ``not statements'' or ``negation:'' ``$n$ is not prime.''
+            \item ``for all statement'' or ``universally quantified statement:'' ``Every basis is linearly independent'' \(\Leftrightarrow\) ``For all lists \(v_1, \dots, v_n\) of vectors, (if \(v_1, \dots, v_n\) is a basis, then \(v_1, \dots, v_n\) is linearly independent).''
+            \item ``exists statement'' or ``existentially quantified statement:'' ``There is an odd prime.''
+        \end{itemize}
+
+        \emph{Note:} The reason ``if and only if'' is not in the above list of statement types is that it is actually an ``and statement.'' We treat ``\(A \Leftrightarrow B\)'' as an abbreviation of ``\(A \Rightarrow B\) and \(B \Rightarrow A\).''
+    \end{enumerate}
+
+    \section{Proof rules}
+
+    \begin{center}
+        \begin{tabular}{c c l}
+            Type of conclusion: & To prove: & You should do the following: \\ \hline
+            Conjunction & $A$ and $B$ & First we prove $A$. [Prove $A$] \\
+            && Next, we prove $B$. [Prove $B$] \\
+            && So we proved $A$ and $B$, as required. \\ \hline
+            Implication & $A$ implies $B$ & Assume $A$. [Prove $B$] Since we \\
+            && assumed $A$, this proves that $A$ implies $B$. \\ \hline
+            For all-statement & \(\forall x \in A, P(x)\) & Take an arbitrary $x \in A$. [Prove \(P(x)\)] \\
+            && Since $x$ was arbitrary, this proves \(\forall x \in A, P(x)\). \\ \hline
+            Not-statement & not $A$ & Assume A. [Prove a contradiction] \\ \hline
+            Or-statement & $A$ or $B$ & \underline{Method 1:} [Prove $A$]. Since we proved $A$, \\
+            && we have $A$ or $B$. \\
+            && \underline{Method 2:} [Prove $B$]. Since we proved $B$, \\
+            && we have $A$ or $B$. \\
+            && \underline{Method 3:} Assume that both $A$ and $B$ are false. \\
+            && [Prove a contradiction] \\ \hline
+            Exists-statement & \(\exists x \in A, P(x)\) & [Describe a specific element $a \in A$] \\
+            && [Prove \(P(a)\)]
+        \end{tabular}
+    \end{center}
+
+    \pagebreak
+
+    \section{Proof rules for using an assumption}
+    \begin{center}
+        \begin{tabular}{c c l}
+            Type of assumption: & If you already know: & You may use it as follows: \\ \hline
+            And-statement & $A$ and $B$ & You may conclude $A$. \\
+            && You may conclude $B$. \\ \hline
+            Or-statement & $A$ or $B$ & [Can proceed by case distinction] \\ 
+            && \underline{Case 1:} $A$ is true. [Prove the conclusion] \\
+            && \underline{Case 2:} $B$ is true. [Prove the conclusion] \\ \hline
+            Implication & \(A \Rightarrow B\) & \underline{Method 1:} [If you also know $A$, you may \\
+            && conclude $B$] \\
+            && \underline{Method 2:} [If you also know not $B$, then \\
+            && you may conclude not $A$] \\ \hline
+            Not-statement & not $A$ & [If you also know $A$, you may derive \\
+            && a contradiction] \\ \hline
+            For all-statement & \(\forall x \in A, P(x)\) & [Given any element \(a \in A\), you may \\
+            && conclude \(P(a)\)] \\ \hline
+            Exists-statement & \(\exists x \in A, P(x)\) & [You may give a new name to an \\
+            && unknown element \(b \in A\). You may \\
+            && assume \(P(b)\) holds]
+        \end{tabular}
+    \end{center}
+
+    \section{Examples}
+
+    \begin{enumerate}
+        \item Prove: For all sets \(A,B,C\), we have \[(A \cup B) \cap C = (A \cap C) \cup (B \cap C).\]
+        \begin{proof}
+            Let \(A,B,C\) be arbitrary sets. We msut show \((A \cup B) \cap C = (A \cap C) \cup (B \cap C).\) By definition of equality of sets, we must show \[(A \cup B) \cap C \subseteq (A \cap C) \cup (B \cap C)\] and \[(A \cap C) \cup (B \cap C) \subseteq (A \cup B) \cap C.\] We first prove \((A \cup B) \cap C \subseteq (A \cap C) \cup (B \cap C)\). We have to show \(\forall x\ in (A \cup B) \cap C, x \in (A \cap C) \cup (B \cap C)\). Take an arbitrary \(x \in (A \cup B) \cap C\) and we want to show \(x \in (A \cap C) \cup (B \cap C)\). Equivalently, by definition of union, we must show \(x \in A \cap C\) or \(x \in B \cap C\). 
+
+            Assumption 2 says: \(x \in (A \cup B) \cap C\). By definition of intersection, we have \(x \in A \cup B\) and \(x \in C\). We conclude \(x \in A \cup B\). We conclude \(x \in C\). 
+
+            The other inclusion is the same. Hence, we proved the statement provided.
+        \end{proof}
+    \end{enumerate}
+
+\end{document}
