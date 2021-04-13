@@ -32,5 +32,14 @@ This class continues the exploration of discrete mathematics started in Discrete
 - 8.3 Derangements: Nothing Is in Its Right Place
 
 ## Chapter 11 An Introduction to Graph Theory
+- 11.1 Definitions and Examples
+- 11.2 Subgraphs, Complements and Graph Isomorphism
+- 11.3 Vertex Degree: Euler Trails and Circuits
+- 11.4 Planar Graphs 
+- 11.6 Graph Coloring and Chromatic Polynomials
+
+## Chapter 12 Trees
+- 12.1 Definitions, Properties, and Examples
+- 12.2 Rooted Trees
 
 ## Appendix 3 Countable and Uncountable Sets
